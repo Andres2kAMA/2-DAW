@@ -63,5 +63,11 @@ window.onload = function () {
 
   curso.anyadirModulos(arrayModulos);
 
+  alumnoUno.anyadirModulos(arrayModulos);
+  alumnoDos.anyadirModulos(modulosDWS);
   curso.mostrarProfesores();
+
+  curso.mostrarAlumnos("descendente");
+
+  curso.informeCurso();
 };
