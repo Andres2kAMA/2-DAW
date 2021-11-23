@@ -5,7 +5,7 @@ import * as Profesores from "./ejercicio2Profesorado.js";
 import * as Modulos from "./ejercicio2Modulos.js";
 
 window.onload = function () {
-  var curso = new Curso.Curso("2-DAW", "Aula 23", "2");
+  var curso = new Curso.Curso("2-DAW", "Aula 23", "3", "2");
   var alumnoUno = new Alumnos.Alumnado(
     "12345678Q",
     "Carlos",
@@ -21,9 +21,47 @@ window.onload = function () {
     "24/10/2000",
     10
   );
+
+  var profesoresDWC = new Array();
+
+  var profesorUno = new Profesores.Profesorado(
+    "12345678A",
+    "Carlos",
+    "García García",
+    "24/05/1990"
+  );
+
+  var profesorDos = new Profesores.Profesorado(
+    "87654321Z",
+    "Sara",
+    "Pérez Pérez",
+    "05/02/1995"
+  );
+
+  var profesorTres = new Profesores.Profesorado(
+    "19283746F",
+    "Noa",
+    "Mancheño Aracil",
+    "24/11/1998"
+  );
+
+  profesoresDWC.push(profesorUno, profesorDos, profesorTres);
+  var arrayModulos = new Array();
+
+  var moduloDWC = new Modulos.Modulos("DWC", 128);
+  var modulosDWS = new Modulos.Modulos("DWS", 96);
+
+  moduloDWC.anyadirProfesorado(profesoresDWC);
+
+  modulosDWS.anyadirProfesorado(profesorDos);
+
+  arrayModulos.push(moduloDWC, modulosDWS);
+
   curso.matricularAlumno(alumnoUno);
 
   curso.matricularAlumno(alumnoDos);
 
-  curso.mostrarAlumnos();
+  curso.anyadirModulos(arrayModulos);
+
+  curso.mostrarProfesores();
 };

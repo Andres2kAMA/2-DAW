@@ -13,18 +13,13 @@ export class Alumnado {
   setNotaMedia(notaMedia) {
     this.notaMedia = notaMedia;
   }
-  //Esto es una prueba
 
   getNotaMedia() {
     return this.notaMedia;
   }
 
-  getAnyoNacimiento() {
-    return this.fechaNacimiento.split("/")[2];
-  }
-
   comprobarMayorEdad() {
-    let anyo = getAnyoNacimiento();
+    let anyo = this.fechaNacimiento.split("/")[2];
     if (2021 - anyo >= 18) {
       return true;
     }
@@ -33,7 +28,9 @@ export class Alumnado {
 
   anyadirModulos(modulos) {
     for (let i = 0; i < modulos.length; i++) {
-      this.modulos.push(modulos[i]);
+      if (modulos[i].constructor.name == "Modulos") {
+        this.modulos.push(modulos[i]);
+      }
     }
   }
 }

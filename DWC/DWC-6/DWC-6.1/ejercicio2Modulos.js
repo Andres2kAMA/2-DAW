@@ -8,8 +8,8 @@ export class Modulos {
   }
 
   anyadirProfesorado(profesorado) {
-    if (Object.prototype(profesorado) == "Profesorado") {
-      for (let i = 0; i < profesorado.length; i++) {
+    for (let i = 0; i < profesorado.length; i++) {
+      if (profesorado[i].constructor.name == "Profesorado") {
         this.profesorado.push(profesorado[i]);
       }
     }
