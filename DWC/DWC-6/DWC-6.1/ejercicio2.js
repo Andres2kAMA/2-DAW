@@ -5,7 +5,10 @@ import * as Profesores from "./ejercicio2Profesorado.js";
 import * as Modulos from "./ejercicio2Modulos.js";
 
 window.onload = function () {
+  //Me creo un curso.
   var curso = new Curso.Curso("2-DAW", "Aula 23", "3", "2");
+
+  //Me creo dos alumnos.
   var alumnoUno = new Alumnos.Alumnado(
     "12345678Q",
     "Andrés",
@@ -22,8 +25,10 @@ window.onload = function () {
     10
   );
 
+  //Creo un array de profesores (los que impartirás DWC).
   var profesoresDWC = new Array();
 
+  //Me creo tres profesores.
   var profesorUno = new Profesores.Profesorado(
     "12345678A",
     "Luis",
@@ -45,29 +50,45 @@ window.onload = function () {
     "24/11/1998"
   );
 
-  profesoresDWC.push(profesorUno, profesorDos, profesorTres);
-  var arrayModulos = new Array();
+  //Al array de profesoresDWC le añado los profesores que la imparten.
+  profesoresDWC.push(profesorUno, profesorTres);
 
+  //Creo un array dónde almacenaré todos los módulos.
+  var arrayModulosAlumnoUno = new Array();
+
+  //Creo los tres módulos.
   var moduloDWC = new Modulos.Modulos("DWC", 128);
   var moduloDWS = new Modulos.Modulos("DWS", 96);
+  var moduloDIW = new Modulos.Modulos("DIW", 102);
 
+  //Añado los profesores al módulo.
   moduloDWC.anyadirProfesorado(profesoresDWC);
 
   moduloDWS.anyadirProfesorado(profesorDos);
 
-  arrayModulos.push(moduloDWC, moduloDWS);
+  moduloDIW.anyadirProfesorado(profesorTres);
 
+  //Añado todos los módulos al array.
+  arrayModulos.push(moduloDWC, moduloDWS, moduloDIW);
+
+  //Matriculo los alumnos al curso.
   curso.matricularAlumno(alumnoUno);
 
   curso.matricularAlumno(alumnoDos);
 
+  //Añado los módulos al curso.
   curso.anyadirModulos(arrayModulos);
 
+  //Añado los módulos de cada alumno.
   alumnoUno.anyadirModulos(arrayModulos);
   alumnoDos.anyadirModulos(moduloDWS);
+
+  //Muestro los profesores.
   curso.mostrarProfesores();
 
+  //Muestro los alumnos en orden descendente.
   curso.mostrarAlumnos("descendente");
 
+  //Muestro el informe del curso.
   curso.informeCurso();
 };

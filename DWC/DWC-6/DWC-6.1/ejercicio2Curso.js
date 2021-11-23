@@ -261,44 +261,5 @@ export class Curso {
     this.mostrarCurso();
     this.mostrarDatosAlumnos();
     this.mostrarDatosModulos();
-    /*
-    let tabla = document.createElement("table");
-    let tamanyoMaxInforme = this.devolverTamanyoMaximoInforme();
-    let fila = document.createElement("tr");
-    let celdaNegrita = document.createElement("th");
-    celdaNegrita.colSpan = tamanyoMaxInforme[0] + 1;
-    celdaNegrita.innerHTML = this.nombre;
-    fila.appendChild(celdaNegrita);
-    tabla.appendChild(fila);
-    for (let i = 0; i < this.alumnos.length; i++) {
-      celdaNegrita = document.createElement("th");
-      celdaNegrita.innerHTML = "Nombre";
-      fila = document.createElement("tr");
-      let celda = document.createElement("td");
-      celda.innerHTML = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
-      fila.appendChild(celdaNegrita);
-      fila.appendChild(celda);
-      for (let j = 0; j < this.alumnos[i].modulos.length; j++) {
-        celda = document.createElement("td");
-        celda.innerHTML = this.alumnos[i].modulos[j]["nombre"];
-        fila.appendChild(celda);
-        for (
-          let z = 0;
-          z < this.alumnos[i].modulos[j].profesorado.length;
-          z++
-        ) {
-          celda = document.createElement("td");
-
-          for (const key in this.alumnos[i].modulos[j].profesorado[z]) {
-            celda.innerHTML =
-              this.alumnos[i].modulos[j].profesorado[z]["nombre"];
-            fila.appendChild(celda);
-          }
-          tabla.appendChild(fila);
-        }
-      }
-    }
-    body.appendChild(tabla);
-    body.appendChild(document.createElement("br"));*/
   }
 }
