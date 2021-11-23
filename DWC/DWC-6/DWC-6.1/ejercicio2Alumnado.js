@@ -27,9 +27,22 @@ export class Alumnado {
   }
 
   anyadirModulos(modulos) {
-    for (let i = 0; i < modulos.length; i++) {
-      if (modulos[i].constructor.name == "Modulos") {
-        this.modulos.push(modulos[i]);
+    let body = document.getElementById("body");
+    if (modulos.length != undefined) {
+      for (let i = 0; i < modulos.length; i++) {
+        let p = document.createElement("p");
+        if (modulos[i].constructor.name == "Modulos") {
+          this.modulos.push(modulos[i]);
+          p.innerHTML = `Modulo '${modulos[i].nombre}' añadido correctamente`;
+          body.appendChild(p);
+        }
+      }
+    } else {
+      let p = document.createElement("p");
+      if (modulos.constructor.name == "Modulos") {
+        this.modulos.push(modulos);
+        p.innerHTML = `Modulo '${modulos.nombre}' añadido correctamente`;
+        body.appendChild(p);
       }
     }
   }

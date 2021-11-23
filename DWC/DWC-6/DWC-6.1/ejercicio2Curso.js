@@ -29,15 +29,25 @@ export class Curso {
   }
   anyadirModulos(modulos) {
     let body = document.getElementById("body");
-    for (let i = 0; i < modulos.length; i++) {
+    if (modulos.length != undefined) {
+      for (let i = 0; i < modulos.length; i++) {
+        let p = document.createElement("p");
+        if (modulos[i].constructor.name == "Modulos") {
+          this.modulos.push(modulos[i]);
+          p.innerHTML = `Modulo '${modulos[i].nombre}' añadido correctamente`;
+          body.appendChild(p);
+        }
+      }
+    } else {
       let p = document.createElement("p");
-      if (modulos[i].constructor.name == "Modulos") {
-        this.modulos.push(modulos[i]);
-        p.innerHTML = `Modulo '${modulos[i].nombre}' añadido correctamente`;
+      if (modulos.constructor.name == "Modulos") {
+        this.modulos.push(modulos);
+        p.innerHTML = `Modulo '${modulos.nombre}' añadido correctamente`;
         body.appendChild(p);
       }
     }
   }
+
   mostrarAlumnos(maneraOrdenar) {
     let alumnosOrdenados = new Array();
     let body = document.getElementById("body");
@@ -109,21 +119,47 @@ export class Curso {
     body.appendChild(document.createElement("br"));
   }
 
-  informeCurso() {
-    let body = document.getElementById("body");
-
-    let tabla = document.createElement("table");
-    let fila = document.createElement("tr");
-    let celdaEnunciado = document.createElement("th");
-    celdaEnunciado.innerHTML = "INFORME GENERAL";
-    celdaEnunciado.colSpan = 10;
-    fila.appendChild(celdaEnunciado);
-    tabla.appendChild(fila);
-
+  devolverTamanyoAlumnos() {
+    let longitudCadaAlumno = new Array();
     for (let i = 0; i < this.alumnos.length; i++) {
-      for (let j = 0; j < this.alumnos[i].modulos.length; j++) {
-        fila = document.createElement("tr");
+      for (let j = 0; j < 1; j++) {
+        for (let z = 0; z < 1; z++) {}
+      }
+      return longitudCadaAlumno;
+    }
+  }
+  informeCurso() {
+    /*
+    let longitudCadaAlumno = this.devolverTamanyoArrayAlumnos();
+
+    let body = document.getElementById("body");
+    let tabla = document.createElement("table");
+
+    for (let i = 0; i < longitudCadaAlumno.length; i++) {
+      let longitudCampos = longitudCadaAlumno[i];
+      let fila = document.createElement("tr");
+      for (let j = 0; j < longitudCampos; j++) {
         let celda = document.createElement("td");
+        switch (j) {
+          case 0:
+            celda.innerHTML = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
+            fila.appendChild(celda);
+            break;
+
+          case 1:
+        }
+      }
+    }
+*/
+    let body = document.getElementById("body");
+    let tabla = document.createElement("table");
+    for (let i = 0; i < this.alumnos.length; i++) {
+      let fila = document.createElement("tr");
+      let celda = document.createElement("td");
+      celda.innerHTML = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
+      fila.appendChild(celda);
+      for (let j = 0; j < this.alumnos[i].modulos.length; j++) {
+        celda = document.createElement("td");
         celda.innerHTML = this.alumnos[i].modulos[j]["nombre"];
         fila.appendChild(celda);
         for (

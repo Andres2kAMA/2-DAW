@@ -8,8 +8,8 @@ window.onload = function () {
   var curso = new Curso.Curso("2-DAW", "Aula 23", "3", "2");
   var alumnoUno = new Alumnos.Alumnado(
     "12345678Q",
-    "Carlos",
-    "Mancheño ALcaraz",
+    "Andrés",
+    "Mancheño Alcaraz",
     "24/05/2000",
     8.9
   );
@@ -26,7 +26,7 @@ window.onload = function () {
 
   var profesorUno = new Profesores.Profesorado(
     "12345678A",
-    "Carlos",
+    "Luis",
     "García García",
     "24/05/1990"
   );
@@ -49,13 +49,13 @@ window.onload = function () {
   var arrayModulos = new Array();
 
   var moduloDWC = new Modulos.Modulos("DWC", 128);
-  var modulosDWS = new Modulos.Modulos("DWS", 96);
+  var moduloDWS = new Modulos.Modulos("DWS", 96);
 
   moduloDWC.anyadirProfesorado(profesoresDWC);
 
-  modulosDWS.anyadirProfesorado(profesorDos);
+  moduloDWS.anyadirProfesorado(profesorDos);
 
-  arrayModulos.push(moduloDWC, modulosDWS);
+  arrayModulos.push(moduloDWC, moduloDWS);
 
   curso.matricularAlumno(alumnoUno);
 
@@ -64,7 +64,7 @@ window.onload = function () {
   curso.anyadirModulos(arrayModulos);
 
   alumnoUno.anyadirModulos(arrayModulos);
-  alumnoDos.anyadirModulos(modulosDWS);
+  alumnoDos.anyadirModulos(moduloDWS);
   curso.mostrarProfesores();
 
   curso.mostrarAlumnos("descendente");

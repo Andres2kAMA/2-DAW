@@ -8,9 +8,15 @@ export class Modulos {
   }
 
   anyadirProfesorado(profesorado) {
-    for (let i = 0; i < profesorado.length; i++) {
-      if (profesorado[i].constructor.name == "Profesorado") {
-        this.profesorado.push(profesorado[i]);
+    if (profesorado.length != undefined) {
+      for (let i = 0; i < profesorado.length; i++) {
+        if (profesorado[i].constructor.name == "Profesorado") {
+          this.profesorado.push(profesorado[i]);
+        }
+      }
+    } else {
+      if (profesorado.constructor.name == "Profesorado") {
+        this.profesorado.push(profesorado);
       }
     }
   }
