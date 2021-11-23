@@ -1,6 +1,6 @@
 <?php
 
-require_once "sesiones-php";
+require_once "sesiones.php";
 comprobar_sesion();
 $cod = $_POST["cod"];
 $unidades = $_POST["unidades"];

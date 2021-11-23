@@ -82,6 +82,7 @@ export class Curso {
       celda.innerHTML = alumnosOrdenados[i];
       fila.appendChild(celda);
       tabla.appendChild(fila);
+      this.alumnos[i].modulos.length;
     }
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
@@ -133,8 +134,134 @@ export class Curso {
     }
     return longitudCadaAlumno;
   }
+  devolverElemento(elemento) {
+    return document.createElement(elemento);
+  }
+
+  mostrarCurso() {
+    let body = document.getElementById("body");
+
+    let tabla = document.createElement("table");
+    let fila = document.createElement("tr");
+    let celdaEnunciado = document.createElement("th");
+
+    celdaEnunciado.colSpan = 4;
+    celdaEnunciado.innerHTML = "CURSO";
+
+    fila.appendChild(celdaEnunciado);
+    tabla.appendChild(fila);
+    fila = document.createElement("tr");
+
+    for (const key in this) {
+      if (key != "modulos" && key != "alumnos") {
+        celdaEnunciado = document.createElement("th");
+        celdaEnunciado.innerHTML = key;
+        fila.appendChild(celdaEnunciado);
+        tabla.appendChild(fila);
+      }
+    }
+
+    fila = document.createElement("tr");
+    for (const key in this) {
+      console.log(key);
+      if (key != "modulos" && key != "alumnos") {
+        let celda = document.createElement("td");
+        celda.innerHTML = this[key];
+        fila.appendChild(celda);
+        tabla.appendChild(fila);
+      }
+    }
+
+    body.appendChild(tabla);
+    body.appendChild(document.createElement("br"));
+  }
+
+  mostrarDatosAlumnos() {
+    let body = document.getElementById("body");
+
+    let tabla = document.createElement("table");
+    let fila = document.createElement("tr");
+    let celdaEnunciado = document.createElement("th");
+
+    celdaEnunciado.colSpan = 4;
+    celdaEnunciado.innerHTML = "DATOS ALUMNOS";
+
+    fila.appendChild(celdaEnunciado);
+    tabla.appendChild(fila);
+    fila = document.createElement("tr");
+    let celdaNombre = document.createElement("th");
+    celdaNombre.innerHTML = "Nombre";
+    fila.appendChild(celdaNombre);
+
+    let celdaModulo = document.createElement("th");
+    celdaModulo.innerHTML = "Módulos";
+    celdaModulo.colSpan = this.alumnos[0].modulos.length;
+    fila.appendChild(celdaModulo);
+    tabla.appendChild(fila);
+    for (let i = 0; i < this.alumnos.length; i++) {
+      fila = document.createElement("tr");
+      let celda = document.createElement("td");
+
+      celda.innerHTML = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
+      fila.appendChild(celda);
+      for (let j = 0; j < this.alumnos[i].modulos.length; j++) {
+        celda = document.createElement("td");
+        celda.innerHTML = this.alumnos[i].modulos[j]["nombre"];
+        fila.appendChild(celda);
+      }
+      tabla.appendChild(fila);
+    }
+    body.appendChild(tabla);
+    body.appendChild(document.createElement("br"));
+  }
+
+  mostrarDatosModulos() {
+    let body = document.getElementById("body");
+
+    let tabla = document.createElement("table");
+    let fila = document.createElement("tr");
+    let celdaEnunciado = document.createElement("th");
+
+    celdaEnunciado.colSpan = 4;
+    celdaEnunciado.innerHTML = "DATOS MODULOS";
+
+    fila.appendChild(celdaEnunciado);
+    tabla.appendChild(fila);
+    fila = document.createElement("tr");
+    let celdaNombre = document.createElement("th");
+    celdaNombre.innerHTML = "Modulo";
+    fila.appendChild(celdaNombre);
+
+    let celdaModulo = document.createElement("th");
+    celdaModulo.innerHTML = "Profesores";
+    celdaModulo.colSpan = this.modulos[0].profesorado.length;
+    fila.appendChild(celdaModulo);
+    tabla.appendChild(fila);
+    for (let i = 0; i < this.modulos.length; i++) {
+      fila = document.createElement("tr");
+      let celda = document.createElement("td");
+      celda.innerHTML = this.modulos[i]["nombre"];
+      fila.appendChild(celda);
+      for (let j = 0; j < this.modulos[i].profesorado.length; j++) {
+        let celda = document.createElement("td");
+        celda.innerHTML = this.modulos[i].profesorado[j]["nombre"];
+        fila.appendChild(celda);
+      }
+      tabla.appendChild(fila);
+    }
+    body.appendChild(tabla);
+    body.appendChild(document.createElement("br"));
+  }
+
   informeCurso() {
     let body = document.getElementById("body");
+    let tituloInforme = this.devolverElemento("h2");
+    tituloInforme.innerHTML = "INFORME CURSO";
+    body.appendChild(tituloInforme);
+    this.mostrarCurso();
+    this.mostrarDatosAlumnos();
+    this.mostrarDatosModulos();
+    /*
     let tabla = document.createElement("table");
     let tamanyoMaxInforme = this.devolverTamanyoMaximoInforme();
     let fila = document.createElement("tr");
@@ -172,6 +299,6 @@ export class Curso {
       }
     }
     body.appendChild(tabla);
-    body.appendChild(document.createElement("br"));
+    body.appendChild(document.createElement("br"));*/
   }
 }

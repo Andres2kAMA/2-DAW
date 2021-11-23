@@ -30,8 +30,9 @@ comprobar_sesion();
 
         echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$unidades</td>"
             . "<td><form action = 'eliminar.php' method = 'POST'>"
-            . "<input name = 'unidades' type='number' min='1' value = '1'"
-            . "<input type = 'submit' value = 'Eliminar'<input name = 'cod' type = 'hidden' value = '$cod'"
+            . "<input name = 'unidades' type='number' min='1' value = '1'>"
+            . "<input type = 'submit' value = 'Eliminar'>"
+            . " <input name = 'cod' type = 'hidden' value = '$cod'>"
             . "</form></td></tr>";
     }
     echo "</table>";
