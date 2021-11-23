@@ -1,0 +1,80 @@
+/*
+A todo el documento le añado:
+  ->Un color de fondo
+  ->Centro el texto 
+*/
+* {
+  background-color: #eaf2f8;
+  text-align: center;
+}
+
+/*
+  Al header le añado:
+    ->Un margen inferior de 50px
+  */
+header {
+  margin-bottom: 50px;
+}
+
+/*
+  A los botones le añado:
+    ->El texto en negrita
+    ->Un borde sódilo negro de 2px
+    ->Redondeo el borde
+  */
+button {
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+/*
+  Le introduzco un color de fondo cuando el ratón 
+  pasa encima del botones
+  */
+button:hover {
+  background-color: #1abc9c;
+}
+
+/*
+ Al select le añado:
+    ->La letra en negrita
+    ->Un borde redondeado
+*/
+select {
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/*
+  Le introduzco un color de fondo cuando el ratón 
+  pasa encima del select
+  */
+select:hover {
+  background-color: #f4d03f;
+}
+
+#opcionUno {
+  font-weight: bold;
+  color: #117864;
+}
+
+#opcionDos {
+  font-weight: lighter;
+  color: #2980b9;
+}
+
+#opcionTres {
+  font-weight: bold;
+  background-color: #21618c;
+}
+
+#error {
+  font-weight: bold;
+  color: red;
+}
+
+.colorBlanco {
+  background-color: white;
+}

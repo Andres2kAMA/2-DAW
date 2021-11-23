@@ -1,0 +1,28 @@
+* {
+  background-color: #eaf2f8;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 50px;
+}
+th,
+tr,
+td {
+  background-color: white;
+  border: 1px solid black;
+}
+
+input,
+select {
+  background-color: white;
+}
+
+table {
+  margin: auto;
+  margin-top: 40px;
+}
+
+#error {
+  color: red;
+}

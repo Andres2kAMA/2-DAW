@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="estilos/estilo.css" />
+    <title>Ejercicio 7</title>
+  </head>
+  <body>
+    <header>
+      <h1>Ejercicio 7</h1>
+    </header>
+    <p class="pregunta">
+      Dibuja en SVG dos figuras. Una de ellas con un patrón de imagen de relleno
+      en su interior y la otra con un patrón realizado con otro/s elemento/s de
+      SVG de tu elección.
+    </p>
+    <svg width="100" height="100">
+      <defs>
+        <pattern id="img1" width="15" height="15" patternUnits="userSpaceOnUse">
+          <image
+            xlink:href="multimedia/img/pikachu.png"
+            width="10"
+            height="10"
+          ></image>
+        </pattern>
+      </defs>
+      <rect
+        width="100"
+        height="100"
+        fill="url(#img1)"
+        style="stroke: black; stroke-width: 1"
+      ></rect>
+    </svg>
+    <br />
+    <svg width="100" height="100">
+      <defs>
+        <pattern
+          id="img2"
+          x="5"
+          y="5"
+          width="10"
+          height="10"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="5" cy="5" r="5" fill="#FFAB4C"></circle>
+        </pattern>
+      </defs>
+      <rect
+        width="100"
+        height="100"
+        fill="url(#img2)"
+        style="stroke: black; stroke-width: 1"
+      ></rect>
+    </svg>
+  </body>
+</html>

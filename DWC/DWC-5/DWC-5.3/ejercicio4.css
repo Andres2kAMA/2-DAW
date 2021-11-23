@@ -1,0 +1,41 @@
+* {
+  background-color: #eaf2f8;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 50px;
+}
+input {
+  background-color: white;
+}
+
+#error,
+.noAnagrama {
+  color: red;
+}
+
+.noAnagrama {
+  font-weight: bold;
+}
+
+.anagrama {
+  color: green;
+  font-weight: bold;
+}
+
+#error,
+#aviso {
+  margin-bottom: 35px;
+}
+
+#enviar {
+  font-weight: bold;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+#enviar:hover {
+  background-color: #1abc9c;
+}

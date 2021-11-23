@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="centrarTexto colorTitulo">Blog</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html" class="colorEnlaces"
+              >Volver a la página inicial</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <article>
+      <video width="320" height="200">
+        <source src="multimedia/videos/video2.mp4" type="video/mp4" />
+        <source src="multimedia/videos/video2.ogg" type="video/ogg" />
+        Tu navegador no soporta la etiqueta video
+      </video>
+      <div>
+        <button type="button" id="iniciar">Iniciar</button>
+        <button type="button" id="reiniciar">Reiniciar</button>
+        <button type="button" id="retrasar">Retrasar 5 secs</button>
+        <button type="button" id="adelantar">Adelantar 5 secs</button>
+        <button type="button" id="silenciar">Silenciar</button>
+        <button type="button" id="bajarVolumen">Bajar volumen</button>
+        <button type="button" id="subirVolumen">Subir volumen</button>
+      </div>
+    </article>
+
+    <article>
+      <video width="320" height="200" id="gorila" controls>
+        <source src="multimedia/videos/gorila.mp4#t=2,7" type="video/mp4" />
+        Tu navegador no soporta la etiqueta video
+      </video>
+    </article>
+    <script src="js/blog3.js"></script>
+  </body>
+</html>

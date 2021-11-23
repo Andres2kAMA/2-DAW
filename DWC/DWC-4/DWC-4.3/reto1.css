@@ -1,0 +1,29 @@
+* {
+  background-color: lemonchiffon;
+}
+
+.centrarTabla {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#primerDiv {
+  padding-top: 1%;
+}
+
+#segundoDiv {
+  padding-top: 1%;
+}
+#modificarBoton {
+  margin-top: 1%;
+  background-color: white;
+  border: solid black;
+  font-weight: bold;
+  width: 250px;
+  height: 100px;
+}
+
+#labelColorUsuario {
+  font-size: large;
+  font-weight: bold;
+}

@@ -1,0 +1,93 @@
+* {
+  margin: 0.3%;
+  padding: 0.3%;
+  background-color: #fff8e5;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.centrarTexto {
+  text-align: center;
+}
+
+.colorTitulo {
+  color: #00a19d;
+  font-weight: bold;
+}
+
+.colorSubtitulo {
+  color: #e05d5d;
+  font-weight: bold;
+}
+
+.colorEnlaces {
+  color: #ffb344;
+  font-weight: bold;
+}
+
+.colorEnlaces:hover {
+  color: #00a19d;
+}
+
+table {
+  width: 50%;
+  margin: auto;
+}
+
+table,
+th,
+td {
+  border: solid;
+  background-color: white;
+  text-align: center;
+}
+
+#titulos {
+  background-color: #00a19d;
+}
+
+#subtitulos {
+  background-color: #e05d5d;
+}
+
+#enlaces {
+  background-color: #ffb344;
+}
+
+#hover {
+  background-color: #00a19d;
+}
+
+#contenidoPrincipal {
+  background-color: black;
+}
+
+#fondo {
+  background-color: #fff8e5;
+}
+
+video {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+article h4 {
+  text-align: center;
+}
+
+code {
+  text-align: center;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.datosPersonales {
+  font-weight: bold;
+}

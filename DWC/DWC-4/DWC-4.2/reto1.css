@@ -1,0 +1,6 @@
+.palabraCensurada {
+  display: inline;
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}

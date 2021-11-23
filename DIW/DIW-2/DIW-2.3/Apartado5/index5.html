@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apartado 5</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      window.onload = function () {
+        var ctx = document.getElementById("mi - canvas").getContext("2d");
+        var img = new Image();
+        img.src = "g20s.jpg";
+        img.addEventListener(
+          "load",
+          function () {
+            ctx.drawImage(img, 0, 0);
+            ctx.fillStyle = "rgba(255,128,128,0.5)";
+            ctx.strokeStyle = "rgb(255,0,0)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(330, 240, 50, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            ctx.clearRect(670, 80, 100, 100);
+          },
+          false
+        );
+      };
+    </script>
+  </body>
+</html>

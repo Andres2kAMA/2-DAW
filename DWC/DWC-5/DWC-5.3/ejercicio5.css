@@ -1,0 +1,60 @@
+* {
+  text-align: center;
+  font-weight: bold;
+}
+
+body {
+  background: linear-gradient(rgba(5, 7, 12, 0.5), rgba(5, 7, 12, 1)),
+    url("img/mapa.jpg") center / cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+header {
+  margin-bottom: 50px;
+}
+div {
+  background: rgba(5, 7, 12, 0.4);
+}
+input {
+  background: rgba(5, 7, 12, 0.3);
+}
+input,
+select {
+  background-color: white;
+}
+
+label {
+  font-weight: bold;
+}
+
+#enviar {
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#enviar:hover {
+  background-color: #1abc9c;
+}
+
+.mostrar {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.error {
+  color: Red;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+select:hover {
+  background-color: #f4d03f;
+}
+
+label,
+header {
+  color: white;
+}

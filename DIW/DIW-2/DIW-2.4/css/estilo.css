@@ -1,0 +1,13 @@
+header {
+  text-align: center;
+}
+
+.pregunta {
+  font-weight: bold;
+}
+
+#aviso {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}

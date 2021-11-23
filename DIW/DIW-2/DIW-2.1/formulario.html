@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <title>Formulario</title>
+</head>
+<body>
+    <header>
+        <h1 class="centrarTexto colorTitulo">Formulario</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="index.html" class="colorEnlaces"
+                >Volver a la página inicial</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </header>
+    <form>
+        <fieldset>
+        <legend class="colorTitulo">Formulario</legend>
+        <label class="colorSubtitulo" for="nombre" >Nombre completo:</label>
+        <input id="nombre" type="text" autofocus required/><br /><br />
+
+        <label class="colorSubtitulo" for="correo">Correo Electrónico:</label>
+        <input id="correo" type="email" required><br><br>
+
+        <label class="colorSubtitulo" for="url">URL:</label>
+        <input id="url" type="url" placeholder="Escribe la URL de tu página personal" size="25" ><br><br>
+
+        <label class="colorSubtitulo" for="fecha">Fecha:</label>
+        <input id="fecha" type="date"><br><br>
+
+        <label class="colorSubtitulo" for="tiempo">Tiempo:</label>
+        <input id="tiempo" type="time"><br><br>
+
+        <label class="colorSubtitulo" for="fechaNacimiento">Fecha y hora de nacimiento:</label>
+        <input id="fechaNacimiento" type="datetime"><br><br>
+
+        <label class="colorSubtitulo" for="mes">Mes:</label>
+        <input id="mes" type="month"><br><br>
+
+        <label class="colorSubtitulo" for="semana">Semana:</label>
+        <input id="semana" type="week"><br><br>
+
+        <label class="colorSubtitulo" for="num">Número (min -10, max 10):</label>
+        <input id="num" type="number"><br><br>
+
+        <label class="colorSubtitulo" for="intervalo">Intervalo (min -10, max 10):</label>
+        <input id="intervalo" type="range"><br><br>
+        
+        <label class="colorSubtitulo" for="tel">Teléfono:</label>
+        <input id="tel" type="tel"><br><br>
+
+        <label class="colorSubtitulo" for="color">Color favorito:</label>
+        <input id="color" type="color"><br><br>
+        
+        <label for="suma" class="colorSubtitulo">Introduce dos números positivos:</label>
+        <input type="number" id="valor1" min="0">+
+        <input type="number" id="valor2" min="0">=
+        <output name="x" for="suma"></output><br><br>
+
+        <input type="submit" value="¡Enviar!">
+        </form>
+
+        <script src="js/formulario.js"></script>
+</body>
+</html>

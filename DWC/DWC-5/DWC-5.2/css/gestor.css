@@ -1,0 +1,75 @@
+* {
+  margin: 1%;
+  text-align: center;
+}
+.colorBlanco {
+  color: white;
+}
+body {
+  background-color: #154360;
+}
+#contenedor > div {
+  /* Selector hijos directos (primer nivel) */
+  float: left;
+  width: 300px;
+  border: 2px solid black;
+  height: auto;
+  min-height: 500px;
+  padding: 0.5%;
+  background-color: #e9e6e6;
+  margin-right: 0.5%;
+}
+
+#contenedor p:first-child {
+  text-align: left;
+}
+.botones {
+  text-align: right;
+}
+
+.tarea {
+  background-color: rgb(126, 16, 16);
+  color: white;
+  width: 95%;
+  height: 85px;
+  margin: 5pxbody;
+  overflow: auto;
+  padding: 0px 2px;
+}
+
+.acabada {
+  background-color: rgb(8, 109, 30);
+  color: white;
+  width: 95%;
+  height: 85px;
+  margin: 5px;
+  overflow: auto;
+  padding: 0px 2px;
+}
+
+#mostrar {
+  text-align: right;
+}
+
+/* El elemento que tenga esta clase desaparecerá*/
+.tareaOcultada {
+  display: none;
+}
+
+#contenedor {
+  display: flex;
+  justify-content: center;
+}
+
+#contenedor h1 {
+  text-align: center;
+}
+
+input {
+  font-weight: bold;
+  background-color: white;
+}
+
+#error {
+  color: red;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 3</title>
+  </head>
+  <body>
+    <p
+      id="parrafo1"
+      onclick="desaparecerParrafo('parrafo1')"
+      ondblclick="eliminarParrafo('parrafo1')"
+    >
+      Párrafo 1
+    </p>
+    <p
+      id="parrafo2"
+      onclick="desaparecerParrafo('parrafo2')"
+      ondblclick="eliminarParrafo('parrafo2')"
+    >
+      Párrafo 2
+    </p>
+    <p
+      id="parrafo3"
+      onclick="desaparecerParrafo('parrafo3')"
+      ondblclick="eliminarParrafo('parrafo3')"
+    >
+      Párrafo 3
+    </p>
+    <p
+      id="parrafo4"
+      onclick="desaparecerParrafo('parrafo4')"
+      ondblclick="eliminarParrafo('parrafo4')"
+    >
+      Párrafo 4
+    </p>
+    <!-- He puesto el evento 'onmouseover' sólamente en el último párrafo, ya que
+         si en un mismo elemento se ponen el evento 'onclick' y el evento 'ondblclick'
+         SIEMPRE va a coger 'onclick'
+    -->
+    <p
+      id="parrafo5"
+      onclick="desaparecerParrafo('parrafo5')"
+      onmouseover="eliminarParrafo('parrafo5')"
+    >
+      Párrafo 5
+    </p>
+    <input type="button" onclick="reaparecerParrafos()" value="Reaparecer" />
+    <script src="reto3.js"></script>
+  </body>
+</html>

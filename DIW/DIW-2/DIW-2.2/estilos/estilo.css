@@ -1,0 +1,22 @@
+header {
+  text-align: center;
+}
+
+.pregunta,
+dt {
+  font-weight: bold;
+}
+
+li,
+dt {
+  font-style: italic;
+}
+
+svg {
+  display: block;
+  margin: auto;
+}
+
+dl {
+  text-align: center;
+}

@@ -1,0 +1,91 @@
+* {
+  text-align: center;
+}
+
+header {
+  margin-bottom: 50px;
+}
+
+body {
+  grid-area: auto;
+  background: linear-gradient(
+    to bottom,
+    rgb(48, 92, 150) 20%,
+    rgb(94, 156, 214) 35%,
+    white 100%
+  );
+  background-size: 100%;
+  background-repeat: repeat-x;
+}
+
+.elem1 {
+  grid-area: header;
+}
+#error {
+  grid-area: error;
+}
+.elem2 {
+  grid-area: tabla;
+}
+.elem3 {
+  grid-area: form;
+}
+
+div {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header"
+    "error"
+    "tabla"
+    "form";
+}
+
+input,
+button {
+  background-color: white;
+}
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
+table {
+  margin-top: 50px;
+  margin: 0 auto;
+}
+
+form {
+  margin-top: 50px;
+}
+
+button {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: all 600ms;
+  box-shadow: 3px 3px 1px #ccc;
+}
+
+#error {
+  color: red;
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+}
+
+td:nth-child(2n) button:hover {
+  background-color: #1abc9c;
+  transition: all 600ms;
+  box-shadow: none;
+}
+
+td:nth-child(2n + 1) button:hover {
+  background-color: #f4d03f;
+  transition: all 600ms;
+  box-shadow: none;
+}

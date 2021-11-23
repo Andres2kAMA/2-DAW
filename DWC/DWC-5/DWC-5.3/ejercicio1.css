@@ -1,0 +1,56 @@
+/*
+A todo el documento le añado:
+  ->Un color de fondo
+  ->Centro el texto 
+*/
+* {
+  background-color: #eaf2f8;
+  text-align: center;
+}
+
+/*
+Al header le añado:
+  ->Un margen inferior de 50px
+*/
+header {
+  margin-bottom: 50px;
+}
+
+/*
+Al formulario le añado estilo para centrar
+todos los elementos de este.
+*/
+form {
+  display: grid;
+  grid-template-columns: repeat(10, auto auto);
+  grid-template-rows: repeat(10, auto auto);
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+}
+
+/*
+A los botones le añado:
+  ->Un color de fondo 'blanco'
+  ->Pongo el texto en negrita
+  ->Le añado un borde sódilo negro de 2px
+  ->Redondeo el borde
+*/
+button {
+  background-color: white;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+/*
+Le introduzco un color de fondo cuando el ratón 
+pasa encima de los botones
+*/
+button:hover {
+  background-color: #1abc9c;
+}
+
+.marcarLabel {
+  font-weight: bold;
+  background-color: #2980b9;
+}

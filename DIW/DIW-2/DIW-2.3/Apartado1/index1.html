@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<!-- 
+    Mediante el uso de la etiqueta <head> se añade información adicional
+    al documento.
+-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ejemplo de estructura de capítulos en HTML5</title>
+</head>
+
+<body>
+    <!-- 
+    En la cabecera del documento se añaden tanto el título
+    cómo el subtítulo.
+    -->
+    <header>
+        <h1>Ejemplo de estructura de capítulos en HTML5</h1>
+        <h2>Presentación en HTML5</h2>
+    </header>
+
+    <!-- 
+    Justo debajo de la cabecera se define una lista descriptiva, definida 
+    por la etiqueta <dl>. En ella se hace lo siguiente:
+        -> A la etiqueta <dt> se le añaden enlaces internos
+        -> Se hace uso de la etiqueta <dd>, utilizada para definir lo que
+           está indicado en el <dt>
+    -->
+    <nav>
+        <dl>
+            <dt><a href="#cap1">Capítulo I</a> :</dt>
+            <dd>la mañana</dd>
+            <dt><a href="#cap1">Capítulo II</a> :</dt>
+            <dd>la tarde</dd>
+            <dt><a href="#cap1">Capítulo III</a> :</dt>
+            <dd>la noche</dd>
+        </dl>
+    </nav>
+
+    <!-- 
+    A continuación se crean 3 secciones compuestas por:
+        -> Un ID en la etiqueta <section>
+        -> Un título
+        -> Texto
+    -->
+
+    <section id="cap1">
+        <h1>Capítulo I</h1>
+        <p>Hoy sale el sol, el comienzo de una nueva aventura, la de
+            la vida durante un día.</p>
+    </section>
+
+    <section id="cap2">
+        <h1>Capítulo II</h1>
+        <p>Ahora viene la noche, al final de esta extraordinaria
+            aventura que ha tenido lugar hoy.</p>
+    </section>
+
+    <section id="cap3">
+        <h1>Capítulo III</h1>
+
+        <!-- 
+        Como se puede ver, la última parte del párrafo está dentro de una
+        etiqueta <strong>, por lo que estaŕa en negrita.
+        -->
+
+        <p>En el corazón de la noche los espíritus están descansando,
+            preparando una nueva experiencia de vida, que tendrá lugar
+            mañana. ¡No <strong>vivas sin la alegría de un nuevo proyecto!
+            </strong></p>
+    </section>
+
+    <!-- 
+    Finalmente, se define el pie de página, en el que se ha insertado un 
+    enlace a una página externa dentro de una etiqueta <p>.
+    -->
+
+    <footer>
+        <p>
+            <a href="http://validator.w3.org/check?uri=referer">
+                ¡Página xHTML válida!
+            </a>
+        </p>
+    </footer>
+
+</body>
+
+</html>
