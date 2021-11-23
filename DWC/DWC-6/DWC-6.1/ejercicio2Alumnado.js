@@ -13,6 +13,7 @@ export class Alumnado {
   setNotaMedia(notaMedia) {
     this.notaMedia = notaMedia;
   }
+  //Esto es una prueba
 
   getNotaMedia() {
     return this.notaMedia;
