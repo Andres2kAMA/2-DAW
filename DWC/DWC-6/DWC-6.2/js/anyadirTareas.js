@@ -1,3 +1,7 @@
+import * as devolverPlantilla from "./devolverElementos.js";
+import * as acabarTarea from "./acabarTarea.js";
+import * as borrarTarea from "./eliminarTarea.js";
+
 /**
  *
  * @param {int} numTarea
@@ -23,10 +27,11 @@ function anyadirTarea(numTarea) {
     tareaAnyadir.setAttribute("draggable", "true");
 
     //Me almaceno la plantilla modificada
-    let plantillaInsertar = devolverPlantillaPendienteModificada(
-      numTarea,
-      textoUsuario.value
-    );
+    let plantillaInsertar =
+      devolverPlantilla.devolverPlantillaPendienteModificada(
+        numTarea,
+        textoUsuario.value
+      );
 
     //Añado la plantilla como hija del div
     tareaAnyadir.innerHTML = plantillaInsertar;
@@ -41,14 +46,14 @@ function anyadirTarea(numTarea) {
     document.getElementById(`borrar-${numTarea}`).addEventListener(
       "click",
       function (ev) {
-        borrarTarea(ev.target);
+        borrarTarea.borrarTarea(ev.target);
       },
       false
     );
     document.getElementById(`acabar-${numTarea}`).addEventListener(
       "click",
       function (ev) {
-        acabarTarea(ev.target);
+        acabarTarea.acabarTarea(ev.target);
       },
       false
     );
