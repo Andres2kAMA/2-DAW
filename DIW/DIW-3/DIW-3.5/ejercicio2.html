@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+ 
+  <title>Flexbox: Sidebar Component</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  
+<style>
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar Navigation */
+.sidebar__nav {
+  flex-grow: 1;
+}
+
+</style>
+
+</head>
+
+<body>
+  <!--Sidebar Component-->
+  <div class="sidebar-wrapper">
+    <div class="sidebar">
+      <div class="sidebar__logo">
+        <h3> Sidebar </h3>
+      </div>
+      <ul class="sidebar__nav">
+        <li class="active"> <i class="fa fa-home" aria-hidden="true"></i> Home </li>
+        <li> <i class="fa fa-female" aria-hidden="true"></i> About Me</li>
+        <li> <i class="fa fa-camera-retro" aria-hidden="true"></i> Portfolio</li>
+        <li> <i class="fa fa-envelope-open-o" aria-hidden="true"></i> Contact Me</li>
+      </ul>
+      <div class="sidebar__profile">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/93.jpg" alt="Profile Photo">
+        <h4>Linda Hart</h4>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+ 

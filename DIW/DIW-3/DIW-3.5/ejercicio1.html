@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Flexbox: Thumbnail List Component</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<style>
+
+/*list item image wrapper*/
+.list .list-item__image {
+  flex-shrink: 0;
+}
+
+/*list item content*/
+.list .list-item__content {
+  flex-grow: 1;
+}
+
+</style>
+
+</head>
+
+<body translate="no" >
+  <div class="list-wrapper">
+	<ul class="list">
+
+	<!--Flexbox list item-->
+	<li class="list-item">
+		<div class="list-item__image">
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/93.jpg" alt="Thumbnail">
+		</div>
+		<div class="list-item__content">
+			<h4> Linda Hart </h4>
+			<p> 6765 Shady Ln Dr </p>
+		</div>
+	</li>
+
+	<!--Flexbox list item-->
+	<li class="list-item">
+		<div class="list-item__image">
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/46.jpg" alt="Thumbnail">
+		</div>
+		<div class="list-item__content">
+			<h4> Roger Medina </h4>
+			<p> 2420 Paddock Way </p>
+		</div>
+	</li>
+
+	<!--Flexbox list item-->
+	<li class="list-item">
+		<div class="list-item__image">
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/59.jpg" alt="Thumbnail">
+		</div>
+		<div class="list-item__content">
+			<h4> Dean Sullivan </h4>
+			<p> 6727 Airplane Ave </p>
+		</div>
+	</li>
+
+	<!--Flexbox list item-->
+	<li class="list-item">
+		<div class="list-item__image">
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/78.jpg" alt="Thumbnail">
+		</div>
+		<div class="list-item__content">
+			<h4> Elizabeth Austin </h4>
+			<p> 6685 Blossom Hill Rd </p>
+		</div>
+	</li>
+
+</ul>
+</div>
+
+</body>
+
+</html>
+ 

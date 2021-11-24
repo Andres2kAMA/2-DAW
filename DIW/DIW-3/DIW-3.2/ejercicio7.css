@@ -1,0 +1,23 @@
+#longer{
+    float: left;
+    width: 30%;
+    background: #66FFFF;
+    padding: 10px;
+}
+
+#shorter {
+    background: #FFFF66;
+    padding: 10px;
+}
+
+ul {
+    color: white;
+    background: black;
+
+}
+
+li {
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+}

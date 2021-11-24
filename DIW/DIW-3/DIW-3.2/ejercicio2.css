@@ -1,0 +1,16 @@
+#box {
+    border: 5px dotted red;
+    margin: 10px;
+    padding: 10px;
+    background: gray;
+}
+
+body {
+    margin: 2px;
+    border: 1px solid blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

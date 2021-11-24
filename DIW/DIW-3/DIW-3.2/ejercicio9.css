@@ -1,0 +1,13 @@
+div.wrapper {
+    float: right;
+}
+
+div.grid {
+    color: white;
+    background: red;
+    padding: 5px;    
+}
+
+#moveMe {
+    background:blue;
+}
