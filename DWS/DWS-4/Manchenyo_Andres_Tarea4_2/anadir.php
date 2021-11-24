@@ -9,4 +9,4 @@ if (isset($_SESSION["carrito"][$cod])) {
 } else {
     $_SESSION["carrito"][$cod] = $unidades;
 }
-header("Location: carrito.php");
+header("Location: categorias.php");
