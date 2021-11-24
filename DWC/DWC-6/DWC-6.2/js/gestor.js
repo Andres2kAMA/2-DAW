@@ -89,6 +89,7 @@ window.onload = function () {
     "drop",
     function (ev) {
       ev.preventDefault();
+      Datos;
 
       if (ev.target.id == "acabadas") {
         acabarTarea(elementoArrastrado.getElementsByTagName("input")[0]);

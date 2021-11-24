@@ -1,3 +1,7 @@
+import * as devolverPlantilla from "./devolverElementos.js";
+import * as acabarTarea from "./acabarTarea.js";
+import * as volverTarea from "./volverTarea.js";
+
 /**
  *
  * @param {input} ev
@@ -33,7 +37,7 @@ function acabarTarea(ev) {
   tareaAcabada.setAttribute("draggable", "true");
 
   //Me almaceno la plantilla modificada
-  let plantillaInsertar = devolverPlantillaAcabadaModificada(
+  let plantillaInsertar = devolverPlantilla.devolverPlantillaAcabadaModificada(
     numeroTarea,
     textoUsuario
   );
@@ -47,8 +51,8 @@ function acabarTarea(ev) {
   //Le añado dos eventos con la función "click"
   document.getElementById(`archivar-${numeroTarea}`).addEventListener(
     "click",
-    function (ev) {
-      archivarTarea(tareaAcabada);
+    function () {
+      archivarTarea.archivarTarea(tareaAcabada);
     },
     false
   );
@@ -56,7 +60,7 @@ function acabarTarea(ev) {
   document.getElementById(`volver-${numeroTarea}`).addEventListener(
     "click",
     function (ev) {
-      volverTarea(ev.target);
+      volverTarea.volverTarea(ev.target);
     },
     false
   );
