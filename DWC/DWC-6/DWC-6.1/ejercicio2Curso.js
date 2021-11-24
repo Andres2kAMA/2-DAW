@@ -1,6 +1,19 @@
 "use strict";
 
 export class Curso {
+  /**
+   * Defino un constructor que va a almacenar:
+   *  ->El nombre
+   *  ->El número del aula
+   *  ->El número de módulos
+   *  ->El número de los alumanos
+   *  ->Un array de módulos
+   *  ->Un array de alumnos
+   * @param {*} nombre
+   * @param {*} numAula
+   * @param {*} numModulos
+   * @param {*} numAlumnados
+   */
   constructor(nombre, numAula, numModulos, numAlumnados) {
     this.nombre = nombre;
     this.numAula = numAula;
@@ -122,27 +135,47 @@ export class Curso {
     body.appendChild(document.createElement("br"));
   }
 
+  /**
+   * Muestro todos los profesores contratados.
+   */
   mostrarProfesores() {
+    //Me almaceno el body.
     let body = document.getElementById("body");
 
+    //Creo los elementos de la tabla básicos
     let tabla = document.createElement("table");
     let fila = document.createElement("tr");
     let celdaEnunciado = document.createElement("th");
+
+    //Indico el el enunciado tabla ocupará 4 columnas.
     celdaEnunciado.colSpan = 4;
+
+    //Le inserto un texto y una clase.
     celdaEnunciado.innerHTML = "PROFESORES";
     celdaEnunciado.className = "tituloTabla";
+
+    //Añado la celda a la tabla.
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
+
+    //Recorro los módulos.
     for (let i = 0; i < this.modulos.length; i++) {
+      //Recorro los profesores de cada módulo.
       for (let j = 0; j < this.modulos[i].profesorado.length; j++) {
+        //Creo una fila.
         fila = document.createElement("tr");
+        //Inserto una fila con las keys del objeto.
         for (const key in this.modulos[i].profesorado[j]) {
           celdaEnunciado = document.createElement("th");
           celdaEnunciado.innerHTML = key;
           fila.appendChild(celdaEnunciado);
           tabla.appendChild(fila);
         }
+
+        //Creo otra fila.
         fila = document.createElement("tr");
+
+        //Inserto en la fila los datos de un profesor en concreto.
         for (const key in this.modulos[i].profesorado[j]) {
           let celda = document.createElement("td");
           celda.innerHTML = this.modulos[i].profesorado[j][key];
@@ -151,43 +184,39 @@ export class Curso {
         }
       }
     }
+
+    //Añado al body tanto la tabla como un salto de línea.
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
   }
 
-  devolverTamanyoMaximoInforme() {
-    let longitudCadaAlumno = new Array();
-    for (let i = 0; i < this.alumnos.length; i++) {
-      for (let j = 0; j < 1; j++) {
-        for (let z = 0; z < 1; z++) {
-          longitudCadaAlumno[i] =
-            1 +
-            this.alumnos[i].modulos.length +
-            this.alumnos[i].modulos[j].profesorado.length;
-        }
-      }
-    }
-    return longitudCadaAlumno;
-  }
-  devolverElemento(elemento) {
-    return document.createElement(elemento);
-  }
-
+  /**
+   * Esta función mostrará los datos del curso.
+   */
   mostrarCurso() {
+    //Me almaceno el body.
     let body = document.getElementById("body");
 
+    //Me creo los elementos básicos de la tabla
     let tabla = document.createElement("table");
     let fila = document.createElement("tr");
     let celdaEnunciado = document.createElement("th");
 
+    //Indico que el título de la tabla ocupe 4 columnas.
     celdaEnunciado.colSpan = 4;
+
+    //Le inserto al título de la tabla un texto y una clase.
     celdaEnunciado.innerHTML = "CURSO";
     celdaEnunciado.className = "tituloTabla";
 
+    //Añado la celda a la tabla.
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
+
+    //Me creo una fila.
     fila = document.createElement("tr");
 
+    //En la fila le añado tantas celdas como keys haya. (NO AÑADO LOS ARRAYS)
     for (const key in this) {
       if (key != "modulos" && key != "alumnos") {
         celdaEnunciado = document.createElement("th");
@@ -197,7 +226,10 @@ export class Curso {
       }
     }
 
+    //Creo otra fila
     fila = document.createElement("tr");
+
+    //En la fila creada inserto tantas celdas como datos haya. (NO AÑADO LOS ARRAYS)
     for (const key in this) {
       if (key != "modulos" && key != "alumnos") {
         let celda = document.createElement("td");
@@ -207,92 +239,156 @@ export class Curso {
       }
     }
 
+    //Inserto en el body tanto la tabla como un salto de línea.
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
   }
 
+  /**
+   * Esta función mostrará el nombre y apellidos de cada alumno, junto a los módulos
+   * en los que están matriculados.
+   */
   mostrarDatosAlumnos() {
+    //Me almaceno el body.
     let body = document.getElementById("body");
 
+    //Creo los datos básicos de la tabla.
     let tabla = document.createElement("table");
     let fila = document.createElement("tr");
     let celdaEnunciado = document.createElement("th");
 
+    //Indico que el título de la tabla ocupe 4 columnas.
     celdaEnunciado.colSpan = 4;
-    celdaEnunciado.innerHTML = "DATOS ALUMNOS";
-    celdaEnunciado.className = "tituloTabla";
 
+    //Le inserto al título un texto y una clase.
+    celdaEnunciado.innerHTML = "DATOS ALUMNOS";
+    celdaEnunciado.className = "tituloTabla"; //Le indico un texto y lo añado a la fila.
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
+
+    //Creo una fila.
     fila = document.createElement("tr");
+
+    //Creo un th.
     let celdaNombre = document.createElement("th");
+
+    //Le indico un texto y lo añado a la fila.
     celdaNombre.innerHTML = "Nombre";
     fila.appendChild(celdaNombre);
 
+    //Creo un th.
     let celdaModulo = document.createElement("th");
+    //Le indico un texto, un tamaño de columnas y lo añado a la fila.
     celdaModulo.innerHTML = "Módulos";
     celdaModulo.colSpan = this.alumnos[0].modulos.length;
     fila.appendChild(celdaModulo);
+
+    //Añado la fila a la tabla
     tabla.appendChild(fila);
+
+    //Recorro los alumnos.
     for (let i = 0; i < this.alumnos.length; i++) {
+      //Creo tanto una fila como una celda por cada iteración.
       fila = document.createElement("tr");
       let celda = document.createElement("td");
 
+      //Añado a la celda el nombre y apellidos del alumno.
       celda.innerHTML = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
+
+      //Inserto la celda en la fila.
       fila.appendChild(celda);
+
+      //Recorros los módulos de cada alumno
       for (let j = 0; j < this.alumnos[i].modulos.length; j++) {
+        //En cada celda creada añadiré eñ nombre del módulo.
         celda = document.createElement("td");
         celda.innerHTML = this.alumnos[i].modulos[j]["nombre"];
         fila.appendChild(celda);
       }
+      //Añado la fila a la tabla.
       tabla.appendChild(fila);
     }
+
+    //Al body le añado tanto la tabla como un salto de línea.
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
   }
 
+  /**
+   * Este método mostrará el nombre de los módulos y los profesores que los imparten,
+   */
   mostrarDatosModulos() {
+    //Me almaceno el body
     let body = document.getElementById("body");
 
+    //Creo los datos básicos de la tabla.
     let tabla = document.createElement("table");
     let fila = document.createElement("tr");
     let celdaEnunciado = document.createElement("th");
 
+    //Le indico que el titulo de la tabla ocupe 4 columnas.
     celdaEnunciado.colSpan = 4;
+
+    //Le inserto tanto un texto como una clase.
     celdaEnunciado.innerHTML = "DATOS MODULOS";
     celdaEnunciado.className = "tituloTabla";
 
+    //Inserto la celda en la tabla
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
+
+    //Creo una fila y una celda
     fila = document.createElement("tr");
     let celdaNombre = document.createElement("th");
+
+    //A la celda le indico un texto y lo añado a la fila.
     celdaNombre.innerHTML = "Modulo";
     fila.appendChild(celdaNombre);
 
+    //Creo otra celda.
     let celdaModulo = document.createElement("th");
+
+    //A la celda le añado un texto, un ancho y lo añado a la fila.
     celdaModulo.innerHTML = "Profesores";
     celdaModulo.colSpan = this.modulos[0].profesorado.length;
     fila.appendChild(celdaModulo);
+
+    //Añado la fila a la tabla
     tabla.appendChild(fila);
+
+    //Recorro los módulos
     for (let i = 0; i < this.modulos.length; i++) {
+      //Creo tanto una fila como una celda.
       fila = document.createElement("tr");
       let celda = document.createElement("td");
+
+      //Añado a la celda el nombre del módulo y lo inserto en la fila.
       celda.innerHTML = this.modulos[i]["nombre"];
       fila.appendChild(celda);
+
+      //Recorro los profesores.
       for (let j = 0; j < this.modulos[i].profesorado.length; j++) {
+        //Creo una celda en la que le inserto el nombre de los profesores.
         let celda = document.createElement("td");
         celda.innerHTML = this.modulos[i].profesorado[j]["nombre"];
         fila.appendChild(celda);
       }
+
+      //Añado la fila a la tabla.
       tabla.appendChild(fila);
     }
+
+    //Añado la tabla al body e inserto un salto de línea.
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
   }
 
+  /**
+   * Este método imprimirá todos los datos del curso.
+   */
   informeCurso() {
     let body = document.getElementById("body");
-    let tituloInforme = this.devolverElemento("h2");
+    let tituloInforme = document.createElement("h2");
     tituloInforme.innerHTML = "INFORME CURSO";
     tituloInforme.className = "titulos";
     body.appendChild(tituloInforme);
