@@ -10,6 +10,10 @@ export class Curso {
     this.alumnos = new Array();
   }
 
+  /**
+   *
+   * @returns Devuelvo la nota media de todos los alumnos matriculados.
+   */
   notaMedia() {
     let notaMedia = 0;
     for (let i = 0; i < this.alumnos.length; i++) {
@@ -18,6 +22,11 @@ export class Curso {
     return notaMedia / this.alumnos.length;
   }
 
+  /**
+   * Si el parámetro introducido es un objeto alumno, lo añado al array y muestro
+   * el nombre del alumno matriculado por pantalla.
+   * @param {Alumno} alumno
+   */
   matricularAlumno(alumno) {
     let body = document.getElementById("body");
     let p = document.createElement("p");
@@ -27,43 +36,60 @@ export class Curso {
       body.appendChild(p);
     }
   }
+
+  /**
+   * Si el parámetro introducido es un objeto módulo, lo añado al array y muestro
+   * el nombre del módulo por pantalla.
+   * @param {Modulos} modulos
+   */
   anyadirModulos(modulos) {
     let body = document.getElementById("body");
+    //Si se ha pasado un array de módulosm entro en la condición.
     if (modulos.length != undefined) {
       for (let i = 0; i < modulos.length; i++) {
-        let p = document.createElement("p");
+        //Valido si el objeto es uno de tipo módulo.
         if (modulos[i].constructor.name == "Modulos") {
+          //Lo añado al array.
           this.modulos.push(modulos[i]);
+          let p = document.createElement("p");
           p.innerHTML = `Modulo '${modulos[i].nombre}' añadido correctamente`;
           body.appendChild(p);
         }
       }
     } else {
-      let p = document.createElement("p");
+      //Valido si el objeto es uno de tipo módulo.
       if (modulos.constructor.name == "Modulos") {
+        //Lo añado al array.
         this.modulos.push(modulos);
+        let p = document.createElement("p");
         p.innerHTML = `Modulo '${modulos.nombre}' añadido correctamente`;
         body.appendChild(p);
       }
     }
   }
 
-  mostrarAlumnos(maneraOrdenar) {
+  mostrarAlumnosOrdenados(maneraOrdenar) {
+    //Me creo un nuevo array.
     let alumnosOrdenados = new Array();
-    let body = document.getElementById("body");
 
-    let tabla = document.createElement("table");
-    let fila = document.createElement("tr");
-    let celdaEnunciado = document.createElement("th");
-
+    //Almaceno el nombre y los apellidos de los alumnos.
     for (let i = 0; i < this.alumnos.length; i++) {
       alumnosOrdenados[
         i
       ] = `${this.alumnos[i].nombre} ${this.alumnos[i].apellidos}`;
     }
 
+    //Los ordeno ascendentemente.
     alumnosOrdenados.sort();
 
+    //Me creo los elementos iniciales de la taba¡la
+    let body = document.getElementById("body");
+    let tabla = document.createElement("table");
+    let fila = document.createElement("tr");
+    let celdaEnunciado = document.createElement("th");
+    celdaEnunciado.className = "tituloTabla";
+
+    //Si se ha especificado que la manera de ordenar va a ser descendente, le doy la vuelta al array.
     if (maneraOrdenar == "descendente") {
       alumnosOrdenados.reverse();
       celdaEnunciado.innerHTML =
@@ -73,17 +99,25 @@ export class Curso {
         "ALUMNOS ORDENADOS POR EL NOMBRE ASCENENTEMENTE";
     }
 
+    //Añado la fila a la tabla.
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
+
+    /**
+     * Defino un bucle en el que se van a crear tantas celdas como alumnos, y estas celdas se van a insertar
+     * en la tabla.
+     */
     for (let i = 0; i < alumnosOrdenados.length; i++) {
       fila = document.createElement("tr");
-      let celda = document.createElement("th");
+      let celda = document.createElement("td");
 
       celda.innerHTML = alumnosOrdenados[i];
       fila.appendChild(celda);
       tabla.appendChild(fila);
       this.alumnos[i].modulos.length;
     }
+
+    //Añado al body tanto la tabla como un salto de línea.
     body.appendChild(tabla);
     body.appendChild(document.createElement("br"));
   }
@@ -96,6 +130,7 @@ export class Curso {
     let celdaEnunciado = document.createElement("th");
     celdaEnunciado.colSpan = 4;
     celdaEnunciado.innerHTML = "PROFESORES";
+    celdaEnunciado.className = "tituloTabla";
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
     for (let i = 0; i < this.modulos.length; i++) {
@@ -147,6 +182,7 @@ export class Curso {
 
     celdaEnunciado.colSpan = 4;
     celdaEnunciado.innerHTML = "CURSO";
+    celdaEnunciado.className = "tituloTabla";
 
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
@@ -163,7 +199,6 @@ export class Curso {
 
     fila = document.createElement("tr");
     for (const key in this) {
-      console.log(key);
       if (key != "modulos" && key != "alumnos") {
         let celda = document.createElement("td");
         celda.innerHTML = this[key];
@@ -185,6 +220,7 @@ export class Curso {
 
     celdaEnunciado.colSpan = 4;
     celdaEnunciado.innerHTML = "DATOS ALUMNOS";
+    celdaEnunciado.className = "tituloTabla";
 
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
@@ -224,6 +260,7 @@ export class Curso {
 
     celdaEnunciado.colSpan = 4;
     celdaEnunciado.innerHTML = "DATOS MODULOS";
+    celdaEnunciado.className = "tituloTabla";
 
     fila.appendChild(celdaEnunciado);
     tabla.appendChild(fila);
@@ -257,6 +294,7 @@ export class Curso {
     let body = document.getElementById("body");
     let tituloInforme = this.devolverElemento("h2");
     tituloInforme.innerHTML = "INFORME CURSO";
+    tituloInforme.className = "titulos";
     body.appendChild(tituloInforme);
     this.mostrarCurso();
     this.mostrarDatosAlumnos();

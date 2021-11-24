@@ -54,7 +54,7 @@ window.onload = function () {
   profesoresDWC.push(profesorUno, profesorTres);
 
   //Creo un array dónde almacenaré todos los módulos.
-  var arrayModulosAlumnoUno = new Array();
+  var arrayModulos = new Array();
 
   //Creo los tres módulos.
   var moduloDWC = new Modulos.Modulos("DWC", 128);
@@ -87,7 +87,7 @@ window.onload = function () {
   curso.mostrarProfesores();
 
   //Muestro los alumnos en orden descendente.
-  curso.mostrarAlumnos("descendente");
+  curso.mostrarAlumnosOrdenados("descendente");
 
   //Muestro el informe del curso.
   curso.informeCurso();
