@@ -1,14 +1,10 @@
 "use strict";
 
 import * as borrarElementoPorDefecto from "./borrarElementosPorDefecto.js";
-import * as devolverPlantilla from "./devolverElementos.js";
-import * as anyadirTarea from "./anyadirTareas.js";
-import * as acabarTarea from "./acabarTarea.js";
-import * as borrarTarea from "./eliminarTarea.js";
-import * as volverTarea from "./volverTarea.js";
-import * as archivarTarea from "./archivarTareas.js";
-import * as mostrarTarea from "./mostrarTareas,js";
+import * as tarea from "./tareas.js";
+import * as mostrarTarea from "./mostrarTareas.js";
 import * as comprobarTareas from "./comprobarTareas.js";
+import * as devolverElementos from "./devolverElementos.js";
 
 //Práctica 5.2 - Gestor de tareas 2
 
@@ -29,15 +25,6 @@ window.onload = function () {
   var primerParrafo = document.getElementsByTagName("h1")[0];
   primerParrafo.className = "colorBlanco";
 
-  /**
-   *
-   * @param {div} nuevoNodo
-   * @param {div} nodoExistente
-   */
-  function insertAfter(nuevoNodo, nodoExistente) {
-    nodoExistente.parentNode.insertBefore(nuevoNodo, nodoExistente.nextSibling);
-  }
-
   //Evento aplicado al botón añadir
   document.getElementById("add").addEventListener(
     "click",
@@ -47,7 +34,7 @@ window.onload = function () {
       } else {
         tareasAnyadidas++;
       }
-      anyadirTarea(tareasAnyadidas);
+      tarea.anyadirTarea(tareasAnyadidas);
     },
     false
   );
@@ -56,7 +43,7 @@ window.onload = function () {
   document.getElementById("sho").addEventListener(
     "click",
     function () {
-      mostrarTareasOcultadas();
+      mostrarTarea.mostrarTareasOcultadas();
     },
     false
   );
@@ -89,10 +76,8 @@ window.onload = function () {
     "drop",
     function (ev) {
       ev.preventDefault();
-      Datos;
-
       if (ev.target.id == "acabadas") {
-        acabarTarea(elementoArrastrado.getElementsByTagName("input")[0]);
+        tarea.acabarTarea(elementoArrastrado.getElementsByTagName("input")[0]);
       }
     },
     false
@@ -154,7 +139,7 @@ window.onload = function () {
     function (ev) {
       ev.preventDefault();
       if (ev.target.id == "pendientes") {
-        volverTarea(elementoArrastrado.getElementsByTagName("input")[0]);
+        tarea.volverTarea(elementoArrastrado.getElementsByTagName("input")[0]);
       }
       elementoArrastrado.style.border = "";
       elementoArrastrado.style.opacity = "1";
@@ -173,27 +158,27 @@ window.onload = function () {
         //Siempre que esté dentro de pendientes
         if (
           (elementoArrastrado.classList[0] == "moverTarea" &&
-            estaDentroPendientes(ev.target)) ||
+            comprobarTareas.estaDentroPendientes(ev.target)) ||
           (elementoArrastrado.classList[1] == "moverTarea" &&
-            estaDentroPendientes(ev.target))
+            comprobarTareas.estaDentroPendientes(ev.target))
         ) {
           //Selecciono al contenedor "pendientes"
-          var divPadre = devolverDivPendientes(ev.target);
+          var divPadre = devolverElementos.devolverDivPendientes(ev.target);
 
           //Selecciono a la hermana
-          var tareaHermana = devolverTarea(ev.target);
+          var tareaHermana = devolverElementos.devolverTarea(ev.target);
 
           //Si tiene hermana entra al condicional
           if (tareaHermana != false) {
             //Si el elemento es mayor que la hermana mayor, inserta la tarea después que la hermana pequeña
             if (
-              esHermanaMayor(
+              comprobarTareas.esHermanaMayor(
                 elementoArrastrado,
                 tareaHermana,
                 divPadre.children
               )
             ) {
-              insertAfter(elementoArrastrado, tareaHermana);
+              tarea.insertAfter(elementoArrastrado, tareaHermana);
             } else {
               //Si no, la inserta antes
               divPadre.insertBefore(elementoArrastrado, tareaHermana);
@@ -210,6 +195,5 @@ window.onload = function () {
     },
     false
   );
-
-  borrarElementosPorDefecto();
+  borrarElementoPorDefecto.borrarElementosPorDefecto();
 };

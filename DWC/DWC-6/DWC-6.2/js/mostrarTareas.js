@@ -10,3 +10,5 @@ function mostrarTareasOcultadas() {
     tareasAcabadas[i].className = "acabada";
   }
 }
+
+export { mostrarTareasOcultadas };
