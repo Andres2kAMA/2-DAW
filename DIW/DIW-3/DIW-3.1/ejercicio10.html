@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
-		<title>Studio albums</title>
-	</head>
-	<body>
-		<div>
-    			<p>In the Court of the Crimson King (1969)</p>
-			<p>In the Wake of Poseidon (1970)</p>
-			<p>Lizard (1970)</p>
-			<p>Islands (1971)</p>
-			<p>Larks' Tongues in Aspic (1973)</p>			
-			<p>Starless and Bible Black (1974)</p>
-			<p>Red (1974)</p>
-			<p>Discipline (1981)</p>
-			<p>Beat (1982)</p>
-			<p>Three of a Perfect Pair (1984)</p>
-			<p>THRAK (1995)</p>
-			<p>The ConstruKction of Light (2000)</p>
-			<p>The Power to Believe (2003)</p>
-		</div>
-	</body>
+  <head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css" />
+    <title>Studio albums</title>
+  </head>
+  <body>
+    <div>
+      <p>In the Court of the Crimson King (1969)</p>
+      <p>In the Wake of Poseidon (1970)</p>
+      <p>Lizard (1970)</p>
+      <p>Islands (1971)</p>
+      <p>Larks' Tongues in Aspic (1973)</p>
+      <p>Starless and Bible Black (1974)</p>
+      <p>Red (1974)</p>
+      <p>Discipline (1981)</p>
+      <p>Beat (1982)</p>
+      <p>Three of a Perfect Pair (1984)</p>
+      <p>THRAK (1995)</p>
+      <p>The ConstruKction of Light (2000)</p>
+      <p>The Power to Believe (2003)</p>
+    </div>
+  </body>
+  <style>
+    p:nth-child(1) {
+      color: red;
+    }
+    p:nth-child(13) {
+      color: blue;
+    }
+    p:nth-child(2) {
+      font-family: "Tahoma";
+    }
+    p:nth-child(3) {
+      color: #cc0000;
+    }
+    p:nth-child(4) {
+      background-color: #00ff00;
+    }
+    p:nth-child(5) {
+      font-size: 22px;
+    }
+    /**
+	¿Podría seleccionar un subconjunto de párrafos en vez de un único párrafo?¿Cómo?
+	Sí que se podría. Ejemplos:
+		->document.getElementsByTagName("p");
+		->document.getElementsByClassName("p");
+		->document.getElementsByName("p");
+	**/
+  </style>
 </html>
