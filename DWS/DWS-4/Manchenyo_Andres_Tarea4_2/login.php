@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ->Punto 1: Check
         ->Punto 2: Check
         ->Punto 3: 
-        ->Punto 4: 
-        ->Punto 5: 
+        ->Punto 4: Check
+        ->Punto 5: Check
         ->Punto 6: 
         ->Punto 7: 
         ->Punto 8: 
