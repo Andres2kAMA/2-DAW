@@ -1,6 +1,14 @@
+//Me creo un array donde almacenaré todos los personajes.
 var personajes = new Array();
 
-function anyadirInformacionSinopsis(etiquetaACrear, texto, id, body) {
+/**
+ * Esta función la utilizaré pare añadir/actualizar el valor de la sinopsis.
+ * @param {String} etiquetaACrear
+ * @param {String} texto
+ * @param {String} id
+ * @param {body} body
+ */
+function mostrarInformacionSinopsis(etiquetaACrear, texto, id, body) {
   if (document.getElementById(id) == null) {
     let etiqueta = document.createElement(etiquetaACrear);
     etiqueta.id = id;
@@ -11,31 +19,35 @@ function anyadirInformacionSinopsis(etiquetaACrear, texto, id, body) {
   }
 }
 
-function enviarPeticionPersonajes(personajes) {
-  for (let i = 0; i < 10; i++) {
-    obtenerPersonaje(personajes[i]);
-  }
-}
-
 function mostrarPersonajesPelicula() {
   let body = document.getElementById("body");
-  if (document.getElementById("personajes") != null) {
-    body.removeChild(document.getElementById("personajes"));
-  } else {
+  if (document.getElementById("cargandoPersonajes") != null) {
+    body.removeChild(document.getElementById("cargandoPersonajes"));
+  }
+  if (document.getElementById("tituloPersonajes") == null) {
     let h2 = document.createElement("h2");
     h2.innerHTML = "Personajes";
+    h2.id = "tituloPersonajes";
     body.appendChild(h2);
   }
 
   let nav = document.createElement("nav");
   nav.id = "personajes";
+  let ul = document.createElement("ul");
   for (let i = 0; i < personajes.length; i++) {
     let li = document.createElement("li");
     li.innerHTML = personajes[i];
-    nav.appendChild(li);
+    ul.appendChild(li);
   }
   personajes = new Array();
+  nav.appendChild(ul);
   body.appendChild(nav);
+}
+
+function enviarPeticionPersonajes(personajes) {
+  for (let i = 0; i < 10; i++) {
+    obtenerPersonaje(personajes[i]);
+  }
 }
 
 function almacenarPersonajes(personaje) {
@@ -49,9 +61,9 @@ function almacenarPersonajes(personaje) {
 function mostrarInformacionPelicula(pelicula) {
   let body = document.getElementById("body");
 
-  anyadirInformacionSinopsis("h2", "Sinopsis", "sinopsis", body);
-  anyadirInformacionSinopsis("h3", pelicula.title, "titulo", body);
-  anyadirInformacionSinopsis(
+  mostrarInformacionSinopsis("h2", "Sinopsis", "sinopsis", body);
+  mostrarInformacionSinopsis("h3", pelicula.title, "titulo", body);
+  mostrarInformacionSinopsis(
     "p",
     pelicula.opening_crawl,
     "textoSinopsis",
@@ -147,7 +159,15 @@ function obtenerPersonaje(url) {
     () => {
       // Si está recibiendo datos.
       if (httpRequest.readyState == 3) {
-        //console.log("Obteniendo los datos...");
+        if (document.getElementById("personajes") != null) {
+          body.removeChild(document.getElementById("personajes"));
+        } else if (document.getElementById("cargandoPersonajes") == null) {
+          let body = document.getElementById("body");
+          let p = document.createElement("p");
+          p.innerHTML = "Cargando...";
+          p.id = "cargandoPersonajes";
+          body.appendChild(p);
+        }
       }
 
       // Si la comunicación ha sido correcta.
