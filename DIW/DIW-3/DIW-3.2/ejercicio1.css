@@ -1,0 +1,20 @@
+h1,
+h2,
+#tagline,
+.date {
+  color: cornflowerblue;
+  border: 2px dotted blue;
+  border-radius: 10px;
+}
+
+#nav {
+  display: inline;
+}
+
+a:hover {
+  color: rebeccapurple;
+}
+
+body {
+  border: 1px solid;
+}
