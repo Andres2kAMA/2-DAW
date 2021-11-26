@@ -19,11 +19,15 @@ function mostrarInformacionSinopsis(etiquetaACrear, texto, id, body) {
   }
 }
 
+/**
+ * Esta función la utilizaré para mostrar los personajes
+ */
 function mostrarPersonajesPelicula() {
   let body = document.getElementById("body");
   if (document.getElementById("cargandoPersonajes") != null) {
     body.removeChild(document.getElementById("cargandoPersonajes"));
   }
+
   if (document.getElementById("tituloPersonajes") == null) {
     let h2 = document.createElement("h2");
     h2.innerHTML = "Personajes";
@@ -92,8 +96,14 @@ function mostrarPeliculas(listadoPeliculas) {
   let nav = document.createElement("nav");
   let ul = document.createElement("ul");
 
+  if (document.getElementById("cargandoPeliculas") != null) {
+    body.removeChild(document.getElementById("cargandoPeliculas"));
+  }
+
   h2.innerHTML = `Películas - ${listadoPeliculas.count}`;
   body.appendChild(h2);
+
+  nav.id = "listadoPeliculas";
 
   for (let i = 0; i < listadoPeliculas.count; i++) {
     let li = document.createElement("li");
@@ -126,7 +136,13 @@ function conectarmeConLaApi(url) {
     () => {
       // Si está recibiendo datos.
       if (httpRequest.readyState == 3) {
-        //console.log("Obteniendo los datos...");
+        if (document.getElementById("listadoPeliculas") == null) {
+          let body = document.getElementById("body");
+          let p = document.createElement("p");
+          p.innerHTML = "Cargando...";
+          p.id = "cargandoPeliculas";
+          body.appendChild(p);
+        }
       }
 
       // Si la comunicación ha sido correcta.
