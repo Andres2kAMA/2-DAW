@@ -201,11 +201,7 @@ function conectarmeConLaApi(url) {
         //Si no se ha creado la lista entro.
         if (document.getElementById("listadoPeliculas") == null) {
           //Añado al body el mensaje de que se están cargando los datos.
-          let body = document.getElementById("body");
-          let p = document.createElement("p");
-          p.innerHTML = "Cargando...";
-          p.id = "cargandoPeliculas";
-          body.appendChild(p);
+          anyadirEtiquetaPersonalizada("p", "Cargando...", "cargandoPeliculas");
         }
       }
 
@@ -243,12 +239,12 @@ function obtenerPersonaje(url) {
         if (document.getElementById("personajes") != null) {
           body.removeChild(document.getElementById("personajes"));
         } else if (document.getElementById("cargandoPersonajes") == null) {
-          //Si no, muestro un mensaje de que se están cargando los personajes.
-          let body = document.getElementById("body");
-          let p = document.createElement("p");
-          p.innerHTML = "Cargando...";
-          p.id = "cargandoPersonajes";
-          body.appendChild(p);
+          //Si no, muestro un mensaje de que se están cargando los personajes.¡
+          anyadirEtiquetaPersonalizada(
+            "p",
+            "Cargando...",
+            "cargandoPersonajes"
+          );
         }
       }
 
