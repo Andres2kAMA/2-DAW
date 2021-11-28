@@ -26,11 +26,18 @@ comprobar_sesion();
         $nom = $producto["Nombre"];
         $des = $producto["Descripcion"];
         $peso = $producto["Peso"];
+        $stock = $producto["Stock"];
         $unidades = $_SESSION["carrito"][$cod];
         $_SESSION["unidades"] =  [$unidades, $cod];
         echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$unidades</td>"
             . "<td><form action = 'eliminar.php' method = 'POST'>"
-            . "<input name = 'unidades' type='number' min='1' value = '1'>"
+            . "<select name='unidades' id='unidades'>";
+
+        echo "<option value=' $unidades'>$unidades</option>";
+        for ($i = 1; $i <= $stock; $i++) {
+            echo "<option value=' $i'>$i</option>";
+        }
+        echo "</select>"
             . "<input type = 'submit' value = 'Eliminar'>"
             . " <input name = 'cod' type = 'hidden' value = '$cod'>"
             . "</form></td></tr>";
@@ -38,7 +45,7 @@ comprobar_sesion();
     echo "</table>";
     ?>
     <hr>
-    <a href="procesar_pedido.php">Realizar pedido</a>
+    <a href="confirmar_pedido.php">Realizar pedido</a>
 
 </body>
 

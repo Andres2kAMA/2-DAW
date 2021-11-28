@@ -33,7 +33,12 @@ comprobar_sesion();
             if ($stock >= 1) {
                 echo "<tr><td>$nom</td><td>$des</td><td>$peso</td><td>$stock</td>"
                     . "<td><form action = 'anadir.php' method = 'POST'>"
-                    . "<input name = 'unidades' type='number' min='1' value = '1'>"
+                    . "<select name='unidades' id='unidades'>";
+
+                for ($i = 1; $i <= $stock; $i++) {
+                    echo "<option value=' $i'>$i</option>";
+                }
+                echo "</select>"
                     . "<input type = 'submit' value = 'Comprar'>"
                     . "<input name = 'cod' type = 'hidden' value = '$cod'>"
                     . "</form></td></tr>";
