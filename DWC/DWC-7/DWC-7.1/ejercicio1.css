@@ -13,6 +13,7 @@
 
 .peliculas:hover {
   color: #ffe81f;
+  cursor: pointer;
 }
 ul {
   padding-right: 3em;
