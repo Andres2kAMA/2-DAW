@@ -16,7 +16,6 @@ window.onload = function () {
   function ejecutarPromesaPokemon(promesaPokemon) {
     promesaPokemon
       .then((pokemon) => {
-        console.log(pokemon);
         pokemonApi.mostrarDatos(pokemon);
       })
       .catch((error) => {

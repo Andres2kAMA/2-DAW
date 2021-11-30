@@ -37,20 +37,21 @@ function mostrarDatoIndividual(dato, idEncabezado) {
 }
 
 function eliminarElementosDiv(div) {
-  while (div.hasChildNodes == true) {
+  while (div.hasChildNodes() == true) {
     div.removeChild(div.children[0]);
   }
 }
 
 function mostrarError(mensajeError) {
   let div = document.getElementById("mostrarDatos");
-  if (div.hasChildNodes) {
-    eliminarElementosDiv(div);
-    let p = document.createElement("p");
-    p.id = "error";
-    p.innerHTML = mensajeError;
-    div.insertAdjacentElement("beforebegin", p);
-  }
+  if (document.getElementById("error") == null)
+    if (div.hasChildNodes) {
+      eliminarElementosDiv(div);
+      let p = document.createElement("p");
+      p.id = "error";
+      p.innerHTML = mensajeError;
+      div.insertAdjacentElement("beforebegin", p);
+    }
 }
 function eliminarError() {
   if (document.getElementById("error") != null) {
@@ -65,9 +66,9 @@ function mostrarDatos(pokemon) {
   let encabezados = ["Nombre", "Imagen", "ID", "Peso"];
   if (document.getElementById("Nombre") == null) crearEncabezados(encabezados);
   mostrarDatoIndividual(pokemon.name.toUpperCase(), encabezados[0]);
+  mostrarImagen(pokemon.sprites.front_default);
   mostrarDatoIndividual(pokemon.id, encabezados[2]);
   mostrarDatoIndividual(pokemon.weight, encabezados[3]);
-  mostrarImagen(pokemon.sprites.front_default);
 }
 
 function obtenerPokemon(pokemonID) {
