@@ -20,7 +20,7 @@ window.onload = function () {
         pokemonApi.mostrarDatos(pokemon);
       })
       .catch((error) => {
-        console.log(error.message);
+        pokemonApi.mostrarError(error.message);
       });
   }
 };
