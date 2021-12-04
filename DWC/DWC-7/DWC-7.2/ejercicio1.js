@@ -1,5 +1,6 @@
 "use strict";
 
+//Importo la Api
 import * as pokemonApi from "./pokemon.js";
 
 window.onload = function () {
