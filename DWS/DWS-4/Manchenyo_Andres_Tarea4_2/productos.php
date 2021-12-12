@@ -15,6 +15,7 @@ comprobar_sesion();
 
 <body>
     <?php require "cabecera.php";
+    $_SESSION["cat"] = $_GET["categoria"];
     $categorias = cargar_categoria($_GET["categoria"]);
     $productos = cargar_productos_categoria($_GET["categoria"]);
     if ($categorias === FALSE or $productos === FALSE) {

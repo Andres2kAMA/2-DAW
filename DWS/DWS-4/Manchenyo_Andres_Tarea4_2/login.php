@@ -49,16 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input id="clave" name="clave" type="password"><br><br>
         <input type="submit">
     </form>
-    <!--
-        ->Punto 1: Check
-        ->Punto 2: Check
-        ->Punto 3: 
-        ->Punto 4: Check
-        ->Punto 5: Check
-        ->Punto 6: Check
-        ->Punto 7: 
-        ->Punto 8: 
-         !-->
 </body>
 
 </html>
