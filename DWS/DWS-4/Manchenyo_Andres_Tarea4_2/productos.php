@@ -8,6 +8,8 @@ comprobar_sesion();
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./estilos/estilo.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/estiloCategorias.css">
     <title>Tabla de productos por categoria</title>
 </head>
 
@@ -38,8 +40,8 @@ comprobar_sesion();
                 for ($i = 1; $i <= $stock; $i++) {
                     echo "<option value=' $i'>$i</option>";
                 }
-                echo "</select>"
-                    . "<input type = 'submit' value = 'Comprar'>"
+                echo "</select><br>"
+                    . "<input  type = 'submit' value = 'Comprar'>"
                     . "<input name = 'cod' type = 'hidden' value = '$cod'>"
                     . "</form></td></tr>";
             }
