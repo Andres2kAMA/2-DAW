@@ -24,10 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./estilos/estilo.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/estiloLogin.css">
     <title>Formulario Login</title>
 </head>
 
 <body>
+    <h1>Login</h1>
     <?php
     if (isset($_GET["redirigido"])) {
         echo "<p>Haga login para continuar</p>";
@@ -41,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
 
         <label for="usuario">Usuario</label>
-        <input value="<?php if (isset($usuario)) echo $usuario; ?>" id="usuario" name="usuario" type="text">
+        <input value="<?php if (isset($usuario)) echo $usuario; ?>" id="usuario" name="usuario" type="text"><br><br>
         <label for="clave">Clave</label>
-        <input id="clave" name="clave" type="password">
+        <input id="clave" name="clave" type="password"><br><br>
         <input type="submit">
     </form>
     <!--
