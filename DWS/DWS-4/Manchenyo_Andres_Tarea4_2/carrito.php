@@ -8,6 +8,8 @@ comprobar_sesion();
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./estilos/estilo.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/estiloCategorias.css">
     <title>Carrito de la compra</title>
 </head>
 
@@ -37,14 +39,13 @@ comprobar_sesion();
         for ($i = 1; $i <= $stock; $i++) {
             echo "<option value=' $i'>$i</option>";
         }
-        echo "</select>"
+        echo "</select><br>"
             . "<input type = 'submit' value = 'Eliminar'>"
             . " <input name = 'cod' type = 'hidden' value = '$cod'>"
             . "</form></td></tr>";
     }
     echo "</table>";
     ?>
-    <hr>
     <a href="confirmar_pedido.php">Realizar pedido</a>
 
 </body>

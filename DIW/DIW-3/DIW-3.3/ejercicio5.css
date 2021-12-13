@@ -1,0 +1,12 @@
+* {
+  background-color: #ccffcc;
+}
+.mi_clase {
+  background-color: #ffcccc;
+}
+
+#mi_id,
+h1,
+em {
+  background-color: white;
+}

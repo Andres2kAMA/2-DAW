@@ -1,0 +1,46 @@
+body {
+  background: linear-gradient(rgba(5, 7, 12, 0.5), rgba(5, 7, 12, 1)),
+    url("../img/supermercado.jpg") center / cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1,
+label {
+  color: white;
+}
+a {
+  color: blanchedalmond;
+}
+input:hover {
+  border: 3px solid teal;
+  border-radius: 10px;
+  font-weight: bold;
+}
+li {
+  list-style: none;
+}
+
+a:visited {
+  color: aquamarine;
+  font-weight: bold;
+}
+
+option,
+select,
+input {
+  color: black;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 20px 5px;
+}
+
+th,
+td {
+  border: 5px solid black;
+  border-radius: 10px;
+  padding: 4px;
+}

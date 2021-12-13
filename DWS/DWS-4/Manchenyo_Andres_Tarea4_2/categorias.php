@@ -8,12 +8,14 @@ comprobar_sesion();
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./estilos/estilo.css">
+    <link rel="stylesheet" type="text/css" href="./estilos/estiloCategorias.css">
     <title>Lista de categorias</title>
 </head>
 
 <body>
     <?php require "cabecera.php" ?>
-    <h1>Lista de categorais</h1>
+    <h1>Lista de categorias</h1>
     <?php $categorias = cargar_categorias();
     if ($categorias === false) {
         echo "<p class='error'>Error al conectar con la base de datos</p>";

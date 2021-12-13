@@ -1,0 +1,76 @@
+#titulo {
+  color: teal;
+}
+
+#subtitulo {
+  color: blue;
+}
+
+#adicional {
+  color: goldenrod;
+}
+
+#especial {
+  color: blueviolet;
+}
+
+.destacado {
+  color: darkorange;
+}
+
+.especial {
+  color: darkgoldenrod;
+}
+
+strong,
+a {
+  color: red;
+}
+
+em,
+caption {
+  color: blue;
+}
+
+span {
+  color: blueviolet;
+}
+
+tr,
+th,
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+td strong {
+  color: darkgoldenrod;
+}
+
+td {
+  color: green;
+}
+
+td em {
+  color: green;
+}
+
+tfoot th {
+  color: red;
+}
+
+tbody tr:nth-child(2) th {
+  color: red;
+}
+
+div p:first-child span {
+  color: goldenrod;
+}
+
+div span {
+  color: palevioletred;
+}
+
+div a {
+  color: green;
+}
