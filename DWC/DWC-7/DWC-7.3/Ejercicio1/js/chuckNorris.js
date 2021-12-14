@@ -6,16 +6,24 @@ function mostrarBromaChuckNorris(datos) {
   plantilaHTML.anyadirElemento("p", datos.value, "parrafo", "body");
 }
 
-function anyadirEventoBoton(id, datos) {
+function anyadirEventoBoton(id) {
   document.getElementById(id).addEventListener(
     "click",
     function () {
-      return conectarAPI();
+      conectarAPI("https://api.chucknorris.io/jokes/random");
     },
     false
   );
 }
-function conectarAPI() {
-  return new Request("https://api.chucknorris.io/jokes/random");
+
+function conectarAPI(url) {
+  fetch(url)
+    .then((Response) => Response.json())
+    .then((datos) => {
+      mostrarBromaChuckNorris(datos);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
-export { conectarAPI, anyadirEventoBoton };
+export { conectarAPI, anyadirEventoBoton, mostrarBromaChuckNorris };

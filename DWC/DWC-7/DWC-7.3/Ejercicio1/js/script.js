@@ -16,13 +16,4 @@ window.onload = function () {
   );
 
   chuckNorrisApi.anyadirEventoBoton("boton");
-
-  var chuckNorris = chuckNorrisApi.conectarAPI();
-
-  fetch(chuckNorris)
-    .then((Response) => Response.json())
-    .then((datos) => {})
-    .catch(function (err) {
-      console.log(err);
-    });
 };

@@ -6,7 +6,9 @@
 import * as swApi from "./sw.js";
 
 window.onload = () => {
-  const promesaSW = swApi.conectarmeConLaApi("https://swapi.dev/api/films");
+  const promesaSW = swApi.conectarmeConLaApi(
+    "https://swapi.py4e.com/api/films"
+  );
 
   promesaSW
     .then((promesaSW) => {
