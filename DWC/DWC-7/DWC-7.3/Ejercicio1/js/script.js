@@ -3,18 +3,25 @@
 //Ejercicio 1 - Explotando una API con Fetch
 
 import * as plantilaHTML from "./plantillaHTML.js";
+import * as chuckNorrisApi from "./chuckNorris.js";
 
 window.onload = function () {
-  var chuckNorris = new Request("https://api.chucknorris.io/jokes/random");
+  plantilaHTML.anyadirElemento("h1", "API de Chuck Norris", "titulo", "body");
+
+  plantilaHTML.anyadirElemento(
+    "button",
+    "Generar frase aleatoria",
+    "boton",
+    "body"
+  );
+
+  chuckNorrisApi.anyadirEventoBoton("boton");
+
+  var chuckNorris = chuckNorrisApi.conectarAPI();
 
   fetch(chuckNorris)
-    .then((respuesta) => {
-      return respuesta.json();
-    })
-    .then((datos) => {
-      plantilaHTML.anyadirElemento("h1", "API de Chuck Norris", "body");
-      plantilaHTML.anyadirElemento("button", "Generar frase aleatoria", "body");
-    })
+    .then((Response) => Response.json())
+    .then((datos) => {})
     .catch(function (err) {
       console.log(err);
     });
