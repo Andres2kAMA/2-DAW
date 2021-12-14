@@ -20,7 +20,7 @@
     </section>
     <section id="principal" style="display: none;">
         <header>
-            <?php require 'cabecera_json.php' ?>
+            <?php require "cabecera_json.php" ?>
         </header>
         <h2 id="titulo"></h2>
         <section id="contenido"></section>
