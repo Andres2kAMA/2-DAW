@@ -9,12 +9,13 @@
 </head>
 
 <body>
+    <p id="p"></p>
     <script type="text/javascript">
         var xhttp = new XMLHttpRequest();
         setInterval(function() {
             xhttp.open("GET", "generar_numero_aleatorio.php", false);
             xhttp.send();
-            alert(xhttp.response);
+            document.getElementById("p").innerHTML = xhttp.response;
         }, 5000);
     </script>
 
