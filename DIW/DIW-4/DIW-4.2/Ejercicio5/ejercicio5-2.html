@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Mapa de imagen</title>
+	<style>
+body { font-family: Verdana; font-size: 10px; }
+div.mapa_imagen {
+  position: relative
+}
+ul.notas li {
+  list-style: none;
+  display: none;
+  position: absolute;
+  border: medium solid white;
+}
+div.mapa_imagen:hover ul.notas li {
+  display: block;
+}
+ul.notas li p {
+  margin: 10px 0 0 0;
+  padding: .3em;
+  display: none;
+  background: #FFF;
+  opacity: 0.65;
+  position: absolute;
+  top: 100%;
+}
+ul.notas li:hover p {
+  display: block;
+}
+
+ul.notas li#nota1 {
+  width: 140px; height: 110px; top: 130px; left: 345px;
+}
+ul.notas li#nota2 {
+  width: 30px; height: 200px; top: 10px; left: 10px;
+}
+ul.notas li#nota3 {
+  width: 60px; height: 60px; top: 200px; left: 150px;
+}
+
+</style>
+</head>
+<body>
+ 
+<div class="mapa_imagen">
+  <img src="mar.jpg" />
+
+  <ul class="notas">
+    <li id="nota1"><p>Todo el mar es suyo :)</p></li>
+    <li id="nota2"><p>Me encanta este color azul</p></li>
+    <li id="nota3"><p>Dan ganas de tirarse...</p></li>
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Mapa de imagen</title>
+
+<style type="text/css">
+body {font-family: tahoma; arial, sans-serif;}
+
+#imap {display:block; width:400px; height:240px; background:url(beatles_basic.jpg); position:relative;}
+
+#imap a#title {display:block; width:400px; height:0; padding-top:240px; overflow:hidden; position:absolute; left:0; top:0; background:transparent url(beatles_hover.jpg) no-repeat 400px 400px; cursor:default;}
+* html #imap a#title {height:240px; he\ight:0;}
+
+#imap a#title:hover {background-position: 0 0; z-index:10;}
+
+#imap dd {position:absolute; padding:0; margin:0;}
+#imap #pic1 {left:36px; top:46px; z-index:20;}
+#imap #pic2 {left:113px; top:76px; z-index:20;}
+#imap #pic3 {left:192px; top:50px; z-index:20;}
+#imap #pic4 {left:262px; top:60px; z-index:20;}
+
+#imap a#paul, #imap a#ringo, #imap a#john, #imap a#george {display:block; width:85px; height:85px; background:transparent url(hover.gif) -100px -100px no-repeat; text-decoration:none; z-index:20;}
+
+#imap a span, #imap a:visited span {display:none;}
+
+#imap a#paul:hover, #imap a#ringo:hover, #imap a#john:hover, #imap a#george:hover {background-position:0 0;}
+
+#imap a:hover span {position:absolute;  width:388px; display:block; font-family:arial; font-size:12px; background:#fff; color:#000; border:1px solid #000; padding:5px;}
+* html #imap a:hover span {width:400px; w\idth:388px;}
+#imap a#paul:hover span {left:-36px; top:200px;}
+#imap a#ringo:hover span {left:-113px; top:170px;}
+#imap a#john:hover span {left:-192px; top:196px;}
+#imap a#george:hover span {left:-262px; top:186px;}
+
+#imap a span:first-line {font-weight:bold; font-style:italic;}
+
+#ads {margin-top:150px;}
+
+</style>
+</head>
+
+<body>
+<h2>THE BEATLES</h2>
+<h2>Un mapa de imagen.</h2>
+<dl id="imap">
+<dt><a id="title" href="#nogo" title="The Beatles">The Beatles</a></dt>
+<dd id="pic1"><a id="paul" title="Paul McCartney" href="#nogo"><span>Paul McCartney - Bajo y voz<br /><br />McCartney figura en el Libro Guinness de los récords como el «músico y compositor más exitoso en la historia de la música popular», con 60 discos de oro y ventas de 100 millones de sencillos en el Reino Unido.</span></a></dd>
+<dd id="pic2"><a id="ringo" title="Ringo Starr" href="#nogo"><span>Ringo Starr - Batería<br /><br />En agosto de 1962, Starr sustituyó de forma permanente en la formación de The Beatles al baterista Pete Best. Además de tocar la batería, Starr participó como vocalista en varias canciones del grupo como "With a Little Help from My Friends".</span></a></dd>
+<dd id="pic3"><a id="john" title="John Lennon" href="#nogo"><span>John Lennon - Guitarra y voz<br /><br />Demostró un carácter rebelde y un ingenio mordaz en la música, el cine, la literatura y el dibujo, así como en sus declaraciones en conferencias de prensa y entrevistas. Además, la polémica le persiguió debido a su constante activismo por la paz, junto con su esposa Yoko Ono.
+<dd id="pic4"><a id="george" title="George Harrison" href="#nogo"><span>George Harrison - Guitarra y voz<br /><br />En 1965, fue pionero en introducir música hindú en occidente a través de instrumentos como el sitar, que tocó en canciones como «Norwegian Wood (This Bird Has Flown)».</span></a></dd>
+</dl>
+
+</body>
+</html>
