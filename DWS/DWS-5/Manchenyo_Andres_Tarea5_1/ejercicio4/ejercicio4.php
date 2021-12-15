@@ -11,16 +11,14 @@
 <body>
 
     <script type="text/javascript">
-        var xhttp = new XMLHttpRequest();
-
-        xhttp.open("GET", "datos_pedidos.php", false);
-        xhttp.send();
-        imprimirDatos();
-
-        async function imprimirDatos() {
-            console.log((xhttp.response));
-
-        }
+        fetch("datos_pedidos.php")
+            .then((Response) => Response.json())
+            .then((datos) => {
+                console.log(datos);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
     </script>
 
 </body>

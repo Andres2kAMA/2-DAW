@@ -13,4 +13,4 @@ while ($row = $resul->fetch()) {
     $cont++;
 }
 
-echo json_decode($json);
+echo $json;
