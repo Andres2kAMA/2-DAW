@@ -1,12 +1,7 @@
-* {
-  background-color: #ccffcc;
-}
-.mi_clase {
+dl dt:not(.mi_clase) {
   background-color: #ffcccc;
 }
 
-#mi_id,
-h1,
-em {
-  background-color: white;
+dl dd:not(#mi_id) {
+  background-color: #ccffcc;
 }
