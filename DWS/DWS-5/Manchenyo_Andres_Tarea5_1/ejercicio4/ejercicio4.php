@@ -8,19 +8,73 @@
     <title>Ejercicio 4</title>
 </head>
 
-<body>
+<body id="body">
 
     <script type="text/javascript">
-        fetch("datos_pedidos.php")
-            .then((Response) => Response.json())
-            .then((datos) => {
-                console.log(datos);
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
+        let keyTabla = ["CodProd", "Nombre", "Descripión", "Peso", "Stock", "CodCat"];
+
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "datos_pedidos.php", false);
+        xhttp.send();
+        imprimirDatos();
+
+        async function imprimirDatos() {
+            let datos = await JSON.parse(xhttp.response);
+            imprimirTabla(datos);
+        }
+
+        function imprimirTabla(datos) {
+            let tabla = document.createElement("table");
+            let filaEnunciado = document.createElement("tr");
+            for (let i = 0; i < keyTabla.length; i++) {
+                let celda = document.createElement("th");
+                celda.innerHTML = keyTabla[i];
+                filaEnunciado.appendChild(celda);
+            }
+            tabla.appendChild(filaEnunciado);
+
+            for (let i = 0; i < datos.length; i++) {
+                let objeto = datos[i];
+                let fila = document.createElement("tr");
+                for (const [key, value] of Object.entries(objeto)) {
+                    if (key == "CodProd" || key == "Nombre" || key == "Descripcion" || key == "Peso" || key == "Stock" || key == "CodCat") {
+                        let celda = document.createElement("td");
+                        celda.innerHTML = value;
+                        fila.appendChild(celda);
+                    }
+
+                }
+                tabla.appendChild(fila);
+
+            }
+            document.getElementById("body").appendChild(tabla);
+        }
     </script>
 
+    <style>
+        * {
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        th {
+            background-color: lightcoral;
+        }
+
+        td {
+            background-color: lightcyan;
+        }
+    </style>
 </body>
 
 </html>
