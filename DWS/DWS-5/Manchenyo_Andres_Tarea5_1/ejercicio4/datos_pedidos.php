@@ -12,4 +12,5 @@ while ($row = $resul->fetch()) {
     $json = json_encode($pedidos);
     $cont++;
 }
-echo $json;
+
+echo json_decode($json);

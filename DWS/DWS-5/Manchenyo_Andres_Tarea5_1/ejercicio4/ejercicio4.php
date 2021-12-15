@@ -15,13 +15,12 @@
 
         xhttp.open("GET", "datos_pedidos.php", false);
         xhttp.send();
-        fetch(xhttp.response).then((respuesta) => {
-            return respuesta.json();
-        }).then((datos) => {
-            console.log(datos);
-        }).catch((error) => {
-            console.log(error);
-        })
+        imprimirDatos();
+
+        async function imprimirDatos() {
+            console.log((xhttp.response));
+
+        }
     </script>
 
 </body>
