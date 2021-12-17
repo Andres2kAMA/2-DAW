@@ -3,17 +3,6 @@ import * as plantillaHTML from "./plantillaHtmlSw.js";
 var personajes = new Array();
 var datosPersonajes = new Array();
 
-function mostrarInformacionSinopsis(etiquetaACrear, texto, id, body) {
-  if (document.getElementById(id) == null) {
-    let etiqueta = document.createElement(etiquetaACrear);
-    etiqueta.id = id;
-    etiqueta.innerHTML = texto;
-    body.appendChild(etiqueta);
-  } else {
-    document.getElementById(id).innerHTML = texto;
-  }
-}
-
 function mostrarInformacionPersonaje(posicionArray) {
   let body = document.getElementById("body");
 
@@ -115,34 +104,6 @@ function almacenarPersonajes(personaje) {
   }
 }
 
-function mostrarInformacionPelicula(pelicula) {
-  let body = document.getElementById("body");
-
-  mostrarInformacionSinopsis("h2", "Sinopsis", "sinopsis", body);
-  mostrarInformacionSinopsis("h3", pelicula.title, "titulo", body);
-  mostrarInformacionSinopsis(
-    "p",
-    pelicula.opening_crawl,
-    "textoSinopsis",
-    body
-  );
-
-  enviarPeticionPersonajes(pelicula.characters);
-}
-
-function obtenerLiModificado(pelicula) {
-  let li = document.createElement("li");
-  li.className = "peliculas";
-  li.addEventListener(
-    "click",
-    function () {
-      mostrarInformacionPelicula(pelicula);
-    },
-    false
-  );
-  return li;
-}
-
 function obtenerPersonaje(url) {
   fetch(url)
     .then((Response) => Response.json())
@@ -152,6 +113,30 @@ function obtenerPersonaje(url) {
     .catch(function (err) {
       console.log(err);
     });
+}
+
+/**
+ * HACIENTO ESTE MÉTODO
+ * @param {Object} pelicula
+ */
+function mostrarInformacionPelicula(pelicula) {
+  let body = document.getElementById("body");
+
+  plantillaHTML.mostrarInformacionSinopsis("h2", "Sinopsis", "sinopsis", body);
+  plantillaHTML.mostrarInformacionSinopsis(
+    "h3",
+    pelicula.title,
+    "titulo",
+    body
+  );
+  plantillaHTML.mostrarInformacionSinopsis(
+    "p",
+    pelicula.opening_crawl,
+    "textoSinopsis",
+    body
+  );
+
+  enviarPeticionPersonajes(pelicula.characters);
 }
 
 /**

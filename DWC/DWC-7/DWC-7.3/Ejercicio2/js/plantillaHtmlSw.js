@@ -1,5 +1,18 @@
 import * as sw from "./sw.js";
 
+function mostrarInformacionSinopsis(etiquetaACrear, texto, id) {
+  let body = document.getElementById("body");
+
+  if (document.getElementById(id) == null) {
+    let etiqueta = document.createElement(etiquetaACrear);
+    etiqueta.id = id;
+    etiqueta.innerHTML = texto;
+    body.appendChild(etiqueta);
+  } else {
+    document.getElementById(id).innerHTML = texto;
+  }
+}
+
 /**
  *
  * @param {Object} pelicula
@@ -55,4 +68,4 @@ function anyadirPeliculasHTML(
   body.appendChild(nav);
 }
 
-export { anyadirPeliculasHTML };
+export { anyadirPeliculasHTML, mostrarInformacionSinopsis };
