@@ -3,107 +3,87 @@ import * as plantillaHTML from "./plantillaHtmlSw.js";
 var personajes = new Array();
 var datosPersonajes = new Array();
 
-function mostrarInformacionPersonaje(posicionArray) {
-  let body = document.getElementById("body");
+function obtenerDatosPersonajes() {
+  return datosPersonajes;
+}
 
-  if (document.getElementById("datosPersonajes") == null) {
-    anyadirEtiquetaPersonalizada(
-      "h2",
-      "Datos del personaje",
-      "datosPersonajes"
-    );
-  } else {
-    body.removeChild(document.getElementById("datosPersonaje"));
-  }
+function anyadirVehiculosPersonajes(datos, posicionArray, tipoVehiculo) {
+  datosPersonajes[posicionArray][tipoVehiculo].push(datos);
+}
 
-  let nav = document.createElement("nav");
-  nav.id = "datosPersonaje";
+function anyadirDatosPersonajes(datos, posicionArray) {
+  datosPersonajes[posicionArray] = new Array();
+  datosPersonajes[posicionArray][0] = new Array();
+  datosPersonajes[posicionArray][0].push(datos);
+}
 
-  let ul = document.createElement("ul");
-
-  for (let i = posicionArray; i < posicionArray + 1; i++) {
-    for (let j = 0; j < datosPersonajes[i].length; j++) {
-      let li = document.createElement("li");
-
-      li.innerHTML = datosPersonajes[i][j];
-      li.className = "datosPersonaje";
-      ul.appendChild(li);
+function obtenerVehiculosPersonajes(url, posicionArray) {
+  if (url.length != 0) {
+    for (let i = 0; i < url.length; i++) {
+      fetch(url[i])
+        .then((Response) => Response.json())
+        .then((vehiculos) => {
+          if (i == 0) {
+            datosPersonajes[posicionArray][2] = new Array();
+          }
+          anyadirVehiculosPersonajes(vehiculos, posicionArray, 2);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     }
   }
-
-  personajes = new Array();
-
-  nav.appendChild(ul);
-  body.appendChild(nav);
 }
 
-function anyadirEtiquetaPersonalizada(etiquetaUsuario, texto, id) {
-  let body = document.getElementById("body");
-  let etiqueta = document.createElement(etiquetaUsuario);
-  etiqueta.innerHTML = texto;
-  etiqueta.id = id;
-  body.appendChild(etiqueta);
+function obtenerNavesPersonajes(url, personaje, posicionArray) {
+  console.log(personaje);
+  anyadirDatosPersonajes(personaje, posicionArray);
+  obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
+  if (url.length != 0) {
+    for (let i = 0; i < url.length; i++) {
+      fetch(url[i])
+        .then((Response) => Response.json())
+        .then((naves) => {
+          if (i == 0) {
+            datosPersonajes[posicionArray][1] = new Array();
+          }
+          anyadirVehiculosPersonajes(naves, posicionArray, 1);
+        })
+        .catch(function (err) {
+          console.log(err.message);
+        });
+    }
+  } else {
+    obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
+  }
 }
 
+/**
+ * Llamo a una función que mostrará los personajes por pantalla y vaciará el array.
+ */
 function mostrarPersonajesPelicula() {
-  let body = document.getElementById("body");
-
-  if (document.getElementById("cargandoPersonajes") != null) {
-    body.removeChild(document.getElementById("cargandoPersonajes"));
-  }
-
-  if (document.getElementById("tituloPersonajes") == null) {
-    anyadirEtiquetaPersonalizada("h2", "Personajes", "tituloPersonajes");
-  }
-
-  let nav = document.createElement("nav");
-  nav.id = "personajes";
-
-  let ul = document.createElement("ul");
-
-  for (let i = 0; i < personajes.length; i++) {
-    let li = document.createElement("li");
-    li.innerHTML = personajes[i].name;
-    li.className = "personajes";
-    li.addEventListener(
-      "click",
-      function () {
-        mostrarInformacionPersonaje(i);
-      },
-      false
-    );
-    ul.appendChild(li);
-
-    datosPersonajes.push(
-      new Array(
-        personajes[i].name,
-        `${personajes[i].height} cm`,
-        `${personajes[i].mass} kg`,
-        personajes[i].eye_color
-      )
-    );
-  }
-
+  plantillaHTML.anyadirPersonajesHTML(personajes);
   personajes = new Array();
-
-  nav.appendChild(ul);
-  body.appendChild(nav);
 }
 
-function enviarPeticionPersonajes(personajes) {
-  for (let i = 0; i < 10; i++) {
-    obtenerPersonaje(personajes[i]);
-  }
-}
-
+/**
+ *
+ * @param {Object} personaje
+ */
 function almacenarPersonajes(personaje) {
+  //Añado al array el personaje
   personajes.push(personaje);
 
+  //Cuando estén almacenados los 10 personajes los muestro
   if (personajes.length == 10) {
     mostrarPersonajesPelicula();
   }
 }
 
+/**
+ * Mediante una promesa fetch llamo al servidor para obtener los personajes
+ * @param {String} url
+ */
 function obtenerPersonaje(url) {
   fetch(url)
     .then((Response) => Response.json())
@@ -116,24 +96,26 @@ function obtenerPersonaje(url) {
 }
 
 /**
- * HACIENTO ESTE MÉTODO
+ * Envío una peticion para obtener los personajes de la película
+ * @param {Array} personajes
+ */
+function enviarPeticionPersonajes(personajes) {
+  for (let i = 0; i < 10; i++) {
+    obtenerPersonaje(personajes[i]);
+  }
+}
+
+/**
+ * Muestro información sobre la película seleccionada
  * @param {Object} pelicula
  */
 function mostrarInformacionPelicula(pelicula) {
-  let body = document.getElementById("body");
-
-  plantillaHTML.mostrarInformacionSinopsis("h2", "Sinopsis", "sinopsis", body);
-  plantillaHTML.mostrarInformacionSinopsis(
-    "h3",
-    pelicula.title,
-    "titulo",
-    body
-  );
-  plantillaHTML.mostrarInformacionSinopsis(
+  plantillaHTML.anyadirEtiquetaPersonalizada("h2", "Sinopsis", "sinopsis");
+  plantillaHTML.anyadirEtiquetaPersonalizada("h3", pelicula.title, "titulo");
+  plantillaHTML.anyadirEtiquetaPersonalizada(
     "p",
     pelicula.opening_crawl,
-    "textoSinopsis",
-    body
+    "textoSinopsis"
   );
 
   enviarPeticionPersonajes(pelicula.characters);
@@ -154,4 +136,10 @@ function mostrarPeliculas(listadoPeliculas) {
   );
 }
 
-export { mostrarPeliculas, mostrarInformacionPelicula };
+export {
+  mostrarPeliculas,
+  mostrarInformacionPelicula,
+  obtenerNavesPersonajes,
+  obtenerVehiculosPersonajes,
+  obtenerDatosPersonajes,
+};
