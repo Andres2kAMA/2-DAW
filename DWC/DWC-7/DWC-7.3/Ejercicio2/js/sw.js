@@ -3,18 +3,33 @@ import * as plantillaHTML from "./plantillaHtmlSw.js";
 var personajes = new Array();
 var datosPersonajes = new Array();
 
-function obtenerDatosPersonajes() {
-  return datosPersonajes;
+function obtenerDatosPersonajesIndividual(personaje, posicionArray) {
+  aumentarArray(posicionArray);
+  anyadirDatosPersonajes(personaje, posicionArray);
+  obtenerNavesPersonajes(personaje.starships, posicionArray);
+  obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
+}
+
+function aumentarArray(posicionArray) {
+  datosPersonajes[posicionArray] = new Array();
+  datosPersonajes[posicionArray][0] = new Array();
+  datosPersonajes[posicionArray][1] = new Array();
+  datosPersonajes[posicionArray][2] = new Array();
+}
+
+function obtenerDatosPersonajes(posicionArray) {
+  return datosPersonajes[posicionArray];
 }
 
 function anyadirVehiculosPersonajes(datos, posicionArray, tipoVehiculo) {
-  datosPersonajes[posicionArray][tipoVehiculo].push(datos);
+  datosPersonajes[posicionArray][tipoVehiculo].push(datos.name);
+  datosPersonajes[posicionArray][tipoVehiculo].push(datos.model);
 }
 
 function anyadirDatosPersonajes(datos, posicionArray) {
-  datosPersonajes[posicionArray] = new Array();
-  datosPersonajes[posicionArray][0] = new Array();
-  datosPersonajes[posicionArray][0].push(datos);
+  datosPersonajes[posicionArray][0].push(datos.name);
+  datosPersonajes[posicionArray][0].push(`${datos.mass} kg`);
+  datosPersonajes[posicionArray][0].push(`${datos.height} cm`);
 }
 
 function obtenerVehiculosPersonajes(url, posicionArray) {
@@ -23,9 +38,6 @@ function obtenerVehiculosPersonajes(url, posicionArray) {
       fetch(url[i])
         .then((Response) => Response.json())
         .then((vehiculos) => {
-          if (i == 0) {
-            datosPersonajes[posicionArray][2] = new Array();
-          }
           anyadirVehiculosPersonajes(vehiculos, posicionArray, 2);
         })
         .catch(function (err) {
@@ -35,26 +47,19 @@ function obtenerVehiculosPersonajes(url, posicionArray) {
   }
 }
 
-function obtenerNavesPersonajes(url, personaje, posicionArray) {
-  console.log(personaje);
-  anyadirDatosPersonajes(personaje, posicionArray);
-  obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
+function obtenerNavesPersonajes(url, posicionArray) {
   if (url.length != 0) {
     for (let i = 0; i < url.length; i++) {
       fetch(url[i])
         .then((Response) => Response.json())
         .then((naves) => {
-          if (i == 0) {
-            datosPersonajes[posicionArray][1] = new Array();
-          }
           anyadirVehiculosPersonajes(naves, posicionArray, 1);
         })
         .catch(function (err) {
+          console.log(datosPersonajes[posicionArray]);
           console.log(err.message);
         });
     }
-  } else {
-    obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
   }
 }
 
@@ -141,5 +146,7 @@ export {
   mostrarInformacionPelicula,
   obtenerNavesPersonajes,
   obtenerVehiculosPersonajes,
+  anyadirDatosPersonajes,
   obtenerDatosPersonajes,
+  obtenerDatosPersonajesIndividual,
 };

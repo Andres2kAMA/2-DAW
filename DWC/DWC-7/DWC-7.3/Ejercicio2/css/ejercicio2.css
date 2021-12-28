@@ -38,6 +38,6 @@ P::first-letter {
   color: red;
 }
 
-.datosPersonaje:hover {
+.seccionPersonaje:hover {
   color: blueviolet;
 }

@@ -6,7 +6,7 @@ let body = document.getElementById("body");
  * @param {int} posicionArray
  */
 function mostrarInformacionPersonaje(posicionArray) {
-  let datosPersonajes = sw.obtenerDatosPersonajes();
+  let datosPersonajes = sw.obtenerDatosPersonajes(posicionArray);
   console.log(datosPersonajes);
   if (document.getElementById("datosPersonajes") == null) {
     anyadirEtiquetaPersonalizada(
@@ -21,19 +21,34 @@ function mostrarInformacionPersonaje(posicionArray) {
   let nav = document.createElement("nav");
   nav.id = "datosPersonaje";
 
-  let ul = document.createElement("ul");
+  for (let i = 0; i < datosPersonajes.length; i++) {
+    let ul = document.createElement("ul");
+    ul.appendChild(document.createElement("br"));
+    let li = document.createElement("li");
+    if (i == 0) {
+      li.innerHTML = `Personaje`;
+      li.className = "seccionPersonaje";
+    } else if (i == 1) {
+      li.innerHTML = `Naves`;
+      li.className = "seccionPersonaje";
+    } else {
+      li.innerHTML = `Vehículos`;
+      li.className = "seccionPersonaje";
+    }
 
-  for (let i = posicionArray; i < posicionArray + 1; i++) {
+    li.appendChild(document.createElement("br"));
     for (let j = 0; j < datosPersonajes[i].length; j++) {
-      let li = document.createElement("li");
+      ul.appendChild(li);
+      li = document.createElement("li");
 
       li.innerHTML = datosPersonajes[i][j];
-      li.className = "datosPersonaje";
       ul.appendChild(li);
+      if (i != 0 && j != 0 && j % 2 == 0) {
+        ul.appendChild(document.createElement("br"));
+      }
     }
+    nav.appendChild(ul);
   }
-
-  nav.appendChild(ul);
   body.appendChild(nav);
 }
 
@@ -46,6 +61,12 @@ function anyadirPersonajesHTML(personajes) {
     anyadirEtiquetaPersonalizada("h2", "Personajes", "tituloPersonajes");
   } else {
     body.removeChild(document.getElementById("personajes"));
+    if (document.getElementById("datosPersonajes") != null) {
+      body.removeChild(document.getElementById("datosPersonajes"));
+    }
+    if (document.getElementById("datosPersonaje") != null) {
+      body.removeChild(document.getElementById("datosPersonaje"));
+    }
   }
 
   let nav = document.createElement("nav");
@@ -57,17 +78,20 @@ function anyadirPersonajesHTML(personajes) {
     let li = document.createElement("li");
     li.innerHTML = personajes[i].name;
     li.className = "personajes";
-    li.addEventListener(
-      "click",
-      function () {
-        mostrarInformacionPersonaje(i);
-      },
-      false
-    );
 
     ul.appendChild(li);
-
-    sw.obtenerNavesPersonajes(personajes[i].starships, personajes[i], i);
+    let promesa = new Promise(function (resolve) {
+      resolve(sw.obtenerDatosPersonajesIndividual(personajes[i], i));
+    });
+    promesa.then(() => {
+      li.addEventListener(
+        "click",
+        function () {
+          mostrarInformacionPersonaje(i);
+        },
+        false
+      );
+    });
   }
 
   nav.appendChild(ul);
