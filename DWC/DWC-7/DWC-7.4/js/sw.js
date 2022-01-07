@@ -4,6 +4,7 @@ var personajes = new Array();
 var datosPersonajes = new Array();
 
 function obtenerDatosPersonajesIndividual(personaje, posicionArray) {
+  console.log(personaje);
   aumentarArray(posicionArray);
   anyadirDatosPersonajes(personaje, posicionArray);
   obtenerNavesPersonajes(personaje.starships, posicionArray);
@@ -32,33 +33,31 @@ function anyadirDatosPersonajes(datos, posicionArray) {
   datosPersonajes[posicionArray][0].push(`${datos.height} cm`);
 }
 
-function obtenerVehiculosPersonajes(url, posicionArray) {
+async function obtenerVehiculosPersonajes(url, posicionArray) {
   if (url.length != 0) {
     for (let i = 0; i < url.length; i++) {
-      fetch(url[i])
-        .then((Response) => Response.json())
-        .then((vehiculos) => {
-          anyadirVehiculosPersonajes(vehiculos, posicionArray, 2);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+      try {
+        let promesa = await fetch(url[i]);
+        let response = await promesa.json();
+        anyadirVehiculosPersonajes(response, posicionArray, 2);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 }
 
-function obtenerNavesPersonajes(url, posicionArray) {
+async function obtenerNavesPersonajes(url, posicionArray) {
   if (url.length != 0) {
     for (let i = 0; i < url.length; i++) {
-      fetch(url[i])
-        .then((Response) => Response.json())
-        .then((naves) => {
-          anyadirVehiculosPersonajes(naves, posicionArray, 1);
-        })
-        .catch(function (err) {
-          console.log(datosPersonajes[posicionArray]);
-          console.log(err.message);
-        });
+      try {
+        let promesa = await fetch(url[i]);
+        let response = await promesa.json();
+        anyadirVehiculosPersonajes(response, posicionArray, 1);
+      } catch (err) {
+        console.log(datosPersonajes[posicionArray]);
+        console.log(err.message);
+      }
     }
   }
 }
@@ -89,15 +88,14 @@ function almacenarPersonajes(personaje) {
  * Mediante una promesa fetch llamo al servidor para obtener los personajes
  * @param {String} url
  */
-function obtenerPersonaje(url) {
-  fetch(url)
-    .then((Response) => Response.json())
-    .then((datos) => {
-      almacenarPersonajes(datos);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+async function obtenerPersonaje(url) {
+  try {
+    let resultado = await fetch(url);
+    let response = await resultado.json();
+    almacenarPersonajes(response);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /**

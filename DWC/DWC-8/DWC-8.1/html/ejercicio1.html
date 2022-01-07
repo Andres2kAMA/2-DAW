@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
+    <title>Ejercicio 1</title>
+  </head>
+  <body id="body">
+    <h1 id="titulo">Agenda 2022</h1>
+    <button id="botonAnyadir">Añadir</button>
+    <button id="botonBuscar">Buscar</button>
+    <button id="botonListar">Listar</button>
+    <br /><br />
+
+    <form id="form">
+      <label>Nombre: </label>
+      <input type="text" id="nombre" value="" /><br /><br />
+      <label>Apellidos: </label>
+      <input type="text" id="apellidos" value="" /><br /><br />
+      <label>Dirección: </label>
+      <input type="text" id="direccion" value="" /><br /><br />
+      <label>Nº teléfono: </label>
+      <input type="number" id="telef" value="" />
+    </form>
+
+    <br /><br />
+    <div id="agenda">
+      <table id="tablaUsuario">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Dirección</th>
+          <th>Nº telef</th>
+          <th>Eliminar</th>
+        </tr>
+      </table>
+    </div>
+    <script type="module" src="../js/ejercicio1.js"></script>
+  </body>
+</html>

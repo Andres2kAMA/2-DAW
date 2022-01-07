@@ -52,11 +52,20 @@ function mostrarInformacionPersonaje(posicionArray) {
   body.appendChild(nav);
 }
 
+function crearEnlace(i, li) {
+  li.addEventListener(
+    "click",
+    function () {
+      mostrarInformacionPersonaje(i);
+    },
+    false
+  );
+}
 /**
  * Añado al HTML 10 personajes de la película y les inserto un evento "click" para obtener información individual de cada personaje.
  * @param {Array} personajes
  */
-function anyadirPersonajesHTML(personajes) {
+async function anyadirPersonajesHTML(personajes) {
   if (document.getElementById("tituloPersonajes") == null) {
     anyadirEtiquetaPersonalizada("h2", "Personajes", "tituloPersonajes");
   } else {
@@ -83,15 +92,8 @@ function anyadirPersonajesHTML(personajes) {
     let promesa = new Promise(function (resolve) {
       resolve(sw.obtenerDatosPersonajesIndividual(personajes[i], i));
     });
-    promesa.then(() => {
-      li.addEventListener(
-        "click",
-        function () {
-          mostrarInformacionPersonaje(i);
-        },
-        false
-      );
-    });
+    await promesa;
+    crearEnlace(i, li);
   }
 
   nav.appendChild(ul);
