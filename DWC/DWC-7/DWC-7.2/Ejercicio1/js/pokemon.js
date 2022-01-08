@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Creo los encabezados del HTML.
+ * @param {Array} encabezados
+ */
 function crearEncabezados(encabezados) {
   let div = document.getElementById("mostrarDatos");
   for (let i = 0; i < encabezados.length; i++) {
@@ -10,6 +14,10 @@ function crearEncabezados(encabezados) {
   }
 }
 
+/**
+ * Añado la imagen del pokemon al HTML.
+ * @param {String} rutaImg
+ */
 function mostrarImagen(rutaImg) {
   let encabezadoImg = document.getElementById("Imagen");
   if (document.getElementById("imagenPokemon") == null) {
@@ -23,6 +31,11 @@ function mostrarImagen(rutaImg) {
   }
 }
 
+/**
+ * Muestro los datos del pokemon.
+ * @param {String} dato
+ * @param {String} idEncabezado
+ */
 function mostrarDatoIndividual(dato, idEncabezado) {
   let encabezado = document.getElementById(idEncabezado);
   if (document.getElementById(`${idEncabezado}Pokemon`) == null) {
@@ -36,12 +49,20 @@ function mostrarDatoIndividual(dato, idEncabezado) {
   }
 }
 
+/**
+ * Elimino toda la información del pokémon.
+ * @param {Div} div
+ */
 function eliminarElementosDiv(div) {
   while (div.hasChildNodes() == true) {
     div.removeChild(div.children[0]);
   }
 }
 
+/**
+ * Muestro un mensaje de error personalizado.
+ * @param {String} mensajeError
+ */
 function mostrarError(mensajeError) {
   let div = document.getElementById("mostrarDatos");
   if (document.getElementById("error") == null)
@@ -53,6 +74,10 @@ function mostrarError(mensajeError) {
       div.insertAdjacentElement("beforebegin", p);
     }
 }
+
+/**
+ * Quito el error.
+ */
 function eliminarError() {
   if (document.getElementById("error") != null) {
     document
@@ -61,6 +86,10 @@ function eliminarError() {
   }
 }
 
+/**
+ * ***FUNCIÓN PRINCIPAL***
+ * @param {Object} pokemon
+ */
 function mostrarDatos(pokemon) {
   eliminarError();
   let encabezados = ["Nombre", "Imagen", "ID", "Peso"];
@@ -71,6 +100,11 @@ function mostrarDatos(pokemon) {
   mostrarDatoIndividual(pokemon.weight, encabezados[3]);
 }
 
+/**
+ *
+ * @param {String} pokemonID
+ * @returns Devuelvo una promesa con el pokemon seleccionado.
+ */
 function obtenerPokemon(pokemonID) {
   return new Promise((resolver, rechazar) => {
     if (pokemonID != NaN && pokemonID > 0 && pokemonID <= 898) {
