@@ -3,14 +3,22 @@ import * as plantillaHTML from "./plantillaHtmlSw.js";
 var personajes = new Array();
 var datosPersonajes = new Array();
 
+/**
+ * Obtengo la información de un personaje individual.
+ * @param {Object} personaje
+ * @param {Int} posicionArray
+ */
 function obtenerDatosPersonajesIndividual(personaje, posicionArray) {
-  console.log(personaje);
   aumentarArray(posicionArray);
   anyadirDatosPersonajes(personaje, posicionArray);
   obtenerNavesPersonajes(personaje.starships, posicionArray);
   obtenerVehiculosPersonajes(personaje.vehicles, posicionArray);
 }
 
+/**
+ * Creo un array bidimensional específico para cada personaje.
+ * @param {Int} posicionArray
+ */
 function aumentarArray(posicionArray) {
   datosPersonajes[posicionArray] = new Array();
   datosPersonajes[posicionArray][0] = new Array();
@@ -18,21 +26,43 @@ function aumentarArray(posicionArray) {
   datosPersonajes[posicionArray][2] = new Array();
 }
 
+/**
+ *
+ * @param {Int} posicionArray
+ * @returns Devuelvo los datos individuales de un personaje en específico.
+ */
 function obtenerDatosPersonajes(posicionArray) {
   return datosPersonajes[posicionArray];
 }
 
+/**
+ *
+ * @param {Object} datos
+ * @param {Int} posicionArray
+ * @param {Int} tipoVehiculo
+ */
 function anyadirVehiculosPersonajes(datos, posicionArray, tipoVehiculo) {
   datosPersonajes[posicionArray][tipoVehiculo].push(datos.name);
   datosPersonajes[posicionArray][tipoVehiculo].push(datos.model);
 }
 
+/**
+ * Añado los datos de cada personaje a un array.
+ * @param {Object} datos
+ * @param {Int} posicionArray
+ */
 function anyadirDatosPersonajes(datos, posicionArray) {
   datosPersonajes[posicionArray][0].push(datos.name);
   datosPersonajes[posicionArray][0].push(`${datos.mass} kg`);
   datosPersonajes[posicionArray][0].push(`${datos.height} cm`);
 }
 
+/**
+ *        ***FUNCIÓN ASÍNCRONA***
+ * Obtengo los vehículos individuales de cada personaje.
+ * @param {String} url
+ * @param {String} posicionArray
+ */
 async function obtenerVehiculosPersonajes(url, posicionArray) {
   if (url.length != 0) {
     for (let i = 0; i < url.length; i++) {
@@ -47,6 +77,12 @@ async function obtenerVehiculosPersonajes(url, posicionArray) {
   }
 }
 
+/**
+ *        ***FUNCIÓN ASÍNCRONA***
+ * Obtengo las naves individuales de cada personaje.
+ * @param {String} url
+ * @param {String} posicionArray
+ */
 async function obtenerNavesPersonajes(url, posicionArray) {
   if (url.length != 0) {
     for (let i = 0; i < url.length; i++) {
@@ -85,6 +121,7 @@ function almacenarPersonajes(personaje) {
 }
 
 /**
+ *        ***FUNCIÓN ASÍNCRONA***
  * Mediante una promesa fetch llamo al servidor para obtener los personajes
  * @param {String} url
  */
