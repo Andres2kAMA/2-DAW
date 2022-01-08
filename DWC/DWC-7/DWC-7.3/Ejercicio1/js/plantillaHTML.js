@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Añado una etiqueta modificada en el HTML.
+ * @param {String} elementoACrear
+ * @param {String} textoElemento
+ * @param {String} idElemento
+ * @param {String} dondeAnyadir
+ */
 function anyadirElemento(
   elementoACrear,
   textoElemento,

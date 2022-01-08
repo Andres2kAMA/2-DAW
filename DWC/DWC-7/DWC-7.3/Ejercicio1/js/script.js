@@ -6,6 +6,10 @@ import * as plantilaHTML from "./plantillaHTML.js";
 import * as chuckNorrisApi from "./chuckNorris.js";
 
 window.onload = function () {
+  /**
+   * Creo la estructura de la página web.
+   */
+
   plantilaHTML.anyadirElemento("h1", "API de Chuck Norris", "titulo", "body");
 
   plantilaHTML.anyadirElemento(
