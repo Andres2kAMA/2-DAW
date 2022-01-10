@@ -1,12 +1,23 @@
+body {
+  font-style: italic;
+  color: grey;
+}
+
 /*
 *  Creo varios espacios en blanco antes y después de la etiqueta span.
 */
+blockquote {
+  max-width: inherit;
+}
+span {
+  max-width: inherit;
+}
 span::before {
   content: "\0000a0 \0000a0 \0000a0 \0000a0 ";
 }
 
 span::after {
-  content: "\0000a0 \0000a0 \0000a0 \0000a0 ";
+  content: "\0000a0 \0000a0 \0000a0 \0000a0  ";
 }
 
 /*
