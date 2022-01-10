@@ -1,0 +1,21 @@
+/*
+*  Creo varios espacios en blanco antes y después de la etiqueta span.
+*/
+span::before {
+  content: "\0000a0 \0000a0 \0000a0 \0000a0 ";
+}
+
+span::after {
+  content: "\0000a0 \0000a0 \0000a0 \0000a0 ";
+}
+
+/*
+*  Añado comillas antes y después de la etiqueta blockquote.
+*/
+blockquote::before {
+  content: open-quote;
+}
+
+blockquote::after {
+  content: close-quote;
+}
