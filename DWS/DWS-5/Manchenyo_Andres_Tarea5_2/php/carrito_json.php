@@ -10,8 +10,7 @@ $productos = iterator_to_array(($productos));
 
 foreach ($productos as &$producto) {
     $cod = $producto["CodProd"];
-
     $producto["unidades"] = $_SESSION["carrito"][$cod];
 }
 
-echo json_encode($productos);
+echo json_encode($productos, true);

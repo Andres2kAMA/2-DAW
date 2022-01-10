@@ -15,7 +15,7 @@ function comprobar_usuario($nombre, $clave)
         if ($resul->rowCount() === 1) {
             return true;
         } else {
-            echo "<p><h2>Usuario no registrado</h2></p>";
+            //echo "<p><h2>Usuario no registrado</h2></p>";
             return false;
         }
     } catch (PDOException $e) {
