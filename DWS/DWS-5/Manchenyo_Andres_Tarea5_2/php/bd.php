@@ -27,7 +27,7 @@ function cargar_categorias()
 {
     try {
         $bd = new PDO(CADENA_CONEXION, USUARIO_CONEXION, CLAVE_CONEXION);
-        $ins = "SELECT CodCat,Nombre FROM categoria";
+        $ins = "SELECT CodCat, Nombre FROM categoria";
         $resul = $bd->query($ins);
 
         if (!$resul) {

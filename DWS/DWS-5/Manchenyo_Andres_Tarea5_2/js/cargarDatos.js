@@ -4,10 +4,12 @@ function cargarCategorias() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       var cats = JSON.parse(xhttp.responseText);
       var lista = document.createElement("ul");
-      for (let i = 0; i < cats.length; i++) {
+
+      for (var i = 0; i < cats.length; i++) {
         var elem = document.createElement("li");
-        var vinculo = document.createElement("li");
-        var ruta = "productos_json.php?categoria=" + cats[i].CodCat;
+        var vinculo = document.createElement("a");
+        var ruta = "productos_json.php?categoria=" + cats[0].CodCat;
+        console.log(ruta);
         vinculo.href = ruta;
         vinculo.innerHTML = cats[i].Nombre;
         vinculo.onclick = function () {
@@ -25,7 +27,6 @@ function cargarCategorias() {
   };
   xhttp.open("GET", "categorias_json.php", true);
   xhttp.send();
-  return false;
 }
 
 function cargarProductos(destino) {
