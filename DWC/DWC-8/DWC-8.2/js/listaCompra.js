@@ -5,15 +5,8 @@ import { app } from "./conexion_Firebase.js";
 import {
   getFirestore,
   collection,
-  getDocs,
-  getDoc,
-  onSnapshot,
-  doc,
-  query,
-  where,
-  orderBy,
-  limit,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+import * as funcionesFirebase from "./funciones_Firebase.js";
 
 window.onload = () => {
   /**
@@ -24,12 +17,7 @@ window.onload = () => {
   const db = getFirestore(app);
   const productosCollection = collection(db, "productos");
 
-  async function obtenerProductos() {
-    const productos = await getDocs(productosCollection);
-    productos.docs.map((producto) => {
-      console.log(producto.data());
-    });
-  }
+  let productos = funcionesFirebase.obtenerProductos(productosCollection);
 
-  obtenerProductos();
+  plantillas.imprimirProductos(productos);
 };

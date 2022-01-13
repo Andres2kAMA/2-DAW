@@ -1,3 +1,41 @@
 * {
-  background-color: lightgoldenrodyellow;
+  text-align: center;
+  list-style: none;
+}
+
+input,
+button {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+button:hover {
+  background-color: coral;
+}
+
+label,
+button {
+  font-weight: bold;
+}
+
+.menu {
+  text-align: center;
+  margin: 20px;
+}
+
+.menu li {
+  display: inline-block;
+  text-align: center;
+}
+
+.menu li a {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  background-color: grey;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  border-radius: 100%;
 }

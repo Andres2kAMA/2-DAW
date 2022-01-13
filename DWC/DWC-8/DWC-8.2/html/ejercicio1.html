@@ -8,6 +8,46 @@
     <title>Ejercicio 1</title>
   </head>
   <body>
+    <h1>Lista de la compra</h1>
+    <button>Listar</button>
+    <button>Filtrar</button>
+    <button>Ordenar</button><br /><br />
+
+    <form id="form">
+      <label>Nombre: </label>
+      <input type="text" id="nombre" value="" /><br /><br />
+      <label>Precio: </label>
+      <input type="number" id="Precio" value="" /><br /><br />
+      <label>Peso: </label>
+      <input type="number" id="peso" value="" /><br /><br />
+    </form>
+    <br /><br />
+
+    <div class="productos">
+      <h2>Productos</h2>
+      <ul class="slider">
+        <li>
+          <p>Nombre: Sal marina fina Carrefour</p>
+          <p>Precio: 0.99</p>
+          <p>Peso: 1kg</p>
+          <img
+            height="150px"
+            width="150px"
+            src="https://static.carrefour.es/hd_350x_/img_pim_food/080409_00_1.jpg"
+          />
+          <p>Descripción: Ejemplo</p>
+        </li>
+      </ul>
+
+      <ul class="menu">
+        <li id="flechaAtras">
+          <a href="#slide1">1</a>
+        </li>
+        <li id="flechaAdelante">
+          <a href="#slide2">2</a>
+        </li>
+      </ul>
+    </div>
     <script type="module" src="../js/listaCompra.js"></script>
   </body>
 </html>
