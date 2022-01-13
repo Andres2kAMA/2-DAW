@@ -13,25 +13,13 @@ import {
   limit,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
-let listaProductos = [];
+import * as plantillas from "./plantillasHtml.js";
 
-async function obtenerProductos(productosCollection) {
+async function listarProductos(productosCollection) {
   const productos = await getDocs(productosCollection);
-
-  await anyadirProductosArray(productos);
-}
-
-async function anyadirProductosArray(productos) {
-  await productos.docs.map((producto) => {
-    listaProductos.push(producto.data());
+  productos.docs.map((producto) => {
+    plantillas.imprimirProductos(producto.data());
   });
-  devolverProductos();
 }
 
-async function devolverProductos() {
-  return listaProductos;
-}
-function imprimirProductos() {
-  console.log(listaProductos);
-}
-export { obtenerProductos, imprimirProductos };
+export { listarProductos };

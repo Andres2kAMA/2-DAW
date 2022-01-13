@@ -1,17 +1,21 @@
 "use strict";
 import * as funcionesFirebase from "./funciones_Firebase.js";
-let plantilaProducto = "<li></li>";
+
+let plantilaProducto = `<tr></tr>`;
 
 function modificarPlantillaProducto(producto) {
   let plantillaDevolver = plantilaProducto.replace(
-    `<li></li>`,
-    `<li><p>Nombre: ${producto.nombre}</p><p>Precio: ${producto.precio}</p><p>Peso: ${producto.peso}</p><img src="${producto.imagen} /><p>Descripción: ${producto.descripción}</p></li>`
+    `<tr></tr>`,
+    `<tr><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td></tr>`
   );
   return plantillaDevolver;
 }
-function imprimirProductos(productos) {
-  let plantilla = modificarPlantillaProducto(productos[0]);
-  carrusel[0].insertAdjacentHTML("beforeend", plantilla);
+
+function imprimirProductos(producto) {
+  console.log(producto.imagen);
+  let tabla = document.getElementById("tabla");
+  let fila = modificarPlantillaProducto(producto);
+  tabla.insertAdjacentHTML("beforeend", fila);
 }
 
 export { imprimirProductos };
