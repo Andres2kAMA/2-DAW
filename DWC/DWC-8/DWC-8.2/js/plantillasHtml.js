@@ -12,7 +12,6 @@ function modificarPlantillaProducto(producto) {
 }
 
 function imprimirProductos(producto) {
-  console.log(producto.imagen);
   let tabla = document.getElementById("tabla");
   let fila = modificarPlantillaProducto(producto);
   tabla.insertAdjacentHTML("beforeend", fila);

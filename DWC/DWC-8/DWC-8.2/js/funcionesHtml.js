@@ -1,10 +1,5 @@
 "use strict";
 
-import { app } from "./conexion_Firebase.js";
-import {
-  getFirestore,
-  collection,
-} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
 
 function anyadirEventosBotones() {
@@ -12,17 +7,19 @@ function anyadirEventosBotones() {
     "click",
     function () {
       ponerFuncionalidadBotones();
-      const productosCollection = obtenerColecciónFireBase();
-      funcionesFirebase.listarProductos(productosCollection);
-      this.className = "desabilitado";
+
+      funcionesFirebase.listarProductos();
+      this.className = "deshabilitado";
     },
     false
   );
+
   document.getElementById("filtrar").addEventListener(
     "click",
     function () {
       ponerFuncionalidadBotones();
-      const productosCollection = obtenerColecciónFireBase();
+      funcionesFirebase.filtrarProductos();
+      this.className = "desabilitado";
     },
     false
   );
@@ -30,7 +27,6 @@ function anyadirEventosBotones() {
     "click",
     function () {
       ponerFuncionalidadBotones();
-      const productosCollection = obtenerColecciónFireBase();
     },
     false
   );
@@ -41,11 +37,6 @@ function ponerFuncionalidadBotones() {
   for (let i = 0; i < botones.length; i++) {
     botones.className = "";
   }
-}
-
-function obtenerColecciónFireBase() {
-  const db = getFirestore(app);
-  return collection(db, "productos");
 }
 
 export { anyadirEventosBotones };
