@@ -1,6 +1,7 @@
 * {
   text-align: center;
   list-style: none;
+  background-color: lightgoldenrodyellow;
 }
 
 input,
@@ -40,7 +41,11 @@ td {
 th {
   background-color: #f0fff0;
 }
-
+h2,
+select,
+option {
+  background-color: white;
+}
 table {
   margin: 0 auto;
 }
