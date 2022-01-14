@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <title>Ejercicio 1</title>
+  </head>
+
+  <body>
+    <!-- Menú -->
+    <h1>Lista de la compra</h1>
+    <button id="listar">Listar</button>
+    <button id="filtrar">Filtrar</button>
+    <button id="ordenar" class="ascendente">
+      Ordenar por precio ascendente
+    </button>
+
+    <br /><br />
+
+    <!-- Formulario -->
+    <form id="form">
+      <label>Longitud del nombre: </label>
+      <input type="text" value="" />
+
+      <br /><br />
+
+      <label>Precio: </label>
+      <input type="number" value="" />
+
+      <br /><br />
+
+      <label>Peso: </label>
+      <input type="number" value="" />
+    </form>
+
+    <br /><br />
+
+    <!-- Div principal -->
+    <section id="noMostrar">
+      <div class="productos">
+        <table id="tabla">
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Peso</th>
+            <th>Imágen</th>
+            <th>Descripción</th>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <script type="module" src="../js/listaCompra.js"></script>
+  </body>
+</html>

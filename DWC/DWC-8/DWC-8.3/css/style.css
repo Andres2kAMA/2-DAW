@@ -1,0 +1,69 @@
+/**
+* Estilo general de la página.
+*/
+* {
+  text-align: center;
+  list-style: none;
+}
+
+/**
+* Estilo al formulario.
+*/
+input,
+button {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+button:hover {
+  background-color: coral;
+}
+
+label,
+button {
+  font-weight: bold;
+}
+
+/**
+* Estilo al div principal de la página.
+*/
+div {
+  width: max-content;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/**
+* Estilo a la tabla.
+*/
+table,
+th,
+td {
+  border: 2px solid black;
+  border-radius: 2%;
+  background-color: white;
+  padding: 5px;
+}
+
+th {
+  background-color: #f0fff0;
+}
+
+table {
+  margin: 0 auto;
+}
+
+section,
+div {
+  background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
+    url("../img/fondo.jpeg") center / cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: max-content;
+}
+
+#noMostrar {
+  display: none;
+}
