@@ -21,6 +21,9 @@ function modificarPlantillaProducto(producto) {
  * @param {Object} producto
  */
 function imprimirProducto(producto) {
+  if (document.getElementById("noMostrar") != null)
+    document.getElementById("noMostrar").id = "";
+
   let tabla = document.getElementById("tabla");
   let fila = modificarPlantillaProducto(producto);
   tabla.insertAdjacentHTML("beforeend", fila);
@@ -30,6 +33,8 @@ function imprimirProducto(producto) {
  * Elimino todos los productos de la tabla.
  */
 function eliminarDatosTabla() {
+  if (document.getElementById("noMostrar") == null)
+    document.getElementsByTagName("section")[0].id = "noMostrar";
   let productos = document.getElementsByClassName("producto");
   for (let i = productos.length; i > 0; i--) {
     productos[0].parentNode.parentNode.removeChild(productos[0].parentNode);
