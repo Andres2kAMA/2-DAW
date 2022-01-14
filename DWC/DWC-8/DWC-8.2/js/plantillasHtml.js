@@ -1,5 +1,13 @@
+"use strict";
+
+//Me defino una plantilla con un tr.
 let plantilaProducto = `<tr></tr>`;
 
+/**
+ *
+ * @param {Object} producto
+ * @returns Devuelvo la plantilla modificada.
+ */
 function modificarPlantillaProducto(producto) {
   let plantillaDevolver = plantilaProducto.replace(
     `<tr></tr>`,
@@ -8,16 +16,23 @@ function modificarPlantillaProducto(producto) {
   return plantillaDevolver;
 }
 
-function imprimirProductos(producto) {
+/**
+ * Imprimo el producto en la tabla.
+ * @param {Object} producto
+ */
+function imprimirProducto(producto) {
   let tabla = document.getElementById("tabla");
   let fila = modificarPlantillaProducto(producto);
   tabla.insertAdjacentHTML("beforeend", fila);
 }
 
+/**
+ * Elimino todos los productos de la tabla.
+ */
 function eliminarDatosTabla() {
   let productos = document.getElementsByClassName("producto");
   for (let i = productos.length; i > 0; i--) {
     productos[0].parentNode.removeChild(productos[0]);
   }
 }
-export { imprimirProductos, eliminarDatosTabla };
+export { imprimirProducto, eliminarDatosTabla };

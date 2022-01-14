@@ -1,6 +1,6 @@
 "use strict";
 
-//
+//Importo las funciones que voy a utilizar del Firestore.
 import {
   getFirestore,
   collection,
@@ -9,70 +9,70 @@ import {
   where,
   orderBy,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+
+//Importo la 'key' para acceder al Firebase.
 import { app } from "./conexion_Firebase.js";
 
 import * as plantillas from "./plantillasHtml.js";
 
+/**
+ * @returns Devuelvo la colección de Productos.
+ */
+async function obtenerColecciónFireBase() {
+  const db = await getFirestore(app);
+  let productosCollection = await collection(db, "productos");
+  return productosCollection;
+}
+
+/**
+ * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
+ */
 async function listarProductos() {
   if (document.getElementsByClassName("producto") != null) {
     plantillas.eliminarDatosTabla();
   }
+
   const productosCollection = obtenerColecciónFireBase();
+
   const productos = await getDocs(productosCollection);
+
   productos.docs.map((producto) => {
-    plantillas.imprimirProductos(producto.data());
+    plantillas.imprimirProducto(producto.data());
   });
 }
 
-async function filtrarProductos() {
-  const productosCollection = obtenerColecciónFireBase();
-  filtrarFormulario(productosCollection);
-}
-
-function obtenerColecciónFireBase() {
-  const db = getFirestore(app);
-  return collection(db, "productos");
-}
-
-function filtrarFormulario(productosCollection) {
-  let formulario = document.getElementById("form");
-  for (let i = 0; i < formulario.length; i++) {
-    if (i == 0) {
-      if (formulario[i].value != "") {
-        filtrarPorNombre(formulario[i].value, productosCollection);
-        break;
-      }
-    } else {
-      if (i == 1) {
-        if (formulario[i].value != 0) {
-          filtrarPorNumero(formulario[i].value, "precio", productosCollection);
-          break;
-        }
-      } else {
-        if (formulario[i].value != 0) {
-          filtrarPorNumero(formulario[i].value, "peso", productosCollection);
-          break;
-        }
-      }
-    }
+/**
+ * @param {*} valor
+ */
+async function filtrarPorNombre(valor) {
+  if (document.getElementsByClassName("producto") != null) {
+    plantillas.eliminarDatosTabla();
   }
-}
-/*
-async function filtrarPorNombre(valor, productosCollection) {
+
+  const productosCollection = obtenerColecciónFireBase();
+
   const consulta = await query(
     productosCollection,
-    where("nombre", "array-contains-any", valor)
+    where("nombre", "==", valor)
   );
+
   const productosFiltrados = await getDocs(consulta);
+
   productosFiltrados.docs.map((producto) => {
     console.log(producto.data());
   });
 }
-*/
-async function filtrarPorNumero(valor, campo, productosCollection) {
+
+/**
+ * @param {*} valor
+ * @param {string} campo
+ */
+async function filtrarPorNumero(valor, campo) {
   if (document.getElementsByClassName("producto") != null) {
     plantillas.eliminarDatosTabla();
   }
+
+  const productosCollection = obtenerColecciónFireBase();
 
   const consulta = await query(
     productosCollection,
@@ -82,26 +82,29 @@ async function filtrarPorNumero(valor, campo, productosCollection) {
   const productosFiltrados = await getDocs(consulta);
 
   productosFiltrados.docs.map((producto) => {
-    plantillas.imprimirProductos(producto.data());
+    plantillas.imprimirProducto(producto.data());
   });
 }
 
 async function ordenarProductos() {
-  const productosCollection = await obtenerColecciónFireBase();
-  var consulta;
   if (document.getElementsByClassName("producto") != null) {
     plantillas.eliminarDatosTabla();
   }
-  console.log(document.getElementsByClassName("ascendente"));
+
+  const productosCollection = obtenerColecciónFireBase();
+
+  var consulta;
+
   if (document.getElementsByClassName("ascendente").length != 0) {
     consulta = await query(
       productosCollection,
       where("precio", ">", 0),
       orderBy("precio", "asc")
     );
-    let boton = document.getElementById("ordenar");
-    boton.innerHTML = "Ordernar descendentemente";
-    boton.className = "descendente";
+
+    let botonOrdenar = document.getElementById("ordenar");
+    botonOrdenar.innerHTML = "Ordernar descendentemente";
+    botonOrdenar.className = "descendente";
   } else {
     consulta = await query(
       productosCollection,
@@ -117,7 +120,13 @@ async function ordenarProductos() {
   const productosFiltrados = await getDocs(consulta);
 
   productosFiltrados.docs.map((producto) => {
-    plantillas.imprimirProductos(producto.data());
+    plantillas.imprimirProducto(producto.data());
   });
 }
-export { listarProductos, filtrarProductos, ordenarProductos };
+
+export {
+  listarProductos,
+  ordenarProductos,
+  filtrarPorNombre,
+  filtrarPorNumero,
+};
