@@ -1,9 +1,15 @@
+/**
+* Estilo general de la página.
+*/
 * {
   text-align: center;
   list-style: none;
   background-color: lightgoldenrodyellow;
 }
 
+/**
+* Estilo al formulario.
+*/
 input,
 button {
   background-color: white;
@@ -21,6 +27,15 @@ button {
   font-weight: bold;
 }
 
+h2,
+select,
+option {
+  background-color: white;
+}
+
+/**
+* Estilo al div principal de la página.
+*/
 div {
   border: 2px solid black;
   border-radius: 20px;
@@ -31,6 +46,9 @@ div {
   box-shadow: 0px 0px 20px #333;
 }
 
+/**
+* Estilo a la tabla.
+*/
 table,
 th,
 td {
@@ -38,19 +56,11 @@ td {
   background-color: white;
   padding: 5px;
 }
+
 th {
   background-color: #f0fff0;
 }
-h2,
-select,
-option {
-  background-color: white;
-}
+
 table {
   margin: 0 auto;
-}
-
-.desabilitado {
-  cursor: not-allowed;
-  pointer-events: none;
 }
