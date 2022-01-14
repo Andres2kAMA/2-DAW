@@ -10,17 +10,35 @@
 
   <body>
     <!-- Menú -->
-    <h1>Lista de la compra</h1>
-    <button id="listar">Listar</button>
-    <button id="filtrar">Filtrar</button>
-    <button id="ordenar" class="ascendente">
-      Ordenar por precio ascendente
-    </button>
-
+    <div id="header">
+      <h1>Lista de la compra</h1>
+      <br />
+      <ul class="nav">
+        <li>
+          <a href="">Productos</a>
+          <ul>
+            <li><a id="listar">Listar productos</a></li>
+            <li><a id="filtrar">Filtrar productos</a></li>
+            <li><a id="ordenar">Ordenar productos por precio ascendente</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="">Lista de la compra</a>
+          <ul>
+            <li><a href="">Submenu1</a></li>
+            <li><a href="">Submenu2</a></li>
+            <li><a href="">Submenu3</a></li>
+            <li><a href="">Submenu4</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <br /><br />
     <br /><br />
 
-    <!-- Formulario -->
-    <form id="form">
+    <!--
+     Formulario -->
+    <form id="form" id="noMostrar">
       <label>Longitud del nombre: </label>
       <input type="text" value="" />
 
@@ -34,7 +52,6 @@
       <label>Peso: </label>
       <input type="number" value="" />
     </form>
-
     <br /><br />
 
     <!-- Div principal -->

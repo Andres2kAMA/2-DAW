@@ -6,12 +6,62 @@
   list-style: none;
 }
 
+/* Menú */
+#header {
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+h1 {
+  color: white;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.nav > li {
+  float: left;
+}
+
+.nav li a {
+  background-color: cadetblue;
+  color: #000;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  font-weight: bold;
+}
+
+.nav li a:hover {
+  background-color: lightseagreen;
+}
+
+.nav li ul {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+}
+
+.nav li:hover > ul {
+  display: block;
+}
+
+.nav li ul li {
+  position: relative;
+}
+
 /**
 * Estilo al formulario.
 */
-input,
-button {
-  background-color: white;
+
+label {
+  color: white;
+}
+
+input {
   border: 2px solid black;
   border-radius: 10px;
   padding: 4px;
@@ -41,29 +91,32 @@ div {
 table,
 th,
 td {
-  border: 2px solid black;
-  border-radius: 2%;
-  background-color: white;
+  background-color: rgba(5, 5, 5, 0.5);
   padding: 5px;
-}
-
-th {
-  background-color: #f0fff0;
+  color: white;
 }
 
 table {
   margin: 0 auto;
 }
 
-section,
-div {
+table,
+body {
   background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
     url("../img/fondo.jpeg") center / cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: max-content;
 }
+div {
+  background: none;
+  background-color: rgba(255, 255, 255, 0.3);
+}
 
 #noMostrar {
   display: none;
+}
+
+#header {
+  background: none;
 }
