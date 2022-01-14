@@ -7,17 +7,25 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <title>Ejercicio 1</title>
   </head>
+
   <body>
+    <!-- Menú -->
     <h1>Lista de la compra</h1>
     <button id="listar">Listar</button>
     <button id="filtrar">Filtrar</button>
     <button id="ordenar" class="ascendente">
-      Ordenar por precio ascendente</button
-    ><br /><br />
+      Ordenar por precio ascendente
+    </button>
 
+    <br /><br />
+
+    <!-- Formulario -->
     <form id="form">
       <label>Longitud del nombre: </label>
-      <input type="text" value="" /><br /><br />
+      <input type="text" value="" />
+
+      <br /><br />
+
       <label>Precio: </label>
       <select name="precio">
         <option value="0">-</option>
@@ -26,7 +34,9 @@
         <option value="10">Menor que 10</option>
         <option value="50">Mayor que 50</option>
       </select>
+
       <br /><br />
+
       <label>Peso: </label>
       <select name="peso">
         <option value="0">-</option>
@@ -36,8 +46,10 @@
         <option value="50">Mayor que 50</option>
       </select>
     </form>
+
     <br /><br />
 
+    <!-- Div principal -->
     <div class="productos">
       <h2>Productos</h2>
       <table id="tabla">
