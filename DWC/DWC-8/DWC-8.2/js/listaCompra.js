@@ -1,7 +1,6 @@
 "use strict";
 
 import * as funcionesBasicas from "./funcionesHtml.js";
-import * as funcionesFirebase from "./funciones_Firebase.js";
 
 window.onload = () => {
   /**

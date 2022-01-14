@@ -1,16 +1,13 @@
 "use strict";
 
+//
 import {
   getFirestore,
   collection,
   getDocs,
-  getDoc,
-  onSnapshot,
-  doc,
   query,
   where,
   orderBy,
-  limit,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 import { app } from "./conexion_Firebase.js";
 

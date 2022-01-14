@@ -1,6 +1,11 @@
 "use strict";
 //*** Enlace a las bibliotecas Firebase -> https://firebase.google.com/docs/web/learn-more?authuser=0#libraries-cdn
 
+/**
+ * Este fichero será la 'key' para conectarme con Firebase.
+ * Desde aquí se exportará la constante que servirá para conectarse con los repositorios de Firebase.
+ */
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 
 const firebaseConfig = {

@@ -1,6 +1,3 @@
-"use strict";
-import * as funcionesFirebase from "./funciones_Firebase.js";
-
 let plantilaProducto = `<tr></tr>`;
 
 function modificarPlantillaProducto(producto) {
