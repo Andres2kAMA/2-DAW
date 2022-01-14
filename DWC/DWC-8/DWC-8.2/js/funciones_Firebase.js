@@ -18,9 +18,9 @@ import * as plantillas from "./plantillasHtml.js";
 /**
  * @returns Devuelvo la colección de Productos.
  */
-async function obtenerColecciónFireBase() {
-  const db = await getFirestore(app);
-  let productosCollection = await collection(db, "productos");
+function obtenerColecciónFireBase() {
+  const db = getFirestore(app);
+  let productosCollection = collection(db, "productos");
   return productosCollection;
 }
 
@@ -59,7 +59,7 @@ async function filtrarPorNombre(valor) {
   const productosFiltrados = await getDocs(consulta);
 
   productosFiltrados.docs.map((producto) => {
-    console.log(producto.data());
+    plantillas.imprimirProducto(producto.data());
   });
 }
 
@@ -103,7 +103,7 @@ async function ordenarProductos() {
     );
 
     let botonOrdenar = document.getElementById("ordenar");
-    botonOrdenar.innerHTML = "Ordernar descendentemente";
+    botonOrdenar.innerHTML = "Ordenar por precio descendente";
     botonOrdenar.className = "descendente";
   } else {
     consulta = await query(
@@ -113,7 +113,7 @@ async function ordenarProductos() {
     );
 
     let boton = document.getElementById("ordenar");
-    boton.innerHTML = "Ordernar ascendentemente";
+    boton.innerHTML = "Ordenar por precio ascendente";
     boton.className = "ascendente";
   }
 

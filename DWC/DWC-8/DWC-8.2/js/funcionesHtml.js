@@ -47,13 +47,13 @@ function filtrarFormulario() {
     } else {
       //Si el filtrado por el precio vale distinto de 0, fltro por el precio.
       if (i == 1) {
-        if (formulario[i].value != 0) {
+        if (formulario[i].value > 0) {
           funcionesFirebase.filtrarPorNumero(formulario[i].value, "precio");
           break;
         }
         //Si el filtrado por el peso vale distinto de 0, fltro por el precio.
       } else {
-        if (formulario[i].value != 0) {
+        if (formulario[i].value > 0) {
           funcionesFirebase.filtrarPorNumero(formulario[i].value, "peso");
           break;
         }

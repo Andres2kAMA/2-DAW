@@ -32,7 +32,7 @@ function imprimirProducto(producto) {
 function eliminarDatosTabla() {
   let productos = document.getElementsByClassName("producto");
   for (let i = productos.length; i > 0; i--) {
-    productos[0].parentNode.removeChild(productos[0]);
+    productos[0].parentNode.parentNode.removeChild(productos[0].parentNode);
   }
 }
 export { imprimirProducto, eliminarDatosTabla };
