@@ -1,9 +1,59 @@
-/**
-* Estilo general de la página.
-*/
+/* Estilo general de la página */
 * {
   text-align: center;
+}
+
+/* Header */
+
+#titulo {
+  width: 390px;
+}
+
+#header {
+  margin: auto;
+  width: max-content;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul,
+ol {
   list-style: none;
+}
+
+.nav > li {
+  float: left;
+}
+
+.nav li {
+  background-color: #117864;
+  color: #f1c40f;
+  text-decoration: none;
+  padding: 10px 12px;
+  display: block;
+  cursor: pointer;
+}
+
+.nav li:hover {
+  background-color: #0e6251;
+}
+
+.nav li ul {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+}
+
+.nav li:hover > ul {
+  display: block;
+}
+
+.nav li ul li {
+  position: relative;
+}
+
+.nav li ul li ul {
+  right: -140px;
+  top: 0px;
 }
 
 /**
@@ -56,7 +106,7 @@ table {
 }
 
 section,
-div {
+div.productos {
   background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
     url("../img/fondo.jpeg") center / cover;
   background-repeat: no-repeat;

@@ -10,31 +10,66 @@
 
   <body>
     <!-- Menú -->
-    <h1>Lista de la compra</h1>
-    <button id="listar">Listar</button>
-    <button id="filtrar">Filtrar</button>
-    <button id="ordenar" class="ascendente">
-      Ordenar por precio ascendente
-    </button>
 
-    <br /><br />
+    <div id="header">
+      <h1 id="titulo">MercaLordran</h1>
+      <ul class="nav">
+        <li>Inicio</li>
+        <li>
+          Productos
+          <ul>
+            <li id="listar">Listar</li>
+            <li id="ordenar" class="ascendente">
+              Ordenar por precio ascendente
+            </li>
+            <li id="filtrar">
+              Filtrar
+              <ul>
+                <li>
+                  Por nombre
+                  <form id="formProductoNombre">
+                    <input type="text" value="" />
+                    <input id="nombreProducto" type="button" value="Filtrar" />
+                  </form>
+                </li>
+                <li>
+                  Por peso
+                  <form id="formProductoPeso">
+                    <input type="number" value="" />
+                    <input id="pesoProducto" type="button" value="Filtrar" />
+                  </form>
+                </li>
+                <li>
+                  Por precio
+                  <form id="formProductoPrecio">
+                    <input type="number" value="" />
+                    <input id="precioProducto" type="button" value="Filtrar" />
+                  </form>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Lista de la compra
+          <ul>
+            <li>Crear listas</li>
+            <li>Listar las listas</li>
+            <li>Añadir productos a la lista de la compra</li>
+            <li>Ordenar listas por nombre del artículo</li>
+            <li>Editar las propiedades de los productos</li>
 
-    <!-- Formulario -->
-    <form id="form">
-      <label>Longitud del nombre: </label>
-      <input type="text" value="" />
-
-      <br /><br />
-
-      <label>Precio: </label>
-      <input type="number" value="" />
-
-      <br /><br />
-
-      <label>Peso: </label>
-      <input type="number" value="" />
-    </form>
-
+            <li>
+              Filtrar las listas
+              <ul>
+                <li>Por el nombre del propietario</li>
+                <li>Por la fecha de creación</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
     <br /><br />
 
     <!-- Div principal -->
@@ -51,7 +86,6 @@
         </table>
       </div>
     </section>
-
     <script type="module" src="../js/listaCompra.js"></script>
   </body>
 </html>
