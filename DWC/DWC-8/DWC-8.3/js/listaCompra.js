@@ -1,6 +1,7 @@
 "use strict";
 
 import * as funcionesBasicas from "./funcionesHtml.js";
+import * as funcionesFirebase from "./funciones_Firebase.js";
 
 window.onload = () => {
   /**
@@ -11,4 +12,5 @@ window.onload = () => {
 
   //Añado los eventos principales de la app.
   funcionesBasicas.anyadirEventosBotones();
+  funcionesFirebase.listarProductos();
 };

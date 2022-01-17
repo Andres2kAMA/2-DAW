@@ -6,7 +6,7 @@
 /* Header */
 
 #titulo {
-  width: 390px;
+  width: 340px;
 }
 
 #header {
@@ -104,10 +104,15 @@ div {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-#noMostrar {
+.noMostrar {
   display: none;
 }
 
 #header {
   background: none;
+}
+
+label {
+  color: white;
+  font-weight: bold;
 }

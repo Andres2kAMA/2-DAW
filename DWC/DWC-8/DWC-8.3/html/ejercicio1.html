@@ -14,7 +14,6 @@
     <div id="header">
       <h1 id="titulo">Carre4</h1>
       <ul class="nav">
-        <li>Inicio</li>
         <li>
           Productos
           <ul>
@@ -65,12 +64,11 @@
         <li>
           Lista de la compra
           <ul>
-            <li>Crear listas</li>
-            <li>Listar las listas</li>
-            <li>Añadir productos a la lista de la compra</li>
-            <li>Ordenar listas por nombre del artículo</li>
-            <li>Editar las propiedades de los productos</li>
-
+            <li id="crearLista">Crear listas</li>
+            <li id="listarListas">Listar las listas</li>
+            <li id="anyadirProductosListas">
+              Añadir productos a la lista de la compra
+            </li>
             <li>
               Filtrar las listas
               <ul>
@@ -84,18 +82,33 @@
     </div>
     <br /><br />
 
+    <section id="noMostrarFormCrearLista" class="noMostrar">
+      <form id="crearLista">
+        <label>Nombre de la lista</label>
+        <input type="text" value="" /><br /><br />
+        <label>Nombre del propietario</label>
+        <input type="text" value="" /><br /><br />
+        <label>Fecha</label>
+        <input type="date" /><br /><br />
+        <input id="botonCrearLista" type="button" value="Crear" />
+      </form>
+    </section>
     <!-- Div principal -->
-    <section id="noMostrar">
+    <section id="ocultarTablaProducto">
       <div class="productos">
-        <table id="tabla">
-          <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Peso</th>
-            <th>Imágen</th>
-            <th>Descripción</th>
-          </tr>
-        </table>
+        <form id="formProductos">
+          <table id="tabla">
+            <tr>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Peso</th>
+              <th>Imágen</th>
+              <th>Descripción</th>
+              <th>Añadir productos a la lista</th>
+              <th>Editar productos</th>
+            </tr>
+          </table>
+        </form>
       </div>
     </section>
     <script type="module" src="../js/listaCompra.js"></script>

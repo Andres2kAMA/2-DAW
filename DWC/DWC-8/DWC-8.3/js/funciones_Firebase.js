@@ -37,7 +37,7 @@ async function listarProductos() {
   const productos = await getDocs(productosCollection);
 
   productos.docs.map((producto) => {
-    plantillas.imprimirProducto(producto.data());
+    plantillas.imprimirProducto(producto.data(), producto.id);
   });
 }
 

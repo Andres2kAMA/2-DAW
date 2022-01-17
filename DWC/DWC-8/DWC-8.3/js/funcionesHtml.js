@@ -1,7 +1,9 @@
 "use strict";
 
 import * as funcionesFirebase from "./funciones_Firebase.js";
+import * as plantillaHtml from "./plantillasHtml.js";
 
+let productosSeleccionados = [];
 /**
  * Añado eventos a los eventos a cada botón.
  */
@@ -50,6 +52,17 @@ function anyadirEventosBotones() {
     },
     false
   );
+
+  document.getElementById("crearLista").addEventListener(
+    "click",
+    function () {
+      productosSeleccionados = [];
+      productosSeleccionados = devolverProductosSeleccionados();
+      mostrarFormularioCrearLista();
+      ocultarTablaProductos();
+    },
+    false
+  );
 }
 
 /**
@@ -62,4 +75,32 @@ function devolverDatosFormulario(idForm) {
   return formulario[0].value;
 }
 
+function devolverProductosSeleccionados() {
+  let checkbox = document.getElementById("formProductos");
+  let productosSeleccionados = [];
+  for (let index = 0; index < checkbox.length; index++) {
+    if (checkbox[index].type == "checkbox" && checkbox[index].checked)
+      productosSeleccionados.push(checkbox[index].value);
+  }
+  return productosSeleccionados;
+}
+function mostrarFormularioCrearLista() {
+  let lista = document.getElementsByClassName("noMostrar");
+  lista[0].className = "";
+}
+
+function ocultarFormularioCrearLista() {
+  let lista = document.getElementsByClassName("noMostrar");
+  lista[0].className = "noMostrar";
+}
+
+function mostrarTablaProductos() {
+  let lista = document.getElementById("ocultarTablaProducto");
+  lista.className = "";
+}
+
+function ocultarTablaProductos() {
+  let lista = document.getElementById("ocultarTablaProducto");
+  lista.className = "noMostrar";
+}
 export { anyadirEventosBotones, devolverDatosFormulario };
