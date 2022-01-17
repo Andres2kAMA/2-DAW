@@ -59,21 +59,12 @@ ol {
 /**
 * Estilo al formulario.
 */
-input,
-button {
+input {
   background-color: white;
   border: 2px solid black;
   border-radius: 10px;
   padding: 4px;
-}
-
-button:hover {
-  background-color: coral;
-}
-
-label,
-button {
-  font-weight: bold;
+  cursor: pointer;
 }
 
 /**
