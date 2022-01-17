@@ -1,20 +1,18 @@
-/**
-* Estilo general de la página.
-*/
+/* Estilo general de la página */
 * {
   text-align: center;
-  list-style: none;
 }
 
-/* Menú */
+/* Header */
+
+#titulo {
+  width: 390px;
+}
+
 #header {
-  margin: 0 auto;
+  margin: auto;
+  width: max-content;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-}
-
-h1 {
-  color: white;
 }
 
 ul,
@@ -26,17 +24,17 @@ ol {
   float: left;
 }
 
-.nav li a {
-  background-color: cadetblue;
-  color: #000;
+.nav li {
+  background-color: #117864;
+  color: #f1c40f;
   text-decoration: none;
-  padding: 15px;
+  padding: 10px 12px;
   display: block;
-  font-weight: bold;
+  cursor: pointer;
 }
 
-.nav li a:hover {
-  background-color: lightseagreen;
+.nav li:hover {
+  background-color: #0e6251;
 }
 
 .nav li ul {
@@ -53,27 +51,20 @@ ol {
   position: relative;
 }
 
+.nav li ul li ul {
+  right: -140px;
+  top: 0px;
+}
+
 /**
 * Estilo al formulario.
 */
-
-label {
-  color: white;
-}
-
 input {
+  background-color: white;
   border: 2px solid black;
   border-radius: 10px;
   padding: 4px;
-}
-
-button:hover {
-  background-color: coral;
-}
-
-label,
-button {
-  font-weight: bold;
+  cursor: pointer;
 }
 
 /**
@@ -100,8 +91,8 @@ table {
   margin: 0 auto;
 }
 
-table,
-body {
+section,
+div.productos {
   background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
     url("../img/fondo.jpeg") center / cover;
   background-repeat: no-repeat;

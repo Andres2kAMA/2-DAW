@@ -14,13 +14,35 @@ function anyadirEventosBotones() {
     false
   );
 
-  document.getElementById("filtrar").addEventListener(
+  document.getElementById("filtrarNombreProducto").addEventListener(
     "click",
     function () {
-      filtrarFormulario();
+      let campoForm = devolverDatosFormulario("formProductoNombre");
+      if (campoForm != "") funcionesFirebase.filtrarPorNombre(campoForm);
     },
     false
   );
+
+  document.getElementById("filtrarPesoProducto").addEventListener(
+    "click",
+    function () {
+      let campoForm = devolverDatosFormulario("formProductoPeso");
+
+      if (campoForm >= 0) funcionesFirebase.filtrarPorNumero(campoForm, "peso");
+    },
+    false
+  );
+
+  document.getElementById("filtrarPrecioProducto").addEventListener(
+    "click",
+    function () {
+      let campoForm = devolverDatosFormulario("formProductoPrecio");
+      if (campoForm >= 0)
+        funcionesFirebase.filtrarPorNumero(campoForm, "precio");
+    },
+    false
+  );
+
   document.getElementById("ordenar").addEventListener(
     "click",
     function () {
@@ -33,33 +55,11 @@ function anyadirEventosBotones() {
 /**
  * Filtro el formulario.
  */
-function filtrarFormulario() {
+function devolverDatosFormulario(idForm) {
   //Me almaceno el formulario
-  let formulario = document.getElementById("form");
+  let formulario = document.getElementById(idForm);
 
-  for (let i = 0; i < formulario.length; i++) {
-    //Si el nombre no está vacío filtro por el nombre.
-    if (i == 0) {
-      if (formulario[i].value != "") {
-        funcionesFirebase.filtrarPorNombre(formulario[i].value);
-        break;
-      }
-    } else {
-      //Si el filtrado por el precio vale distinto de 0, fltro por el precio.
-      if (i == 1) {
-        if (formulario[i].value > 0) {
-          funcionesFirebase.filtrarPorNumero(formulario[i].value, "precio");
-          break;
-        }
-        //Si el filtrado por el peso vale distinto de 0, fltro por el precio.
-      } else {
-        if (formulario[i].value > 0) {
-          funcionesFirebase.filtrarPorNumero(formulario[i].value, "peso");
-          break;
-        }
-      }
-    }
-  }
+  return formulario[0].value;
 }
 
-export { anyadirEventosBotones, filtrarFormulario };
+export { anyadirEventosBotones, devolverDatosFormulario };
