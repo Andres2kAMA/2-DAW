@@ -8,20 +8,27 @@ import {
   query,
   where,
   orderBy,
+  addDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 //Importo la 'key' para acceder al Firebase.
 import { app } from "./conexion_Firebase.js";
 
 import * as plantillas from "./plantillasHtml.js";
+import * as funcionesHtml from "./funcionesHtml.js";
 
 /**
  * @returns Devuelvo la colección de Productos.
  */
-function obtenerColecciónFireBase() {
+function obtenerColecciónProductosFireBase() {
   const db = getFirestore(app);
   let productosCollection = collection(db, "productos");
   return productosCollection;
+}
+function obtenerColecciónListaFireBase() {
+  const db = getFirestore(app);
+  let listaCollection = collection(db, "listaCompra");
+  return listaCollection;
 }
 
 /**
@@ -32,7 +39,7 @@ async function listarProductos() {
     plantillas.eliminarDatosTabla();
   }
 
-  const productosCollection = obtenerColecciónFireBase();
+  const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
 
@@ -49,7 +56,7 @@ async function filtrarPorNombre(valor) {
     plantillas.eliminarDatosTabla();
   }
 
-  const productosCollection = obtenerColecciónFireBase();
+  const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
     productosCollection,
@@ -72,7 +79,7 @@ async function filtrarPorNumero(valor, campo) {
     plantillas.eliminarDatosTabla();
   }
 
-  const productosCollection = obtenerColecciónFireBase();
+  const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
     productosCollection,
@@ -91,7 +98,7 @@ async function ordenarProductos() {
     plantillas.eliminarDatosTabla();
   }
 
-  const productosCollection = obtenerColecciónFireBase();
+  const productosCollection = obtenerColecciónProductosFireBase();
 
   var consulta;
 
@@ -124,9 +131,26 @@ async function ordenarProductos() {
   });
 }
 
+async function crearLista() {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  let datosLista = funcionesHtml.devolverDatosFinalesLista();
+  console.log(datosLista);
+  console.log(datosLista[1]);
+  const nuevaLista = {
+    fechaCreacion: datosLista[0][2],
+    nombreLista: datosLista[0][0],
+    nombrePropietario: datosLista[0][1],
+    productos: datosLista[1],
+  };
+  const listaGuardada = await addDoc(listaCollection, nuevaLista);
+  console.log(`Feo guardado con el id ${listaGuardada.id}`);
+}
+
 export {
   listarProductos,
   ordenarProductos,
   filtrarPorNombre,
   filtrarPorNumero,
+  crearLista,
 };

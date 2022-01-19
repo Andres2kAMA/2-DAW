@@ -11,7 +11,7 @@ let plantilaProducto = `<tr></tr>`;
 function modificarPlantillaProducto(producto, id) {
   let plantillaDevolver = plantilaProducto.replace(
     `<tr></tr>`,
-    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="checkbox" value="${id}"</input></td><td><input type="buttom" value="Editar"</input></td></tr>`
+    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="checkbox" value="${id}"</input></td></tr>`
   );
   return plantillaDevolver;
 }

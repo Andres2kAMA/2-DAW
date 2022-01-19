@@ -4,6 +4,7 @@ import * as funcionesFirebase from "./funciones_Firebase.js";
 import * as plantillaHtml from "./plantillasHtml.js";
 
 let productosSeleccionados = [];
+let datosLista = [];
 /**
  * Añado eventos a los eventos a cada botón.
  */
@@ -63,6 +64,17 @@ function anyadirEventosBotones() {
     },
     false
   );
+
+  document.getElementById("botonCrearLista").addEventListener(
+    "click",
+    function () {
+      datosLista = devolverDatosLista();
+      ocultarFormularioCrearLista();
+      mostrarTablaProductos();
+      funcionesFirebase.crearLista();
+    },
+    false
+  );
 }
 
 /**
@@ -103,4 +115,24 @@ function ocultarTablaProductos() {
   let lista = document.getElementById("ocultarTablaProducto");
   lista.className = "noMostrar";
 }
-export { anyadirEventosBotones, devolverDatosFormulario };
+
+function devolverDatosLista() {
+  let lista = document.getElementsByClassName("datosFormulario");
+  let datosLista = [];
+  for (let i = 0; i < lista.length; i++) {
+    datosLista.push(lista[i].value);
+  }
+  return datosLista;
+}
+
+function devolverDatosFinalesLista() {
+  let datosFinalesLista = [];
+  datosFinalesLista.push(datosLista);
+  datosFinalesLista.push(productosSeleccionados);
+  return datosFinalesLista;
+}
+export {
+  anyadirEventosBotones,
+  devolverDatosFormulario,
+  devolverDatosFinalesLista,
+};
