@@ -120,20 +120,3 @@ function insertar_pedido($carrito, $codRes)
         echo "Error con la base de datos: " . $ex->getMessage();
     }
 }
-
-function cargar_pedidos()
-{
-
-    try {
-        $bd = new PDO(CADENA_CONEXION, USUARIO_CONEXION, CLAVE_CONEXION);
-        $bd->beginTransaction();
-        $sql = "SELECT pedidos.CodPed,pedidos.Fecha,pedidosEnviado,pedidosproductos.Unidades,productos.Nombre,productos.Descripcion FROM pedidos INNER JOIN pedidosproductos ON pedidos.CodPed = pedidosproductos.CodPed INNER JOIN productos ON pedidosproductos.CodProd = productos.CodProd";
-        $resul = $bd->query($sql);
-        if (!$resul) {
-            return FALSE;
-        }
-        return $resul;
-    } catch (Exception $ex) {
-        echo "Error con la base de datos: " . $ex->getMessage();
-    }
-}

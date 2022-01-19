@@ -6,17 +6,18 @@ define("CLAVE_CONEXION", '');
 try {
     $bd = new PDO(CADENA_CONEXION, USUARIO_CONEXION, CLAVE_CONEXION);
 
-    $ins = "SELECT pedidos.CodPed, pedidos.Fecha, pedidos.Enviado, pedidosproductos.Unidades, productos.Nombre, productos.Descripcion FROM pedidos INNER JOIN pedidosproductos ON pedidos.CodPed = pedidosproductos.CodPed INNER JOIN productos ON pedidosproductos.CodProd = productos.CodProd";
-    $resul = $bd->query($ins);
+    $sel = "SELECT pedidos.CodPed, pedidos.Fecha, pedidos.Enviado, pedidosproductos.Unidades, productos.Nombre, productos.Descripcion FROM pedidos INNER JOIN pedidosproductos ON pedidos.CodPed = pedidosproductos.CodPed INNER JOIN productos ON pedidosproductos.CodProd = productos.CodProd";
+    $resul = $bd->query($sel);
 
-    $contador = 0;
+    $fila = 0;
+    $pedidos = [];
 
     if ($resul->rowCount() === 0) {
         return false;
     } else {
         while ($row = $resul->fetch()) {
-            $pedidos[$contador] = $row;
-            $contador++;
+            $pedidos[$fila] = $row;
+            $fila++;
         }
         echo json_encode($pedidos);
     }

@@ -109,6 +109,7 @@ function crear_fila(campos, tipo) {
   for (var i = 0; i < campos.length; i++) {
     var celda = document.createElement(tipo);
     celda.innerHTML = campos[i];
+    celda.style = "border:1px solid";
     fila.appendChild(celda);
   }
   return fila;
@@ -201,14 +202,14 @@ function crearTablaCarrito(productos) {
 
 function crearTablaPedidos(pedidos) {
   var tabla = document.createElement("table");
+  tabla.style = "border:1px solid";
   var cabecera = crear_fila(
     ["Código", "Nombre", "Descripción", "Unidades", "Fecha", "Enviado"],
     "th"
   );
   tabla.appendChild(cabecera);
-  console.log(pedidos);
+
   for (var i = 0; i < pedidos.length; i++) {
-    //creamos la fila con los productos que contiene el carrito
     fila = crear_fila(
       [
         pedidos[i].CodPed,
@@ -277,8 +278,6 @@ function cargarPedidos() {
 
       try {
         var filas = JSON.parse(this.responseText);
-
-        //creamos la tabla de los productos añadidos al carrito
         tabla = crearTablaPedidos(filas);
         contenido.appendChild(tabla);
       } catch (e) {
