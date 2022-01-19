@@ -199,6 +199,33 @@ function crearTablaCarrito(productos) {
   return tabla;
 }
 
+function crearTablaPedidos(pedidos) {
+  var tabla = document.createElement("table");
+  var cabecera = crear_fila(
+    ["Código", "Nombre", "Descripción", "Unidades", "Fecha", "Enviado"],
+    "th"
+  );
+  tabla.appendChild(cabecera);
+  console.log(pedidos);
+  for (var i = 0; i < pedidos.length; i++) {
+    //creamos la fila con los productos que contiene el carrito
+    fila = crear_fila(
+      [
+        pedidos[i].CodPed,
+        pedidos[i].Nombre,
+        pedidos[i].Descripcion,
+        pedidos[i].Unidades,
+        pedidos[i].Fecha,
+        pedidos[i].Enviado,
+      ],
+      "td"
+    );
+
+    tabla.appendChild(fila);
+  }
+  return tabla;
+}
+
 function eliminarProductos(formulario) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -247,10 +274,12 @@ function cargarPedidos() {
       contenido.innerHTML = "";
       var titulo = document.getElementById("titulo");
       titulo.innerHTML = "Pedidos";
+
       try {
         var filas = JSON.parse(this.responseText);
+
         //creamos la tabla de los productos añadidos al carrito
-        tabla = crearTablaCarrito(filas);
+        tabla = crearTablaPedidos(filas);
         contenido.appendChild(tabla);
       } catch (e) {
         var mensaje = document.createElement("p");
@@ -259,6 +288,7 @@ function cargarPedidos() {
       }
     }
   };
+
   xhttp.open("GET", "pedidos_json.php", true);
   xhttp.send();
   return false;
