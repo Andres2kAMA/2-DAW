@@ -164,10 +164,21 @@ async function obtenerProductos(productosId) {
   return productosObtenidos;
 }
 
+async function obtenerListas() {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listas = await getDocs(listaCollection);
+
+  listas.docs.map((lista) => {
+    plantillas.imprimirLista(lista.data(), lista.id);
+  });
+}
+
 export {
   listarProductos,
   ordenarProductos,
   filtrarPorNombre,
   filtrarPorNumero,
   crearLista,
+  obtenerListas,
 };

@@ -1,8 +1,9 @@
 "use strict";
 
+import * as funcionesHTML from "./funcionesHtml.js";
 //Me defino una plantilla con un tr.
 
-let plantilaProducto = `<tr></tr>`;
+let plantilaFila = `<tr></tr>`;
 
 let divProductos = `<div id="tablaProductos">
                         <form id="formProductos">
@@ -18,6 +19,8 @@ let divProductos = `<div id="tablaProductos">
                           </table>
                         </form>
                       </div>`;
+
+let tablaLista = `<table id="tablaListaCompra"></table>`;
 
 let formularioCrearLista = `  <form id="formularioCrearLista">
                                 <label>Nombre de la lista</label>
@@ -36,9 +39,25 @@ let body = document.getElementById("body");
  * @returns Devuelvo la plantilla modificada.
  */
 function modificarPlantillaProducto(producto, id) {
-  let plantillaDevolver = plantilaProducto.replace(
+  let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
     `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="checkbox" value="${id}"</input></td></tr>`
+  );
+  return plantillaDevolver;
+}
+
+function modificarPlantillaProductoLista(producto, id) {
+  let plantillaDevolver = plantilaFila.replace(
+    `<tr></tr>`,
+    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="button" id="${id}" value="Editar"</input></td></tr>`
+  );
+  return plantillaDevolver;
+}
+
+function modificarPlantillaLista(lista, id) {
+  let plantillaDevolver = plantilaFila.replace(
+    `<tr></tr>`,
+    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th><th><input type="button" value="Añadir productos"</input></th></tr>`
   );
   return plantillaDevolver;
 }
@@ -48,9 +67,6 @@ function modificarPlantillaProducto(producto, id) {
  * @param {Object} producto
  */
 function imprimirProducto(producto, id) {
-  if (document.getElementById("noMostrar") != null)
-    document.getElementById("noMostrar").id = "";
-
   let tabla = document.getElementById("tabla");
   let fila = modificarPlantillaProducto(producto, id);
   tabla.insertAdjacentHTML("beforeend", fila);
@@ -65,10 +81,12 @@ function eliminarDatosTabla() {
     productos[0].parentNode.parentNode.removeChild(productos[0].parentNode);
   }
 }
+
 function eliminarDivProductos() {
   let divProductos = document.getElementById("tablaProductos");
   divProductos.parentNode.removeChild(divProductos);
 }
+
 function eliminarFormularioCrearLista() {
   let form = document.getElementById("formularioCrearLista");
   form.parentNode.removeChild(form);
@@ -77,9 +95,46 @@ function eliminarFormularioCrearLista() {
 function insertarDivProductos() {
   body.insertAdjacentHTML("beforeend", divProductos);
 }
+
 function insertarFormularioCrearLista() {
   body.insertAdjacentHTML("beforeend", formularioCrearLista);
 }
+
+function insertarTablaListas() {
+  body.insertAdjacentHTML("beforeend", tablaLista);
+}
+
+function imprimirLista(lista, id) {
+  let tabla = document.getElementById("tablaListaCompra");
+  let fila = modificarPlantillaLista(lista, id);
+  let filasProductos = anyadirProductos(lista);
+
+  funcionesHTML.anyadirFuncionAnyadirProductosLista(id, lista);
+
+  tabla.insertAdjacentHTML("beforeend", fila);
+
+  for (let i = 0; i < filasProductos.length; i++) {
+    tabla.insertAdjacentHTML("beforeend", filasProductos[i]);
+    funcionesHTML.anyadirFuncionEditarProductos(
+      filasProductos,
+      filasProductos[i].id
+    );
+  }
+}
+
+function anyadirProductos(lista) {
+  console.log(lista.productos[0].id);
+  let filasProductos = [];
+  for (let i = 0; i < lista.productos.length; i++) {
+    let filaProducto = modificarPlantillaProductoLista(
+      lista.productos[i],
+      lista.productos[i].id
+    );
+    filasProductos.push(filaProducto);
+  }
+  return filasProductos;
+}
+
 export {
   imprimirProducto,
   eliminarDatosTabla,
@@ -87,4 +142,6 @@ export {
   insertarDivProductos,
   insertarFormularioCrearLista,
   eliminarFormularioCrearLista,
+  insertarTablaListas,
+  imprimirLista,
 };

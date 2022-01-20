@@ -71,7 +71,8 @@ function anyadirEventosBotones() {
     "click",
     function () {
       plantillaHtml.eliminarDivProductos();
-      plantillaHtml.insertarDivListas();
+      plantillaHtml.insertarTablaListas();
+      funcionesFirebase.obtenerListas();
     },
     false
   );
@@ -127,8 +128,30 @@ function anyadirEventoCrearLista() {
   );
 }
 
+function anyadirFuncionAnyadirProductosLista(id, lista) {
+  document.getElementById(id).addEventListener(
+    "click",
+    function () {
+      console.log("hola");
+    },
+    false
+  );
+}
+
+function anyadirFuncionEditarProductos(producto, id) {
+  document.getElementById(id).addEventListener(
+    "click",
+    function () {
+      console.log("mundo");
+    },
+    false
+  );
+}
+
 export {
   anyadirEventosBotones,
   devolverDatosFormulario,
   devolverDatosFinalesLista,
+  anyadirFuncionAnyadirProductosLista,
+  anyadirFuncionEditarProductos,
 };
