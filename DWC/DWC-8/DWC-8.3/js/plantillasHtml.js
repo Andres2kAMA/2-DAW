@@ -57,7 +57,7 @@ function modificarPlantillaProductoLista(producto, id) {
 function modificarPlantillaLista(lista, id) {
   let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
-    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th><th><input type="button" value="Añadir productos"</input></th></tr>`
+    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th></tr>`
   );
   return plantillaDevolver;
 }
@@ -104,12 +104,10 @@ function insertarTablaListas() {
   body.insertAdjacentHTML("beforeend", tablaLista);
 }
 
-function imprimirLista(lista, id) {
+function imprimirLista(lista) {
   let tabla = document.getElementById("tablaListaCompra");
-  let fila = modificarPlantillaLista(lista, id);
+  let fila = modificarPlantillaLista(lista);
   let filasProductos = anyadirProductos(lista);
-
-  funcionesHTML.anyadirFuncionAnyadirProductosLista(id, lista);
 
   tabla.insertAdjacentHTML("beforeend", fila);
 
@@ -117,18 +115,17 @@ function imprimirLista(lista, id) {
     tabla.insertAdjacentHTML("beforeend", filasProductos[i]);
     funcionesHTML.anyadirFuncionEditarProductos(
       filasProductos,
-      filasProductos[i].id
+      lista.productos[i].nombre
     );
   }
 }
 
 function anyadirProductos(lista) {
-  console.log(lista.productos[0].id);
   let filasProductos = [];
   for (let i = 0; i < lista.productos.length; i++) {
     let filaProducto = modificarPlantillaProductoLista(
       lista.productos[i],
-      lista.productos[i].id
+      lista.productos[i].nombre
     );
     filasProductos.push(filaProducto);
   }

@@ -128,18 +128,9 @@ function anyadirEventoCrearLista() {
   );
 }
 
-function anyadirFuncionAnyadirProductosLista(id, lista) {
-  document.getElementById(id).addEventListener(
-    "click",
-    function () {
-      console.log("hola");
-    },
-    false
-  );
-}
-
 function anyadirFuncionEditarProductos(producto, id) {
-  document.getElementById(id).addEventListener(
+  let productos = document.getElementById(id);
+  productos.addEventListener(
     "click",
     function () {
       console.log("mundo");
@@ -152,6 +143,5 @@ export {
   anyadirEventosBotones,
   devolverDatosFormulario,
   devolverDatosFinalesLista,
-  anyadirFuncionAnyadirProductosLista,
   anyadirFuncionEditarProductos,
 };
