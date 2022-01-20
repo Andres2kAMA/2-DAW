@@ -2,6 +2,7 @@
 
 import * as funcionesBasicas from "./funcionesHtml.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
+import * as plantillaHtml from "./plantillasHtml.js";
 
 window.onload = () => {
   /**
@@ -11,6 +12,7 @@ window.onload = () => {
    */
 
   //Añado los eventos principales de la app.
+  plantillaHtml.insertarDivProductos();
   funcionesBasicas.anyadirEventosBotones();
   funcionesFirebase.listarProductos();
 };

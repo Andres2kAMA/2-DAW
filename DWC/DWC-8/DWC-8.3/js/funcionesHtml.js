@@ -53,25 +53,25 @@ function anyadirEventosBotones() {
     },
     false
   );
+  listarListas;
 
   document.getElementById("crearLista").addEventListener(
     "click",
     function () {
       productosSeleccionados = [];
       productosSeleccionados = devolverProductosSeleccionados();
-      mostrarFormularioCrearLista();
-      ocultarTablaProductos();
+      plantillaHtml.eliminarDivProductos();
+      plantillaHtml.insertarFormularioCrearLista();
+      anyadirEventoCrearLista();
     },
     false
   );
 
-  document.getElementById("botonCrearLista").addEventListener(
+  document.getElementById("listarListas").addEventListener(
     "click",
     function () {
-      datosLista = devolverDatosLista();
-      ocultarFormularioCrearLista();
-      mostrarTablaProductos();
-      funcionesFirebase.crearLista();
+      plantillaHtml.eliminarDivProductos();
+      plantillaHtml.insertarDivListas();
     },
     false
   );
@@ -96,25 +96,6 @@ function devolverProductosSeleccionados() {
   }
   return productosSeleccionados;
 }
-function mostrarFormularioCrearLista() {
-  let lista = document.getElementsByClassName("noMostrar");
-  lista[0].className = "";
-}
-
-function ocultarFormularioCrearLista() {
-  let lista = document.getElementsByClassName("noMostrar");
-  lista[0].className = "noMostrar";
-}
-
-function mostrarTablaProductos() {
-  let lista = document.getElementById("ocultarTablaProducto");
-  lista.className = "";
-}
-
-function ocultarTablaProductos() {
-  let lista = document.getElementById("ocultarTablaProducto");
-  lista.className = "noMostrar";
-}
 
 function devolverDatosLista() {
   let lista = document.getElementsByClassName("datosFormulario");
@@ -131,6 +112,21 @@ function devolverDatosFinalesLista() {
   datosFinalesLista.push(productosSeleccionados);
   return datosFinalesLista;
 }
+
+function anyadirEventoCrearLista() {
+  document.getElementById("botonCrearLista").addEventListener(
+    "click",
+    function () {
+      datosLista = devolverDatosLista();
+      plantillaHtml.eliminarFormularioCrearLista();
+      plantillaHtml.insertarDivProductos();
+      funcionesFirebase.listarProductos();
+      funcionesFirebase.crearLista();
+    },
+    false
+  );
+}
+
 export {
   anyadirEventosBotones,
   devolverDatosFormulario,

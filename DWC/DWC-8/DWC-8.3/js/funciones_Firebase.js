@@ -4,6 +4,8 @@
 import {
   getFirestore,
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
   where,
@@ -135,16 +137,31 @@ async function crearLista() {
   const listaCollection = obtenerColecciónListaFireBase();
 
   let datosLista = funcionesHtml.devolverDatosFinalesLista();
-  console.log(datosLista);
-  console.log(datosLista[1]);
+
+  let productosObtenidos = await obtenerProductos(datosLista[1]);
+
   const nuevaLista = {
     fechaCreacion: datosLista[0][2],
     nombreLista: datosLista[0][0],
     nombrePropietario: datosLista[0][1],
-    productos: datosLista[1],
+    productos: productosObtenidos,
   };
   const listaGuardada = await addDoc(listaCollection, nuevaLista);
-  console.log(`Feo guardado con el id ${listaGuardada.id}`);
+}
+
+async function obtenerProductos(productosId) {
+  const productosCollection = obtenerColecciónProductosFireBase();
+  let productosObtenidos = [];
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    for (let i = 0; i < productosId.length; i++) {
+      if (producto.id == productosId[i]) {
+        productosObtenidos.push(producto.data());
+      }
+    }
+  });
+  return productosObtenidos;
 }
 
 export {
