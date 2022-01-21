@@ -39,7 +39,7 @@ function cargarProductos(destino) {
       try {
         var filas = JSON.parse(this.responseText);
         // creamos una tabla con los productos de la categoría seleccionada
-        var tabla = crearTablaProductos(filas);
+        var tabla = crearTablaProductos(filas, destino);
         prod.innerHTML = "";
         prod.appendChild(tabla);
       } catch (e) {
@@ -55,7 +55,7 @@ function cargarProductos(destino) {
   return false;
 }
 
-function crearTablaProductos(productos) {
+function crearTablaProductos(productos, destino) {
   var tabla = document.createElement("table");
   var cabecera = crear_fila(
     ["Código", "Nombre", "Descripción", "Stock", "Comprar"],
@@ -64,7 +64,12 @@ function crearTablaProductos(productos) {
   tabla.appendChild(cabecera);
   for (var i = 0; i < productos.length; i++) {
     // creamos el formulario para añadir unidades del producto al carrito (mediante la función anadirProductos())
-    formu = crearFormulario("Añadir", productos[i].CodProd, anadirProductos);
+    formu = crearFormulario(
+      "Añadir",
+      productos[i].CodProd,
+      anadirProductos,
+      destino
+    );
     //creamos la fila en la tabla a mostrar con los productos
     fila = crear_fila(
       [
@@ -83,7 +88,7 @@ function crearTablaProductos(productos) {
   return tabla;
 }
 
-function crearFormulario(texto, cod, funcion) {
+function crearFormulario(texto, cod, funcion, destino) {
   var formu = document.createElement("form");
   var unidades = document.createElement("input");
   unidades.value = 1;
@@ -96,7 +101,7 @@ function crearFormulario(texto, cod, funcion) {
   bsubmit.type = "submit";
   bsubmit.value = texto;
   formu.onsubmit = function () {
-    return funcion(this);
+    return funcion(this, destino);
   };
   formu.appendChild(unidades);
   formu.appendChild(codigo);
@@ -115,12 +120,12 @@ function crear_fila(campos, tipo) {
   return fila;
 }
 
-function anadirProductos(formulario) {
+function anadirProductos(formulario, destino) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       alert("Producto añadido con éxito");
-      cargarCarrito();
+      cargarProductos(destino);
     }
   };
   var params =
