@@ -1,0 +1,21 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  line-height: 2em;
+  background-color: #222;
+  color: white;
+}
+
+#cuadricula {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px dashed #777;
+  height: 300px;
+  margin-top: 2rem;
+}
+
+.item {
+  padding: 1em;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: var(--color);
+}

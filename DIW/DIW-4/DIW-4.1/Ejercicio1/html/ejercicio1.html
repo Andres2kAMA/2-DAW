@@ -9,14 +9,30 @@
     <div id="wrapper">
       <div id="gridGaps" class="range">
         <p>
-          <label>grid-rows-gap: <span>1</span>px;</label>
-          <input type="range" name="gridRowGap" min="0" max="20" value="1" />
+          <label>grid-rows-gap: <span id="valorGridFila">1</span>px;</label>
+          <input
+            type="range"
+            id="gridFila"
+            name="gridRowGap"
+            min="0"
+            max="20"
+            value="1"
+          />
         </p>
 
         <p></p>
         <p>
-          <label>grid-column-gap: <span>1</span>px;</label>
-          <input type="range" name="gridColumnGap" min="0" max="20" value="1" />
+          <label
+            >grid-column-gap: <span id="valorGridColumna">1</span>px;</label
+          >
+          <input
+            type="range"
+            id="gridColumna"
+            name="gridColumnGap"
+            min="0"
+            max="20"
+            value="1"
+          />
         </p>
 
         <p></p>
@@ -44,5 +60,6 @@
         <div class="item" style="--color: #c87694"><p>15</p></div>
       </div>
     </div>
+    <script src="../js/script.js"></script>
   </body>
 </html>
