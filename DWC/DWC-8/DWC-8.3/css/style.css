@@ -118,3 +118,103 @@ label {
 #formularioCrearLista label {
   color: black;
 }
+/*
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.5em;
+  margin: 0;
+  background: #333;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.3em;
+}
+
+p {
+  margin-bottom: 1.6em;
+}
+
+.container {
+  width: 85%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  padding: 2rem 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+.logo-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  letter-spacing: 2px;
+  font-size: 1.2em;
+}
+
+.menu-horizontal > li {
+  float: left;
+}
+
+.menu-horizontal li {
+  display: block;
+  padding: 0.5rem 1rem;
+  transition: all 0.4s linear;
+  border-radius: 5px;
+}
+
+.menu-horizontal li:hover {
+  background-color: #4a4a4a;
+}
+
+.menu-horizontal li ul {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+}
+
+.menu-horizontal li:hover > ul {
+  display: block;
+}
+
+.menu-horizontal li ul li {
+  position: relative;
+}
+
+.menu-horizontal li ul li ul {
+  right: -140px;
+  top: 0px;
+}
+
+.main {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
+    url("../img/fondo.jpeg") center / cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: max-content;
+}
+.footer {
+  background: #f2f2f2;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+*/

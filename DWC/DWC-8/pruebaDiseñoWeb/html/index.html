@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <title>Diseño</title>
   </head>
   <body>
@@ -13,11 +13,61 @@
       <div class="container logo-nav-container">
         <a href="" class="logo">Carre4</a>
         <nav class="navigation">
-          <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contanto</a></li>
+          <ul class="menu-horizontal">
+            <li>
+              Productos
+              <ul>
+                <li id="listar">Listar</li>
+                <li id="ordenar" class="ascendente">
+                  Ordenar por precio ascendente
+                </li>
+                <li>
+                  Filtrar
+                  <ul>
+                    <li>
+                      Por nombre
+                      <form id="formProductoNombre">
+                        <input type="text" value="" />
+                        <input
+                          id="filtrarNombreProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                    <li>
+                      Por peso
+                      <form id="formProductoPeso">
+                        <input type="number" value="" />
+                        <input
+                          id="filtrarPesoProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                    <li>
+                      Por precio
+                      <form id="formProductoPrecio">
+                        <input type="number" value="" />
+                        <input
+                          id="filtrarPrecioProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Lista de la compra
+              <ul>
+                <li id="crearLista">Crear listas</li>
+                <li id="listarListas">Listar las listas</li>
+              </ul>
+            </li>
           </ul>
         </nav>
       </div>
