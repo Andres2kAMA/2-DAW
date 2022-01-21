@@ -43,6 +43,9 @@ function obtenerColecciónListaFireBase() {
  * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
  */
 async function listarProductos() {
+  if (document.getElementsByClassName("producto") != null) {
+    plantillas.eliminarDatosTabla();
+  }
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
@@ -56,6 +59,10 @@ async function listarProductos() {
  * @param {*} valor
  */
 async function filtrarPorNombre(valor) {
+  if (document.getElementsByClassName("producto") != null) {
+    plantillas.eliminarDatosTabla();
+  }
+
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -75,6 +82,9 @@ async function filtrarPorNombre(valor) {
  * @param {string} campo
  */
 async function filtrarPorNumero(valor, campo) {
+  if (document.getElementsByClassName("producto") != null) {
+    plantillas.eliminarDatosTabla();
+  }
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -90,6 +100,9 @@ async function filtrarPorNumero(valor, campo) {
 }
 
 async function ordenarProductos() {
+  if (document.getElementsByClassName("producto") != null) {
+    plantillas.eliminarDatosTabla();
+  }
   const productosCollection = obtenerColecciónProductosFireBase();
 
   var consulta;
