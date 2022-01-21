@@ -1,10 +1,13 @@
 "use strict";
 
+//Importo las funciones necesarias de los ficheros js.
 import * as funcionesFirebase from "./funciones_Firebase.js";
 import * as plantillaHtml from "./plantillasHtml.js";
 
+//Me declaro dos arrays vacíos.
 let productosSeleccionados = [];
 let datosLista = [];
+
 /**
  * Añado eventos a los eventos a cada botón.
  */
@@ -20,7 +23,8 @@ function anyadirEventosBotones() {
   document.getElementById("filtrarNombreProducto").addEventListener(
     "click",
     function () {
-      let campoForm = devolverDatosFormulario("formProductoNombre");
+      let campoForm =
+        devolverDatosFormularioFiltrarProducto("formProductoNombre");
       if (campoForm != "") funcionesFirebase.filtrarPorNombre(campoForm);
     },
     false
@@ -29,7 +33,8 @@ function anyadirEventosBotones() {
   document.getElementById("filtrarPesoProducto").addEventListener(
     "click",
     function () {
-      let campoForm = devolverDatosFormulario("formProductoPeso");
+      let campoForm =
+        devolverDatosFormularioFiltrarProducto("formProductoPeso");
 
       if (campoForm >= 0) funcionesFirebase.filtrarPorNumero(campoForm, "peso");
     },
@@ -39,7 +44,8 @@ function anyadirEventosBotones() {
   document.getElementById("filtrarPrecioProducto").addEventListener(
     "click",
     function () {
-      let campoForm = devolverDatosFormulario("formProductoPrecio");
+      let campoForm =
+        devolverDatosFormularioFiltrarProducto("formProductoPrecio");
       if (campoForm >= 0)
         funcionesFirebase.filtrarPorNumero(campoForm, "precio");
     },
@@ -53,7 +59,6 @@ function anyadirEventosBotones() {
     },
     false
   );
-  listarListas;
 
   document.getElementById("crearLista").addEventListener(
     "click",
@@ -79,41 +84,8 @@ function anyadirEventosBotones() {
 }
 
 /**
- * Filtro el formulario.
+ *
  */
-function devolverDatosFormulario(idForm) {
-  //Me almaceno el formulario
-  let formulario = document.getElementById(idForm);
-
-  return formulario[0].value;
-}
-
-function devolverProductosSeleccionados() {
-  let checkbox = document.getElementById("formProductos");
-  let productosSeleccionados = [];
-  for (let index = 0; index < checkbox.length; index++) {
-    if (checkbox[index].type == "checkbox" && checkbox[index].checked)
-      productosSeleccionados.push(checkbox[index].value);
-  }
-  return productosSeleccionados;
-}
-
-function devolverDatosLista() {
-  let lista = document.getElementsByClassName("datosFormulario");
-  let datosLista = [];
-  for (let i = 0; i < lista.length; i++) {
-    datosLista.push(lista[i].value);
-  }
-  return datosLista;
-}
-
-function devolverDatosFinalesLista() {
-  let datosFinalesLista = [];
-  datosFinalesLista.push(datosLista);
-  datosFinalesLista.push(productosSeleccionados);
-  return datosFinalesLista;
-}
-
 function anyadirEventoCrearLista() {
   document.getElementById("botonCrearLista").addEventListener(
     "click",
@@ -128,7 +100,12 @@ function anyadirEventoCrearLista() {
   );
 }
 
-function anyadirFuncionEditarProductos(producto, id) {
+/**
+ *
+ * @param {Object} producto
+ * @param {String} id
+ */
+function anyadirEventoEditarProductos(producto, id) {
   let productos = document.getElementById(id);
   productos.addEventListener(
     "click",
@@ -139,9 +116,28 @@ function anyadirFuncionEditarProductos(producto, id) {
   );
 }
 
-export {
-  anyadirEventosBotones,
-  devolverDatosFormulario,
-  devolverDatosFinalesLista,
-  anyadirFuncionEditarProductos,
-};
+/**
+ *
+ * @param {String} idForm
+ * @returns Devuelvo el valor por el cual el usuario quiere filtrar el producto.
+ */
+function devolverDatosFormularioFiltrarProducto(idForm) {
+  let formulario = document.getElementById(idForm);
+
+  return formulario[0].value;
+}
+
+/**
+ *
+ * @returns Devuelvo en un array los campos rellenados de la lista de la compra.
+ */
+function devolverDatosListaCompra() {
+  let lista = document.getElementsByClassName("datosFormulario");
+  let datosLista = [];
+  for (let i = 0; i < lista.length; i++) {
+    datosLista.push(lista[i].value);
+  }
+  return datosLista;
+}
+
+export { anyadirEventosBotones, devolverDatosListaCompra };

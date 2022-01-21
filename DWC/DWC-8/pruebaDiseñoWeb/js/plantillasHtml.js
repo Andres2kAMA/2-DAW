@@ -5,7 +5,7 @@ import * as funcionesHTML from "./funcionesHtml.js";
 
 let plantilaFila = `<tr></tr>`;
 
-let divProductos = `<div id="tablaProductos">
+let divProductosLista = `<div id="tablaProductos">
                         <form id="formProductos">
                           <table id="tabla">
                             <tr>
@@ -15,6 +15,20 @@ let divProductos = `<div id="tablaProductos">
                               <th>Imágen</th>
                               <th>Descripción</th>
                               <th>Añadir productos a la lista</th>
+                            </tr>
+                          </table>
+                        </form>
+                      </div>`;
+
+let divProductos = `<div id="tablaProductos">
+                        <form id="formProductos">
+                          <table id="tabla">
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Precio</th>
+                              <th>Peso</th>
+                              <th>Imágen</th>
+                              <th>Descripción</th>
                             </tr>
                           </table>
                         </form>
@@ -32,7 +46,7 @@ let formularioCrearLista = `  <form id="formularioCrearLista">
                                 <input id="botonCrearLista" type="button" value="Crear" />
                               </form>`;
 
-let body = document.getElementById("body");
+let body = document.getElementById("contenidoPrincipal");
 /**
  *
  * @param {Object} producto
@@ -41,7 +55,7 @@ let body = document.getElementById("body");
 function modificarPlantillaProducto(producto, id) {
   let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
-    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="checkbox" value="${id}"</input></td></tr>`
+    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td></tr>`
   );
   return plantillaDevolver;
 }

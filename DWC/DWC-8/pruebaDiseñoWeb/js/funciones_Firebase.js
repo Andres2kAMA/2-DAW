@@ -16,6 +16,7 @@ import {
 //Importo la 'key' para acceder al Firebase.
 import { app } from "./conexion_Firebase.js";
 
+//Importo funciones de otros ficheros js.
 import * as plantillas from "./plantillasHtml.js";
 import * as funcionesHtml from "./funcionesHtml.js";
 
@@ -27,6 +28,11 @@ function obtenerColecciónProductosFireBase() {
   let productosCollection = collection(db, "productos");
   return productosCollection;
 }
+
+/**
+ *
+ * @returns Devuelvo la colección de Listas de la compra.
+ */
 function obtenerColecciónListaFireBase() {
   const db = getFirestore(app);
   let listaCollection = collection(db, "listaCompra");
@@ -37,10 +43,6 @@ function obtenerColecciónListaFireBase() {
  * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
  */
 async function listarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
@@ -54,10 +56,6 @@ async function listarProductos() {
  * @param {*} valor
  */
 async function filtrarPorNombre(valor) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -77,10 +75,6 @@ async function filtrarPorNombre(valor) {
  * @param {string} campo
  */
 async function filtrarPorNumero(valor, campo) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -96,10 +90,6 @@ async function filtrarPorNumero(valor, campo) {
 }
 
 async function ordenarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
   const productosCollection = obtenerColecciónProductosFireBase();
 
   var consulta;
@@ -136,17 +126,15 @@ async function ordenarProductos() {
 async function crearLista() {
   const listaCollection = obtenerColecciónListaFireBase();
 
-  let datosLista = funcionesHtml.devolverDatosFinalesLista();
-
-  let productosObtenidos = await obtenerProductos(datosLista[1]);
+  // let datosLista = funcionesHtml.devolverDatosFinalesLista();
 
   const nuevaLista = {
     fechaCreacion: datosLista[0][2],
     nombreLista: datosLista[0][0],
     nombrePropietario: datosLista[0][1],
-    productos: productosObtenidos,
+    productos: [],
   };
-  const listaGuardada = await addDoc(listaCollection, nuevaLista);
+  await addDoc(listaCollection, nuevaLista);
 }
 
 async function obtenerProductos(productosId) {

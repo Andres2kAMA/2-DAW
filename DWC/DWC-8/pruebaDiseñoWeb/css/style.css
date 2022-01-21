@@ -1,3 +1,4 @@
+/* Body */
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #333;
@@ -7,6 +8,7 @@ body {
   background: #333;
 }
 
+/* Etiquetas */
 h1 {
   font-size: 2rem;
   line-height: 1.3em;
@@ -16,12 +18,14 @@ p {
   margin-bottom: 1.6em;
 }
 
+/* Clase contenedor */
 .container {
   width: 85%;
   max-width: 850px;
   margin: 0 auto;
 }
 
+/* Header */
 .header {
   background-color: #333;
   color: white;
@@ -36,6 +40,7 @@ p {
   color: white;
   text-decoration: none;
 }
+
 .logo-nav-container {
   display: flex;
   justify-content: space-between;
@@ -46,6 +51,8 @@ p {
   letter-spacing: 2px;
   font-size: 1.2em;
 }
+
+/* Menú desplegable */
 .menu-horizontal {
   display: flex;
   justify-content: space-between;
@@ -64,7 +71,7 @@ p {
 }
 
 .menu-horizontal li:hover {
-  background-color: #4a4a4a;
+  background-color: grey;
 }
 
 .menu-horizontal li ul {
@@ -79,8 +86,10 @@ p {
 
 .menu-horizontal li ul li {
   position: relative;
+  background-color: #4a4a4a;
 }
 
+/* Main */
 .main {
   color: white;
   padding-top: 10rem;
@@ -91,6 +100,19 @@ p {
   background-attachment: fixed;
   height: max-content;
 }
+
+/* Tabla */
+
+table,
+th,
+td {
+  background-color: rgba(5, 5, 5, 0.5);
+  padding: 5px;
+  color: white;
+  text-align: center;
+}
+
+/* Footer */
 .footer {
   background: #f2f2f2;
   padding: 2rem 0;
