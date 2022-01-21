@@ -63,11 +63,9 @@ function anyadirEventosBotones() {
   document.getElementById("crearLista").addEventListener(
     "click",
     function () {
-      productosSeleccionados = [];
-      productosSeleccionados = devolverProductosSeleccionados();
       plantillaHtml.eliminarDivProductos();
       plantillaHtml.insertarFormularioCrearLista();
-      anyadirEventoCrearLista();
+      eventoEnviarFormularioLista();
     },
     false
   );
@@ -86,15 +84,48 @@ function anyadirEventosBotones() {
 /**
  *
  */
-function anyadirEventoCrearLista() {
+function eventoEnviarFormularioLista() {
   document.getElementById("botonCrearLista").addEventListener(
     "click",
     function () {
-      datosLista = devolverDatosLista();
+      datosLista = devolverDatosFormularioLista();
       plantillaHtml.eliminarFormularioCrearLista();
-      plantillaHtml.insertarDivProductos();
+      plantillaHtml.insertarDivProductosLista();
+      funcionesFirebase.eventoAnyadirProductos();
+      anyadirEventoCrearLista();
+    },
+    false
+  );
+}
+function anyadirEventoProducto(id) {
+  document.getElementById(id).addEventListener(
+    "click",
+    function () {
+      productosSeleccionados.push(id);
+    },
+    false
+  );
+}
+
+/**
+ *
+ * @returns Devuelvo los datos del formulario.
+ */
+function devolverDatosFormularioLista() {
+  let datos = [];
+  let form = document.getElementById("formularioCrearLista");
+  for (let i = 0; i < form.length - 1; i++) {
+    datos.push(form[i].value);
+  }
+  return datos;
+}
+
+function anyadirEventoCrearLista() {
+  document.getElementById("crearListaFirebase").addEventListener(
+    "click",
+    function () {
+      funcionesFirebase.crearLista(datosLista, productosSeleccionados);
       funcionesFirebase.listarProductos();
-      funcionesFirebase.crearLista();
     },
     false
   );
@@ -140,4 +171,9 @@ function devolverDatosListaCompra() {
   return datosLista;
 }
 
-export { anyadirEventosBotones, devolverDatosListaCompra };
+export {
+  anyadirEventosBotones,
+  devolverDatosListaCompra,
+  anyadirEventoProducto,
+  anyadirEventoEditarProductos,
+};

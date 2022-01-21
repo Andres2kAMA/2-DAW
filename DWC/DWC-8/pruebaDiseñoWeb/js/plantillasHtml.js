@@ -1,6 +1,7 @@
 "use strict";
 
 import * as funcionesHTML from "./funcionesHtml.js";
+import * as funcionesFirebase from "./funciones_Firebase.js";
 //Me defino una plantilla con un tr.
 
 let plantilaFila = `<tr></tr>`;
@@ -17,6 +18,7 @@ let divProductosLista = `<div id="tablaProductos">
                               <th>Añadir productos a la lista</th>
                             </tr>
                           </table>
+                          <input type="button" value="Crear la lista" id="crearListaFirebase">
                         </form>
                       </div>`;
 
@@ -36,7 +38,9 @@ let divProductos = `<div id="tablaProductos">
 
 let tablaLista = `<table id="tablaListaCompra"></table>`;
 
-let formularioCrearLista = `  <form id="formularioCrearLista">
+let divFormularioLista = `<div id="divFormLista">
+                              <h1>Inserta los valores de tu lista</h1>
+                              <form id="formularioCrearLista">
                                 <label>Nombre de la lista</label>
                                 <input class="datosFormulario" type="text" value="" /><br /><br />
                                 <label>Nombre del propietario</label>
@@ -44,7 +48,8 @@ let formularioCrearLista = `  <form id="formularioCrearLista">
                                 <label>Fecha</label>
                                 <input class="datosFormulario" type="date" value="" /><br /><br />
                                 <input id="botonCrearLista" type="button" value="Crear" />
-                              </form>`;
+                              </form>
+                           </div> `;
 
 let body = document.getElementById("contenidoPrincipal");
 
@@ -70,7 +75,7 @@ function modificarPlantillaProducto(producto) {
 function modificarPlantillaProductoLista(producto, id) {
   let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
-    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="button" id="${id}" value="Editar"</input></td></tr>`
+    `<tr class="producto"><td> ${producto.nombre}</td><td> ${producto.precio}</td><td> ${producto.peso}</td><td><img width="100px" height=100px" src="${producto.imagen}" /></td><td> ${producto.descripcion}</td><td><input type="button" id="${id}" value="Añadir"</input></td></tr>`
   );
   return plantillaDevolver;
 }
@@ -84,7 +89,7 @@ function modificarPlantillaProductoLista(producto, id) {
 function modificarPlantillaLista(lista, id) {
   let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
-    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th></tr>`
+    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th><th><input type="button" value="Editar lista" /><input type="button" value="Añadir productos" /></th></tr>`
   );
   return plantillaDevolver;
 }
@@ -100,6 +105,23 @@ function imprimirProducto(producto, id) {
 }
 
 /**
+ * Imprimo el producto en la tabla.
+ * @param {Object} producto
+ */
+function imprimirProductoLista(producto, id) {
+  let tabla = document.getElementById("tabla");
+  let fila = modificarPlantillaProductoLista(producto, id);
+  tabla.insertAdjacentHTML("beforeend", fila);
+}
+
+function eliminarDatosMain() {
+  let hijos = body.childNodes;
+  for (let i = 0; i < body.childNodes.length + 1; i++) {
+    body.removeChild(hijos[0]);
+  }
+}
+
+/**
  * Elimino el div productos.
  */
 function eliminarDivProductos() {
@@ -111,7 +133,7 @@ function eliminarDivProductos() {
  * Elimino el formulario para crear las listas.
  */
 function eliminarFormularioCrearLista() {
-  let form = document.getElementById("formularioCrearLista");
+  let form = document.getElementById("divFormLista");
   form.parentNode.removeChild(form);
 }
 
@@ -130,8 +152,14 @@ function insertarDivProductos() {
   body.insertAdjacentHTML("beforeend", divProductos);
 }
 
+//Funciones para insertar las plantillas.
+function insertarDivProductosLista() {
+  body.insertAdjacentHTML("beforeend", divProductosLista);
+  funcionesFirebase.listarProductosLista();
+}
+
 function insertarFormularioCrearLista() {
-  body.insertAdjacentHTML("beforeend", formularioCrearLista);
+  body.insertAdjacentHTML("beforeend", divFormularioLista);
 }
 
 function insertarTablaListas() {
@@ -151,18 +179,18 @@ function imprimirLista(lista) {
 
   for (let i = 0; i < filasProductos.length; i++) {
     tabla.insertAdjacentHTML("beforeend", filasProductos[i]);
-    funcionesHTML.anyadirFuncionEditarProductos(
+    funcionesHTML.anyadirEventoEditarProductos(
       filasProductos,
       lista.productos[i].nombre
     );
   }
 }
-/*
+
 /**
  *
  * @param {Object} lista
  * @returns
- 
+ */
 function anyadirProductos(lista) {
   let filasProductos = [];
   for (let i = 0; i < lista.productos.length; i++) {
@@ -173,7 +201,7 @@ function anyadirProductos(lista) {
     filasProductos.push(filaProducto);
   }
   return filasProductos;
-}*/
+}
 
 export {
   imprimirProducto,
@@ -184,4 +212,7 @@ export {
   insertarTablaListas,
   imprimirLista,
   eliminarDatosTabla,
+  insertarDivProductosLista,
+  imprimirProductoLista,
+  eliminarDatosMain,
 };

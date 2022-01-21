@@ -43,9 +43,8 @@ function obtenerColecciónListaFireBase() {
  * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
  */
 async function listarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
@@ -55,13 +54,24 @@ async function listarProductos() {
   });
 }
 
+async function listarProductosLista() {
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductosLista();
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    plantillas.imprimirProductoLista(producto.data(), producto.id);
+  });
+}
+
 /**
  * @param {*} valor
  */
 async function filtrarPorNombre(valor) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
 
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -82,9 +92,8 @@ async function filtrarPorNombre(valor) {
  * @param {string} campo
  */
 async function filtrarPorNumero(valor, campo) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -100,9 +109,9 @@ async function filtrarPorNumero(valor, campo) {
 }
 
 async function ordenarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
+
   const productosCollection = obtenerColecciónProductosFireBase();
 
   var consulta;
@@ -136,20 +145,29 @@ async function ordenarProductos() {
   });
 }
 
-async function crearLista() {
+/**
+ *
+ * @param {*} datosForm
+ * @param {*} productos
+ */
+async function crearLista(datosForm, productos) {
   const listaCollection = obtenerColecciónListaFireBase();
 
-  // let datosLista = funcionesHtml.devolverDatosFinalesLista();
+  let productosLista = await obtenerProductos(productos);
 
   const nuevaLista = {
-    fechaCreacion: datosLista[0][2],
-    nombreLista: datosLista[0][0],
-    nombrePropietario: datosLista[0][1],
-    productos: [],
+    nombreLista: datosForm[0],
+    nombrePropietario: datosForm[1],
+    fechaCreacion: datosForm[2],
+    productos: productosLista,
   };
   await addDoc(listaCollection, nuevaLista);
 }
-
+/**
+ *
+ * @param {*} productosId
+ * @returns
+ */
 async function obtenerProductos(productosId) {
   const productosCollection = obtenerColecciónProductosFireBase();
   let productosObtenidos = [];
@@ -175,11 +193,22 @@ async function obtenerListas() {
   });
 }
 
+async function eventoAnyadirProductos() {
+  const productosCollection = obtenerColecciónProductosFireBase();
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    funcionesHtml.anyadirEventoProducto(producto.id);
+  });
+}
+
 export {
   listarProductos,
+  listarProductosLista,
   ordenarProductos,
   filtrarPorNombre,
   filtrarPorNumero,
   crearLista,
   obtenerListas,
+  eventoAnyadirProductos,
 };
