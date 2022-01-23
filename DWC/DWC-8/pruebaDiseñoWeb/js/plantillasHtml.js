@@ -155,7 +155,6 @@ function insertarDivProductos() {
 //Funciones para insertar las plantillas.
 function insertarDivProductosLista() {
   body.insertAdjacentHTML("beforeend", divProductosLista);
-  funcionesFirebase.listarProductosLista();
 }
 
 function insertarFormularioCrearLista() {

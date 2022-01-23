@@ -63,7 +63,7 @@ function anyadirEventosBotones() {
   document.getElementById("crearLista").addEventListener(
     "click",
     function () {
-      plantillaHtml.eliminarDivProductos();
+      plantillaHtml.eliminarDatosMain();
       plantillaHtml.insertarFormularioCrearLista();
       eventoEnviarFormularioLista();
     },
@@ -73,7 +73,7 @@ function anyadirEventosBotones() {
   document.getElementById("listarListas").addEventListener(
     "click",
     function () {
-      plantillaHtml.eliminarDivProductos();
+      plantillaHtml.eliminarDatosMain();
       plantillaHtml.insertarTablaListas();
       funcionesFirebase.obtenerListas();
     },
@@ -91,6 +91,7 @@ function eventoEnviarFormularioLista() {
       datosLista = devolverDatosFormularioLista();
       plantillaHtml.eliminarFormularioCrearLista();
       plantillaHtml.insertarDivProductosLista();
+      funcionesFirebase.listarProductosLista();
       funcionesFirebase.eventoAnyadirProductos();
       anyadirEventoCrearLista();
     },

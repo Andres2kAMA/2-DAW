@@ -55,8 +55,6 @@ async function listarProductos() {
 }
 
 async function listarProductosLista() {
-  plantillas.eliminarDatosMain();
-  plantillas.insertarDivProductosLista();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
