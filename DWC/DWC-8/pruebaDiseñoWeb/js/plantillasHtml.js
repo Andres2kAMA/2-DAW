@@ -22,6 +22,22 @@ let divProductosLista = `<div id="tablaProductos">
                         </form>
                       </div>`;
 
+let divAnyadirProductosLista = `<div id="tablaProductos">
+                      <form id="formProductos">
+                        <table id="tabla">
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Peso</th>
+                            <th>Imágen</th>
+                            <th>Descripción</th>
+                            <th>Añadir productos a la lista</th>
+                          </tr>
+                        </table>
+                        <input type="button" value="Crear la lista" id="actualizarListaFirebase">
+                      </form>
+                    </div>`;
+
 let divProductos = `<div id="tablaProductos">
                         <form id="formProductos">
                           <table id="tabla">
@@ -40,7 +56,7 @@ let tablaLista = `<table id="tablaListaCompra"></table>`;
 
 let divFormularioLista = `<div id="divFormLista">
                               <h1>Inserta los valores de tu lista</h1>
-                              <form id="formularioCrearLista">
+                              <form id="formularioLista">
                                 <label>Nombre de la lista</label>
                                 <input class="datosFormulario" type="text" value="" /><br /><br />
                                 <label>Nombre del propietario</label>
@@ -48,6 +64,19 @@ let divFormularioLista = `<div id="divFormLista">
                                 <label>Fecha</label>
                                 <input class="datosFormulario" type="date" value="" /><br /><br />
                                 <input id="botonCrearLista" type="button" value="Crear" />
+                              </form>
+                           </div> `;
+
+let divFormularioListaEditar = `<div id="divFormLista">
+                              <h1>Inserta los valores de tu lista</h1>
+                              <form id="formularioLista">
+                                <label>Nombre de la lista</label>
+                                <input class="datosFormulario" type="text" value="" /><br /><br />
+                                <label>Nombre del propietario</label>
+                                <input class="datosFormulario" type="text" value="" /><br /><br />
+                                <label>Fecha</label>
+                                <input class="datosFormulario" type="date" value="" /><br /><br />
+                                <input id="botonEditarLista" type="button" value="Editar" />
                               </form>
                            </div> `;
 
@@ -89,7 +118,7 @@ function modificarPlantillaProductoLista(producto, id) {
 function modificarPlantillaLista(lista, id) {
   let plantillaDevolver = plantilaFila.replace(
     `<tr></tr>`,
-    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th><th><input type="button" value="Editar lista" /><input type="button" value="Añadir productos" /></th></tr>`
+    `<tr class="lista" id="${id}"><th> ${lista.nombrePropietario}</th><th> ${lista.nombreLista}</th><th> ${lista.fechaCreacion}</th><th><input type="button" id="${id}editar"  value="Editar valores lista" /><input type="button" id="${id}eliminar"  value="Eliminar lista" /></th><th><input type="button" id="${id}anyadir" value="Añadir productos" /></th></tr>`
   );
   return plantillaDevolver;
 }
@@ -157,8 +186,16 @@ function insertarDivProductosLista() {
   body.insertAdjacentHTML("beforeend", divProductosLista);
 }
 
+//Funciones para insertar las plantillas.
+function insertarDivActualizarProductosLista() {
+  body.insertAdjacentHTML("beforeend", divAnyadirProductosLista);
+}
+
 function insertarFormularioCrearLista() {
   body.insertAdjacentHTML("beforeend", divFormularioLista);
+}
+function insertarFormularioEditarLista() {
+  body.insertAdjacentHTML("beforeend", divFormularioListaEditar);
 }
 
 function insertarTablaListas() {
@@ -169,19 +206,19 @@ function insertarTablaListas() {
  *
  * @param {Object} lista
  */
-function imprimirLista(lista) {
+function imprimirLista(lista, id) {
   let tabla = document.getElementById("tablaListaCompra");
-  let fila = modificarPlantillaLista(lista);
+  let listaAnyadir = modificarPlantillaLista(lista, id);
   let filasProductos = anyadirProductos(lista);
 
-  tabla.insertAdjacentHTML("beforeend", fila);
+  tabla.insertAdjacentHTML("beforeend", listaAnyadir);
+
+  funcionesHTML.anyadirEventoEditarLista(id, `${id}editar`);
+  funcionesHTML.anyadirEventoEliminarLista(id, `${id}eliminar`);
+  funcionesHTML.anyadirEventoAnyadirProductos(id, `${id}anyadir`);
 
   for (let i = 0; i < filasProductos.length; i++) {
     tabla.insertAdjacentHTML("beforeend", filasProductos[i]);
-    funcionesHTML.anyadirEventoEditarProductos(
-      filasProductos,
-      lista.productos[i].nombre
-    );
   }
 }
 
@@ -193,7 +230,7 @@ function imprimirLista(lista) {
 function anyadirProductos(lista) {
   let filasProductos = [];
   for (let i = 0; i < lista.productos.length; i++) {
-    let filaProducto = modificarPlantillaProductoLista(
+    let filaProducto = modificarPlantillaProducto(
       lista.productos[i],
       lista.productos[i].nombre
     );
@@ -213,5 +250,7 @@ export {
   eliminarDatosTabla,
   insertarDivProductosLista,
   imprimirProductoLista,
+  insertarFormularioEditarLista,
   eliminarDatosMain,
+  insertarDivActualizarProductosLista,
 };

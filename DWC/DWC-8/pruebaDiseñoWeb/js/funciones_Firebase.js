@@ -11,6 +11,9 @@ import {
   where,
   orderBy,
   addDoc,
+  updateDoc,
+  deleteDoc,
+  arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 //Importo la 'key' para acceder al Firebase.
@@ -191,6 +194,47 @@ async function obtenerListas() {
   });
 }
 
+async function aumentarProductosLista(productos, id) {
+  const listaCollection = obtenerColecciónListaFireBase();
+  const lista = await doc(listaCollection, id);
+  let productosAnyadir = await obtenerProductos(productos);
+
+  await updateDoc(lista, {
+    aficiones: arrayUnion(productosAnyadir),
+  });
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+async function editarLista(id, datos) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await updateDoc(listaRef, {
+    nombreLista: datos[0],
+    nombrePropietario: datos[1],
+    fechaCreacion: datos[2],
+  });
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+async function eliminarLista(id) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await deleteDoc(listaRef, id);
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
 async function eventoAnyadirProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
   const productos = await getDocs(productosCollection);
@@ -209,4 +253,7 @@ export {
   crearLista,
   obtenerListas,
   eventoAnyadirProductos,
+  editarLista,
+  eliminarLista,
+  aumentarProductosLista,
 };

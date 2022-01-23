@@ -108,13 +108,65 @@ function anyadirEventoProducto(id) {
   );
 }
 
+function anyadirEventoEditarLista(id, idHTML) {
+  document.getElementById(idHTML).addEventListener(
+    "click",
+    function () {
+      plantillaHtml.eliminarDatosMain();
+      plantillaHtml.insertarFormularioEditarLista();
+      editarValoresLista(id);
+    },
+    false
+  );
+}
+
+function editarValoresLista(id) {
+  document.getElementById("botonEditarLista").addEventListener(
+    "click",
+    function () {
+      datosLista = devolverDatosFormularioLista();
+      funcionesFirebase.editarLista(id, datosLista);
+    },
+    false
+  );
+}
+
+function anyadirEventoEliminarLista(id, idHTML) {
+  document.getElementById(idHTML).addEventListener(
+    "click",
+    function () {
+      funcionesFirebase.eliminarLista(id);
+    },
+    false
+  );
+}
+
+function anyadirEventoAnyadirProductos(id, idHTML) {
+  document.getElementById(idHTML).addEventListener(
+    "click",
+    function () {
+      plantillaHtml.eliminarDatosMain();
+      plantillaHtml.insertarDivActualizarProductosLista();
+      funcionesFirebase.listarProductosLista();
+      funcionesFirebase.eventoAnyadirProductos();
+      document.getElementById("actualizarListaFirebase").addEventListener(
+        "click",
+        function () {
+          funcionesFirebase.aumentarProductosLista(productosSeleccionados, id);
+        },
+        false
+      );
+    },
+    false
+  );
+}
 /**
  *
  * @returns Devuelvo los datos del formulario.
  */
 function devolverDatosFormularioLista() {
   let datos = [];
-  let form = document.getElementById("formularioCrearLista");
+  let form = document.getElementById("formularioLista");
   for (let i = 0; i < form.length - 1; i++) {
     datos.push(form[i].value);
   }
@@ -127,22 +179,7 @@ function anyadirEventoCrearLista() {
     function () {
       funcionesFirebase.crearLista(datosLista, productosSeleccionados);
       funcionesFirebase.listarProductos();
-    },
-    false
-  );
-}
-
-/**
- *
- * @param {Object} producto
- * @param {String} id
- */
-function anyadirEventoEditarProductos(producto, id) {
-  let productos = document.getElementById(id);
-  productos.addEventListener(
-    "click",
-    function () {
-      console.log("mundo");
+      productosSeleccionados = [];
     },
     false
   );
@@ -175,6 +212,8 @@ function devolverDatosListaCompra() {
 export {
   anyadirEventosBotones,
   devolverDatosListaCompra,
+  anyadirEventoEditarLista,
+  anyadirEventoEliminarLista,
   anyadirEventoProducto,
-  anyadirEventoEditarProductos,
+  anyadirEventoAnyadirProductos,
 };
