@@ -12,8 +12,8 @@ body {
 
 #cuadricula {
   display: grid;
-  grid-template-columns: 8.5em;
-  grid-template-rows: 10em 8.5em 10em;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
     "a a . . ."
     "a a . b b"

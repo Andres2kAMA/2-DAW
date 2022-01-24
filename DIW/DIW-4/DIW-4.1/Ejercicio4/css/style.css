@@ -1,0 +1,45 @@
+body {
+  margin: 40px;
+  font: 80% Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 1em;
+  grid-template-areas:
+    "a  a  .   .   e   e"
+    "a  a  b   b   e   e"
+    "c  c  d   d   e   e"
+    ".  .  d   d   e   e";
+
+  background: no-repeat
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/12005/grid.png);
+  background-color: #fff;
+  color: #444;
+}
+
+.box {
+  border: 1px solid black;
+}
+
+.a {
+  grid-area: a;
+}
+
+.b {
+  grid-area: b;
+}
+
+.c {
+  grid-area: c;
+}
+
+.d {
+  grid-area: d;
+}
+
+.e {
+  grid-area: e;
+}
