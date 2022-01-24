@@ -1,0 +1,46 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  line-height: 2em;
+  background-color: #222;
+  color: white;
+}
+#form {
+  text-align: center;
+  margin-bottom: 5em;
+  margin-top: 5em;
+}
+
+#cuadricula {
+  display: grid;
+  grid-template-columns: 8.5em;
+  grid-template-rows: 10em 8.5em 10em;
+  grid-template-areas:
+    "a a . . ."
+    "a a . b b"
+    ". . . b b";
+  margin: 0 auto;
+  border: 1px dashed #777;
+  width: 500px;
+  background: 0 0/100px 100px
+      linear-gradient(transparent 0%, transparent 99%, #777 100%),
+    0 0/100px 100px
+      linear-gradient(90deg, transparent 0%, transparent 99%, #777 100%),
+    0 0/200px 200px no-repeat
+      url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/222579/test.svg"),
+    300px 100px/200px 200px no-repeat
+      url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/222579/test.svg");
+}
+
+.a {
+  grid-area: a;
+  align-items: stretch;
+  justify-items: start;
+}
+.b {
+  grid-area: b;
+}
+
+.item {
+  background-color: #5ea3b5;
+  border-radius: 2em;
+}
