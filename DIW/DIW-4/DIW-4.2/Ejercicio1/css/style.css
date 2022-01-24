@@ -3,30 +3,33 @@ body {
   color: grey;
 }
 
+span {
+  width: max-content;
+}
 /*
 *  Creo varios espacios en blanco antes y después de la etiqueta span.
 */
 blockquote {
   max-width: inherit;
 }
-span {
-  max-width: inherit;
-}
-span::before {
-  content: "\0000a0 \0000a0 \0000a0 \0000a0 ";
-}
-
-span::after {
-  content: "\0000a0 \0000a0 \0000a0 \0000a0  ";
-}
 
 /*
 *  Añado comillas antes y después de la etiqueta blockquote.
 */
+blockquote {
+  quotes: "\201C""\201C";
+}
 blockquote::before {
   content: open-quote;
 }
 
 blockquote::after {
+  width: max-content;
   content: close-quote;
+}
+:lang(en-us) > q {
+  quotes: "\201c""\201d""\2018""\2019";
+}
+:lang(en-gb) > q {
+  quotes: "\2018""\2019""\201c""\201d";
 }
