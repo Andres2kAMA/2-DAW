@@ -6,7 +6,8 @@
  * Desde aquí se exportará la constante que servirá para conectarse con los repositorios de Firebase.
  */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7XNhZSz1ZxlvPpH1ypNJ3cp63C-V3pVM",
@@ -23,5 +24,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const autentificacion = getAuth(app);
 
-export { app };
+export { app, autentificacion };

@@ -81,6 +81,29 @@ let divFormularioListaEditar = `<div id="divFormLista">
                               </form>
                            </div> `;
 
+let divFormRegistrarse = `<div id="divFormRegistrarse">
+                           <h1>Registrate</h1>
+                           <form id="formularioRegistrarse">
+                             <label>Correo</label>
+                             <input class="datosRegistrarse" type="text" value="" /><br /><br />
+                             <label>Contraseña</label>
+                             <input class="datosRegistrarse" type="password" value="" /><br /><br />
+                             <input id="botonRegistrarse" type="button" value="Editar" />
+                           </form>
+                        </div> `;
+let divFormIniciarSesion = `<div id="divFormSesion">
+                              <h1>Inicia sesión</h1>
+                              <form id="formularioSesion">
+                                <label>Nombre completp</label>
+                                <input class="datosSesion" type="text" value="" /><br /><br />
+                                <label>Nickname</label>
+                                <input class="datosSesion" type="text" value="" /><br /><br />
+                                <label>Rol</label>
+                                <input class="datosSesion" type="radio" value="" /><br /><br />
+                                <input id="botonIniciarSesion" type="button" value="Editar" />
+                              </form>
+                           </div> `;
+
 let body = document.getElementById("contenidoPrincipal");
 
 /**
@@ -179,6 +202,12 @@ function insertarFormularioEditarLista() {
 function insertarTablaListas() {
   body.insertAdjacentHTML("beforeend", tablaLista);
 }
+function insertarDivSesion() {
+  body.insertAdjacentHTML("beforeend", divFormIniciarSesion);
+}
+function insertarDivRegistrarse() {
+  body.insertAdjacentHTML("beforeend", divFormRegistrarse);
+}
 
 /**
  *
@@ -229,4 +258,5 @@ export {
   insertarFormularioEditarLista,
   eliminarDatosMain,
   insertarDivActualizarProductosLista,
+  insertarDivRegistrarse,
 };

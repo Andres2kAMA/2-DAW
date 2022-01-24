@@ -13,10 +13,17 @@ import {
   updateDoc,
   deleteDoc,
   arrayUnion,
-} from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 //Importo la 'key' para acceder al Firebase.
-import { app } from "./conexion_Firebase.js";
+import { app, autentificacion } from "./conexion_Firebase.js";
 
 //Importo funciones de otros ficheros js.
 import * as plantillas from "./plantillasHtml.js";
@@ -272,6 +279,19 @@ async function eventoAnyadirProductos() {
   });
 }
 
+async function validarUsuario(correo, contraseña) {
+  createUserWithEmailAndPassword(autentificacion, correo, contraseña)
+    .then((userCredential) => {
+      console.log("yes");
+      console.log(userCredential);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
+
 export {
   listarProductos,
   listarProductosLista,
@@ -284,4 +304,5 @@ export {
   editarLista,
   eliminarLista,
   aumentarProductosLista,
+  validarUsuario,
 };

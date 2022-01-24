@@ -79,9 +79,35 @@ function anyadirEventosBotones() {
     },
     false
   );
+
+  document.getElementById("registrarse").addEventListener(
+    "click",
+    function () {
+      plantillaHtml.eliminarDatosMain();
+      plantillaHtml.insertarDivRegistrarse();
+      eventoRegistrarse();
+    },
+    false
+  );
 }
 
-/****
+function eventoRegistrarse() {
+  document.getElementById("botonRegistrarse").addEventListener(
+    "click",
+    function () {
+      let datos = getDatosRegistrarse();
+      funcionesFirebase.validarUsuario(datos[0], datos[1]);
+    },
+    false
+  );
+}
+
+function getDatosRegistrarse() {
+  let form = document.getElementById("formularioRegistrarse");
+  let datos = [form[0].value, form[1].value];
+  return datos;
+}
+/**
  * Evento que utilizaré para crear la lista.
  */
 function eventoEnviarFormularioLista() {
