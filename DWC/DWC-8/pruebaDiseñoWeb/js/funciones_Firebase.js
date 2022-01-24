@@ -5,7 +5,6 @@ import {
   getFirestore,
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   where,
@@ -109,6 +108,9 @@ async function filtrarPorNumero(valor, campo) {
   });
 }
 
+/**
+ * Ordeno los productos.
+ */
 async function ordenarProductos() {
   plantillas.eliminarDatosMain();
   plantillas.insertarDivProductos();
@@ -166,8 +168,8 @@ async function crearLista(datosForm, productos) {
 }
 /**
  *
- * @param {*} productosId
- * @returns
+ * @param {Array} productosId
+ * @returns Devuelvo un array con los datos de los productos.
  */
 async function obtenerProductos(productosId) {
   const productosCollection = obtenerColecciónProductosFireBase();
@@ -184,6 +186,9 @@ async function obtenerProductos(productosId) {
   return productosObtenidos;
 }
 
+/**
+ * Imprimo las listas.
+ */
 async function obtenerListas() {
   const listaCollection = obtenerColecciónListaFireBase();
 
@@ -194,9 +199,15 @@ async function obtenerListas() {
   });
 }
 
+/**
+ *
+ * @param {Array} productos
+ * @param {String} id
+ */
 async function aumentarProductosLista(productos, id) {
   const listaCollection = obtenerColecciónListaFireBase();
   const lista = await doc(listaCollection, id);
+
   let productosAnyadir = await obtenerProductos(productos);
 
   await updateDoc(lista, {
@@ -208,6 +219,11 @@ async function aumentarProductosLista(productos, id) {
   obtenerListas();
 }
 
+/**
+ *
+ * @param {String} id
+ * @param {Array} datos
+ */
 async function editarLista(id, datos) {
   const listaCollection = obtenerColecciónListaFireBase();
 
@@ -223,6 +239,10 @@ async function editarLista(id, datos) {
   obtenerListas();
 }
 
+/**
+ *
+ * @param {String} id
+ */
 async function eliminarLista(id) {
   const listaCollection = obtenerColecciónListaFireBase();
 
@@ -235,6 +255,9 @@ async function eliminarLista(id) {
   obtenerListas();
 }
 
+/**
+ * Inserto un evento que utilizaré para añadir los productos.
+ */
 async function eventoAnyadirProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
   const productos = await getDocs(productosCollection);

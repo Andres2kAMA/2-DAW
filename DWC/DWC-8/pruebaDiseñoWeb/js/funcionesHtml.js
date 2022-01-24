@@ -81,15 +81,15 @@ function anyadirEventosBotones() {
   );
 }
 
-/**
- *
+/****
+ * Evento que utilizaré para crear la lista.
  */
 function eventoEnviarFormularioLista() {
   document.getElementById("botonCrearLista").addEventListener(
     "click",
     function () {
       datosLista = devolverDatosFormularioLista();
-      plantillaHtml.eliminarFormularioCrearLista();
+      plantillaHtml.eliminarDatosMain();
       plantillaHtml.insertarDivProductosLista();
       funcionesFirebase.listarProductosLista();
       funcionesFirebase.eventoAnyadirProductos();
@@ -98,6 +98,11 @@ function eventoEnviarFormularioLista() {
     false
   );
 }
+
+/**
+ * Añado al array el id del producto seleccionado.
+ * @param {String} id
+ */
 function anyadirEventoProducto(id) {
   document.getElementById(id).addEventListener(
     "click",
@@ -108,6 +113,11 @@ function anyadirEventoProducto(id) {
   );
 }
 
+/**
+ * Evento para editar los datos de la lista.
+ * @param {String} id
+ * @param {String} idHTML
+ */
 function anyadirEventoEditarLista(id, idHTML) {
   document.getElementById(idHTML).addEventListener(
     "click",
@@ -120,6 +130,10 @@ function anyadirEventoEditarLista(id, idHTML) {
   );
 }
 
+/**
+ *
+ * @param {String} id
+ */
 function editarValoresLista(id) {
   document.getElementById("botonEditarLista").addEventListener(
     "click",
@@ -131,6 +145,11 @@ function editarValoresLista(id) {
   );
 }
 
+/**
+ *
+ * @param {String} id
+ * @param {String} idHTML
+ */
 function anyadirEventoEliminarLista(id, idHTML) {
   document.getElementById(idHTML).addEventListener(
     "click",
@@ -141,6 +160,11 @@ function anyadirEventoEliminarLista(id, idHTML) {
   );
 }
 
+/**
+ *
+ * @param {String} id
+ * @param {String} idHTML
+ */
 function anyadirEventoAnyadirProductos(id, idHTML) {
   document.getElementById(idHTML).addEventListener(
     "click",
@@ -160,6 +184,7 @@ function anyadirEventoAnyadirProductos(id, idHTML) {
     false
   );
 }
+
 /**
  *
  * @returns Devuelvo los datos del formulario.
@@ -173,6 +198,9 @@ function devolverDatosFormularioLista() {
   return datos;
 }
 
+/**
+ * Creo la lista.
+ */
 function anyadirEventoCrearLista() {
   document.getElementById("crearListaFirebase").addEventListener(
     "click",
@@ -180,6 +208,7 @@ function anyadirEventoCrearLista() {
       funcionesFirebase.crearLista(datosLista, productosSeleccionados);
       funcionesFirebase.listarProductos();
       productosSeleccionados = [];
+      datosLista = [];
     },
     false
   );

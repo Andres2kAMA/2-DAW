@@ -1,8 +1,9 @@
 "use strict";
 
+//Importo las funciones HTML que voy a utilizar.
 import * as funcionesHTML from "./funcionesHtml.js";
-import * as funcionesFirebase from "./funciones_Firebase.js";
-//Me defino una plantilla con un tr.
+
+//Me defino las plantillas necesarias.
 
 let plantilaFila = `<tr></tr>`;
 
@@ -111,8 +112,8 @@ function modificarPlantillaProductoLista(producto, id) {
 
 /**
  *
- * @param {*} lista
- * @param {*} id
+ * @param {Object} lista
+ * @param {String} id
  * @returns Devuelvo la plantilla modificada.
  */
 function modificarPlantillaLista(lista, id) {
@@ -126,6 +127,7 @@ function modificarPlantillaLista(lista, id) {
 /**
  * Imprimo el producto en la tabla.
  * @param {Object} producto
+ * @param {String} id
  */
 function imprimirProducto(producto, id) {
   let tabla = document.getElementById("tabla");
@@ -136,6 +138,7 @@ function imprimirProducto(producto, id) {
 /**
  * Imprimo el producto en la tabla.
  * @param {Object} producto
+ * @param {String} id
  */
 function imprimirProductoLista(producto, id) {
   let tabla = document.getElementById("tabla");
@@ -143,36 +146,13 @@ function imprimirProductoLista(producto, id) {
   tabla.insertAdjacentHTML("beforeend", fila);
 }
 
+/**
+ * Elimino todo los datos del main.
+ */
 function eliminarDatosMain() {
   let hijos = body.childNodes;
   for (let i = 0; i < body.childNodes.length + 1; i++) {
     body.removeChild(hijos[0]);
-  }
-}
-
-/**
- * Elimino el div productos.
- */
-function eliminarDivProductos() {
-  let divProductos = document.getElementById("tablaProductos");
-  divProductos.parentNode.removeChild(divProductos);
-}
-
-/**
- * Elimino el formulario para crear las listas.
- */
-function eliminarFormularioCrearLista() {
-  let form = document.getElementById("divFormLista");
-  form.parentNode.removeChild(form);
-}
-
-/**
- * Elimino todos los productos de la tabla.
- */
-function eliminarDatosTabla() {
-  let productos = document.getElementsByClassName("producto");
-  for (let i = productos.length; i > 0; i--) {
-    productos[0].parentNode.parentNode.removeChild(productos[0].parentNode);
   }
 }
 
@@ -181,12 +161,10 @@ function insertarDivProductos() {
   body.insertAdjacentHTML("beforeend", divProductos);
 }
 
-//Funciones para insertar las plantillas.
 function insertarDivProductosLista() {
   body.insertAdjacentHTML("beforeend", divProductosLista);
 }
 
-//Funciones para insertar las plantillas.
 function insertarDivActualizarProductosLista() {
   body.insertAdjacentHTML("beforeend", divAnyadirProductosLista);
 }
@@ -205,6 +183,7 @@ function insertarTablaListas() {
 /**
  *
  * @param {Object} lista
+ * @param {String} id
  */
 function imprimirLista(lista, id) {
   let tabla = document.getElementById("tablaListaCompra");
@@ -225,7 +204,7 @@ function imprimirLista(lista, id) {
 /**
  *
  * @param {Object} lista
- * @returns
+ * @returns Devuelvo la fila con los datos de los productos.
  */
 function anyadirProductos(lista) {
   let filasProductos = [];
@@ -241,13 +220,10 @@ function anyadirProductos(lista) {
 
 export {
   imprimirProducto,
-  eliminarDivProductos,
   insertarDivProductos,
   insertarFormularioCrearLista,
-  eliminarFormularioCrearLista,
   insertarTablaListas,
   imprimirLista,
-  eliminarDatosTabla,
   insertarDivProductosLista,
   imprimirProductoLista,
   insertarFormularioEditarLista,
