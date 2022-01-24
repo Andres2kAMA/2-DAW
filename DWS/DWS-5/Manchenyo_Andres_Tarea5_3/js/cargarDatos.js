@@ -63,27 +63,30 @@ function crearTablaProductos(productos, destino) {
   );
   tabla.appendChild(cabecera);
   for (var i = 0; i < productos.length; i++) {
-    // creamos el formulario para añadir unidades del producto al carrito (mediante la función anadirProductos())
-    formu = crearFormulario(
-      "Añadir",
-      productos[i].CodProd,
-      anadirProductos,
-      destino
-    );
-    //creamos la fila en la tabla a mostrar con los productos
-    fila = crear_fila(
-      [
+    if (productos[i].Stock <= 0) {
+    } else {
+      // creamos el formulario para añadir unidades del producto al carrito (mediante la función anadirProductos())
+      formu = crearFormulario(
+        "Añadir",
         productos[i].CodProd,
-        productos[i].Nombre,
-        productos[i].Descripcion,
-        productos[i].Stock,
-      ],
-      "td"
-    );
-    celda_form = document.createElement("td");
-    celda_form.appendChild(formu);
-    fila.appendChild(celda_form);
-    tabla.appendChild(fila);
+        anadirProductos,
+        destino
+      );
+      //creamos la fila en la tabla a mostrar con los productos
+      fila = crear_fila(
+        [
+          productos[i].CodProd,
+          productos[i].Nombre,
+          productos[i].Descripcion,
+          productos[i].Stock,
+        ],
+        "td"
+      );
+      celda_form = document.createElement("td");
+      celda_form.appendChild(formu);
+      fila.appendChild(celda_form);
+      tabla.appendChild(fila);
+    }
   }
   return tabla;
 }
@@ -140,7 +143,7 @@ function anadirProductos(formulario, destino) {
   return false;
 }
 
-function cargarCarrito() {
+function cargarCarrito(formulario) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -158,7 +161,8 @@ function cargarCarrito() {
         procesar.href = "#";
         procesar.innerHTML = "Realizar pedido";
         procesar.onclick = function () {
-          return procesarPedido();
+          var confirmacion = confirm("¿Deseas confirmar el pedido?");
+          if (confirmacion == true) return procesarPedido(formulario);
         };
         contenido.appendChild(procesar);
       } catch (e) {
@@ -236,7 +240,7 @@ function eliminarProductos(formulario) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      cargarCarrito();
+      cargarCarrito(formulario);
       alert("Producto eliminado con éxito");
     }
   };
@@ -252,10 +256,11 @@ function eliminarProductos(formulario) {
   return false;
 }
 
-function procesarPedido() {
+function procesarPedido(formulario) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+      console.log(formulario);
       var contenido = document.getElementById("contenido");
       contenido.innerHTML = "";
       var titulo = document.getElementById("titulo");

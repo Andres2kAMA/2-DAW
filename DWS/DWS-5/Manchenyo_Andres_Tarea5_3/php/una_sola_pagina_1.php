@@ -4,6 +4,9 @@
 <head>
     <title>Formulario de login</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../estilos/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../estilos/estiloLogin.css">
+    <link rel="stylesheet" type="text/css" href="../estilos/estiloCategorias.css">
     <script type="text/javascript" src="../js/sesion.js"></script>
     <script type="text/javascript" src="../js/cargarDatos.js"></script>
 </head>
@@ -26,14 +29,14 @@
     <!--
     a-- > Check 1,5
     b-- > Check 0,5
-    c-- > 
+    c-- > Check 0,5
     d-- > 
-    e-- > 
+    e-- > Check 0,5
     f-- > 
     g-- > 
     h-- > 
     i-- > 
-    j-- > 
+    j-- > Check 0,5
     !-->
 </body>
 
