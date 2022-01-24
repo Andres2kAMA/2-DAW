@@ -207,11 +207,9 @@ async function obtenerListas() {
 async function aumentarProductosLista(productos, id) {
   const listaCollection = obtenerColecciónListaFireBase();
   const lista = await doc(listaCollection, id);
-
   let productosAnyadir = await obtenerProductos(productos);
-
-  await updateDoc(lista, {
-    aficiones: arrayUnion(productosAnyadir),
+  productosAnyadir.map((producto) => {
+    actualizarLista(lista, producto);
   });
 
   plantillas.eliminarDatosMain();
@@ -219,7 +217,14 @@ async function aumentarProductosLista(productos, id) {
   obtenerListas();
 }
 
+async function actualizarLista(lista, producto) {
+  await updateDoc(lista, {
+    productos: arrayUnion(producto),
+  });
+}
+
 /**
+  console.log(productosAnyadir);
  *
  * @param {String} id
  * @param {Array} datos

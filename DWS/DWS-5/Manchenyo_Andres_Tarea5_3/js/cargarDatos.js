@@ -143,7 +143,7 @@ function anadirProductos(formulario, destino) {
   return false;
 }
 
-function cargarCarrito(formulario) {
+function cargarCarrito() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -153,6 +153,7 @@ function cargarCarrito(formulario) {
       titulo.innerHTML = "Carrito de la compra";
       try {
         var filas = JSON.parse(this.responseText);
+        console.log(filas);
         //creamos la tabla de los productos añadidos al carrito
         tabla = crearTablaCarrito(filas);
         contenido.appendChild(tabla);
@@ -162,7 +163,9 @@ function cargarCarrito(formulario) {
         procesar.innerHTML = "Realizar pedido";
         procesar.onclick = function () {
           var confirmacion = confirm("¿Deseas confirmar el pedido?");
-          if (confirmacion == true) return procesarPedido(formulario);
+          if (confirmacion == true) {
+            return borrarStock(filas);
+          }
         };
         contenido.appendChild(procesar);
       } catch (e) {
@@ -177,6 +180,7 @@ function cargarCarrito(formulario) {
   return false;
 }
 
+function borrarStock(filas) {}
 function crearTablaCarrito(productos) {
   var tabla = document.createElement("table");
   var cabecera = crear_fila(
@@ -256,11 +260,10 @@ function eliminarProductos(formulario) {
   return false;
 }
 
-function procesarPedido(formulario) {
+function procesarPedido() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(formulario);
       var contenido = document.getElementById("contenido");
       contenido.innerHTML = "";
       var titulo = document.getElementById("titulo");

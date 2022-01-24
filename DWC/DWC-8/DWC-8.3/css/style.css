@@ -1,124 +1,4 @@
-/* Estilo general de la página */
-* {
-  text-align: center;
-}
-
-/* Header */
-
-#titulo {
-  width: 340px;
-}
-
-header {
-  margin: auto;
-  width: max-content;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-.nav > li {
-  float: left;
-}
-
-.nav li {
-  background-color: #117864;
-  color: #f1c40f;
-  text-decoration: none;
-  padding: 10px 12px;
-  display: block;
-  cursor: pointer;
-}
-
-.nav li:hover {
-  background-color: #0e6251;
-}
-
-.nav li ul {
-  display: none;
-  position: absolute;
-  min-width: 140px;
-}
-
-.nav li:hover > ul {
-  display: block;
-}
-
-.nav li ul li {
-  position: relative;
-}
-
-.nav li ul li ul {
-  right: -140px;
-  top: 0px;
-}
-
-/**
-* Estilo al formulario.
-*/
-input {
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 4px;
-  cursor: pointer;
-}
-
-/**
-* Estilo al div principal de la página.
-*/
-div {
-  width: max-content;
-  padding: 20px;
-  margin: 0 auto;
-}
-
-/**
-* Estilo a la tabla.
-*/
-table,
-th,
-td {
-  background-color: rgba(5, 5, 5, 0.5);
-  padding: 5px;
-  color: white;
-}
-
-table {
-  margin: 0 auto;
-}
-
-table {
-  background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
-    url("../img/fondo.jpeg") center / cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: max-content;
-}
-div {
-  background: none;
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.noMostrar {
-  display: none;
-}
-
-#header {
-  background: none;
-}
-
-label {
-  color: white;
-  font-weight: bold;
-}
-
-#formularioCrearLista label {
-  color: black;
-}
-/*
+/* Body */
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #333;
@@ -128,6 +8,7 @@ body {
   background: #333;
 }
 
+/* Etiquetas */
 h1 {
   font-size: 2rem;
   line-height: 1.3em;
@@ -137,12 +18,14 @@ p {
   margin-bottom: 1.6em;
 }
 
+/* Clase contenedor */
 .container {
   width: 85%;
   max-width: 850px;
   margin: 0 auto;
 }
 
+/* Header */
 .header {
   background-color: #333;
   color: white;
@@ -157,6 +40,7 @@ p {
   color: white;
   text-decoration: none;
 }
+
 .logo-nav-container {
   display: flex;
   justify-content: space-between;
@@ -166,6 +50,13 @@ p {
 .logo {
   letter-spacing: 2px;
   font-size: 1.2em;
+}
+
+/* Menú desplegable */
+.menu-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menu-horizontal > li {
@@ -180,7 +71,7 @@ p {
 }
 
 .menu-horizontal li:hover {
-  background-color: #4a4a4a;
+  background-color: grey;
 }
 
 .menu-horizontal li ul {
@@ -195,14 +86,12 @@ p {
 
 .menu-horizontal li ul li {
   position: relative;
+  background-color: #4a4a4a;
 }
 
-.menu-horizontal li ul li ul {
-  right: -140px;
-  top: 0px;
-}
-
+/* Main */
 .main {
+  color: white;
   padding-top: 10rem;
   padding-bottom: 5rem;
   background: linear-gradient(rgba(5, 7, 12, 0.3), rgba(5, 7, 12, 0.5)),
@@ -211,10 +100,22 @@ p {
   background-attachment: fixed;
   height: max-content;
 }
+
+/* Tabla */
+
+table,
+th,
+td {
+  background-color: rgba(5, 5, 5, 0.5);
+  padding: 5px;
+  color: white;
+  text-align: center;
+}
+
+/* Footer */
 .footer {
   background: #f2f2f2;
   padding: 2rem 0;
   text-align: center;
+  height: max-content;
 }
-
-*/

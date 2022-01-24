@@ -177,6 +177,7 @@ function anyadirEventoAnyadirProductos(id, idHTML) {
         "click",
         function () {
           funcionesFirebase.aumentarProductosLista(productosSeleccionados, id);
+          productosSeleccionados = [];
         },
         false
       );

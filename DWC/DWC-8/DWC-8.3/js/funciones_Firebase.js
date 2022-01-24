@@ -5,17 +5,20 @@ import {
   getFirestore,
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   where,
   orderBy,
   addDoc,
+  updateDoc,
+  deleteDoc,
+  arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 //Importo la 'key' para acceder al Firebase.
 import { app } from "./conexion_Firebase.js";
 
+//Importo funciones de otros ficheros js.
 import * as plantillas from "./plantillasHtml.js";
 import * as funcionesHtml from "./funcionesHtml.js";
 
@@ -27,6 +30,11 @@ function obtenerColecciónProductosFireBase() {
   let productosCollection = collection(db, "productos");
   return productosCollection;
 }
+
+/**
+ *
+ * @returns Devuelvo la colección de Listas de la compra.
+ */
 function obtenerColecciónListaFireBase() {
   const db = getFirestore(app);
   let listaCollection = collection(db, "listaCompra");
@@ -37,10 +45,8 @@ function obtenerColecciónListaFireBase() {
  * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
  */
 async function listarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
@@ -50,13 +56,22 @@ async function listarProductos() {
   });
 }
 
+async function listarProductosLista() {
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    plantillas.imprimirProductoLista(producto.data(), producto.id);
+  });
+}
+
 /**
  * @param {*} valor
  */
 async function filtrarPorNombre(valor) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
 
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -77,10 +92,8 @@ async function filtrarPorNombre(valor) {
  * @param {string} campo
  */
 async function filtrarPorNumero(valor, campo) {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
-
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -95,10 +108,12 @@ async function filtrarPorNumero(valor, campo) {
   });
 }
 
+/**
+ * Ordeno los productos.
+ */
 async function ordenarProductos() {
-  if (document.getElementsByClassName("producto") != null) {
-    plantillas.eliminarDatosTabla();
-  }
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
 
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -133,22 +148,29 @@ async function ordenarProductos() {
   });
 }
 
-async function crearLista() {
+/**
+ *
+ * @param {*} datosForm
+ * @param {*} productos
+ */
+async function crearLista(datosForm, productos) {
   const listaCollection = obtenerColecciónListaFireBase();
 
-  let datosLista = funcionesHtml.devolverDatosFinalesLista();
-
-  let productosObtenidos = await obtenerProductos(datosLista[1]);
+  let productosLista = await obtenerProductos(productos);
 
   const nuevaLista = {
-    fechaCreacion: datosLista[0][2],
-    nombreLista: datosLista[0][0],
-    nombrePropietario: datosLista[0][1],
-    productos: productosObtenidos,
+    nombreLista: datosForm[0],
+    nombrePropietario: datosForm[1],
+    fechaCreacion: datosForm[2],
+    productos: productosLista,
   };
-  const listaGuardada = await addDoc(listaCollection, nuevaLista);
+  await addDoc(listaCollection, nuevaLista);
 }
-
+/**
+ *
+ * @param {Array} productosId
+ * @returns Devuelvo un array con los datos de los productos.
+ */
 async function obtenerProductos(productosId) {
   const productosCollection = obtenerColecciónProductosFireBase();
   let productosObtenidos = [];
@@ -164,6 +186,9 @@ async function obtenerProductos(productosId) {
   return productosObtenidos;
 }
 
+/**
+ * Imprimo las listas.
+ */
 async function obtenerListas() {
   const listaCollection = obtenerColecciónListaFireBase();
 
@@ -174,11 +199,89 @@ async function obtenerListas() {
   });
 }
 
+/**
+ *
+ * @param {Array} productos
+ * @param {String} id
+ */
+async function aumentarProductosLista(productos, id) {
+  const listaCollection = obtenerColecciónListaFireBase();
+  const lista = await doc(listaCollection, id);
+  let productosAnyadir = await obtenerProductos(productos);
+  productosAnyadir.map((producto) => {
+    actualizarLista(lista, producto);
+  });
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+async function actualizarLista(lista, producto) {
+  await updateDoc(lista, {
+    productos: arrayUnion(producto),
+  });
+}
+
+/**
+  console.log(productosAnyadir);
+ *
+ * @param {String} id
+ * @param {Array} datos
+ */
+async function editarLista(id, datos) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await updateDoc(listaRef, {
+    nombreLista: datos[0],
+    nombrePropietario: datos[1],
+    fechaCreacion: datos[2],
+  });
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+/**
+ *
+ * @param {String} id
+ */
+async function eliminarLista(id) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await deleteDoc(listaRef, id);
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+/**
+ * Inserto un evento que utilizaré para añadir los productos.
+ */
+async function eventoAnyadirProductos() {
+  const productosCollection = obtenerColecciónProductosFireBase();
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    funcionesHtml.anyadirEventoProducto(producto.id);
+  });
+}
+
 export {
   listarProductos,
+  listarProductosLista,
   ordenarProductos,
   filtrarPorNombre,
   filtrarPorNumero,
   crearLista,
   obtenerListas,
+  eventoAnyadirProductos,
+  editarLista,
+  eliminarLista,
+  aumentarProductosLista,
 };
