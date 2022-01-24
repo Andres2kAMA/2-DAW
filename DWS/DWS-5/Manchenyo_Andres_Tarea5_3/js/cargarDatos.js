@@ -164,7 +164,7 @@ function cargarCarrito() {
         procesar.onclick = function () {
           var confirmacion = confirm("¿Deseas confirmar el pedido?");
           if (confirmacion == true) {
-            return borrarStock(filas);
+            return procesarPedido();
           }
         };
         contenido.appendChild(procesar);
@@ -180,7 +180,6 @@ function cargarCarrito() {
   return false;
 }
 
-function borrarStock(filas) {}
 function crearTablaCarrito(productos) {
   var tabla = document.createElement("table");
   var cabecera = crear_fila(
@@ -222,7 +221,7 @@ function crearTablaPedidos(pedidos) {
   );
   tabla.appendChild(cabecera);
 
-  for (var i = 0; i < pedidos.length; i++) {
+  for (var i = pedidos.length - 5; i < pedidos.length; i++) {
     fila = crear_fila(
       [
         pedidos[i].CodPed,
@@ -268,7 +267,8 @@ function procesarPedido() {
       contenido.innerHTML = "";
       var titulo = document.getElementById("titulo");
       titulo.innerHTML = "Estado del pedido";
-      if (this.responseText == "TRUE") {
+      console.log(this.responseText);
+      if (this.responseText == true) {
         contenido.innerHTML = "Pedido realizado";
       } else {
         contenido.innerHTML = "Error al procesar el pedido";

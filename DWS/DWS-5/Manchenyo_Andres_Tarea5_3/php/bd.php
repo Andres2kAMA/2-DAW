@@ -120,3 +120,22 @@ function insertar_pedido($carrito, $codRes)
         echo "Error con la base de datos: " . $ex->getMessage();
     }
 }
+
+function eliminar_stock($cantidad, $codProd)
+{
+    try {
+        $bd = new PDO(CADENA_CONEXION, USUARIO_CONEXION, CLAVE_CONEXION);
+        $bd->beginTransaction();
+
+        $sql = "UPDATE productos set Stock=Stock-$cantidad WHERE CodProd=$codProd";
+
+        $resul = $bd->query($sql);
+        if (!$resul) {
+            return FALSE;
+        }
+
+        $bd->commit();
+    } catch (Exception $ex) {
+        echo "Error con la base de datos: " . $ex->getMessage();
+    }
+}

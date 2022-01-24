@@ -32,7 +32,7 @@
     c-- > Check 0,5
     d-- > 
     e-- > Check 0,5
-    f-- > 
+    f-- > Check 1
     g-- > 
     h-- > 
     i-- > 
