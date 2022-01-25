@@ -72,6 +72,7 @@ function crearTablaProductos(productos, destino) {
         anadirProductos,
         destino
       );
+
       //creamos la fila en la tabla a mostrar con los productos
       fila = crear_fila(
         [
@@ -97,9 +98,11 @@ function crearFormulario(texto, cod, funcion, destino) {
   unidades.value = 1;
   unidades.name = "unidades";
   var codigo = document.createElement("input");
+
   codigo.value = cod;
   codigo.type = "hidden";
   codigo.name = "cod";
+
   var bsubmit = document.createElement("input");
   bsubmit.type = "submit";
   bsubmit.value = texto;
@@ -129,6 +132,10 @@ function anadirProductos(formulario, destino) {
     if (this.readyState == 4 && this.status == 200) {
       alert("Producto añadido con éxito");
       cargarProductos(destino);
+      anadirProductoHTML(
+        formulario.elements["cod"].value,
+        formulario.elements["unidades"].value
+      );
     }
   };
   var params =
@@ -143,6 +150,47 @@ function anadirProductos(formulario, destino) {
   return false;
 }
 
+function anadirProductoHTML(cod, unidades) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      try {
+        var prod = JSON.parse(this.responseText);
+        let parrafo = document.createElement("p");
+        parrafo.innerHTML = `${prod[0].Nombre} => ${unidades} unidades.`;
+        parrafo.id = unidades;
+        parrafo.className = "productosHtml";
+
+        if (document.getElementById("vacio") != null) {
+          document
+            .getElementById("infoPedidos")
+            .removeChild(document.getElementById("vacio"));
+          document.getElementById("infoPedidos").appendChild(parrafo);
+        } else {
+          let productosAñadidos =
+            document.getElementsByClassName("productosHtml");
+
+          for (let i = 0; i < productosAñadidos.length; i++) {
+            if (productosAñadidos[i].innerHTML.includes(prod[0].Nombre)) {
+              console.log(patata);
+            } else {
+              document.getElementById("infoPedidos").appendChild(parrafo);
+            }
+          }
+        }
+      } catch (e) {
+        var mensaje = document.createElement("p");
+        mensaje.innerHTML = "Todavía no tiene productos";
+        contenido.appendChild(mensaje);
+      }
+    }
+  };
+
+  xhttp.open("GET", `obtenerUnProducto.php?codUnProd=${cod}`, true);
+  xhttp.send();
+  return false;
+}
+
 function cargarCarrito() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -153,7 +201,6 @@ function cargarCarrito() {
       titulo.innerHTML = "Carrito de la compra";
       try {
         var filas = JSON.parse(this.responseText);
-        console.log(filas);
         //creamos la tabla de los productos añadidos al carrito
         tabla = crearTablaCarrito(filas);
         contenido.appendChild(tabla);

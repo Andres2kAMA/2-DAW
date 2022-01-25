@@ -1,7 +1,3 @@
-<div id="">
-
-</div>
-
 <header>
 
     <span id="cab_usuario"></span>

@@ -108,6 +108,7 @@ function insertar_pedido($carrito, $codRes)
         $pedido = $bd->lastInsertId();
         foreach ($carrito as $codProd => $unidades) {
             $ins = "INSERT into pedidosproductos(CodPed, CodProd, Unidades) VALUES ($pedido, $codProd, $unidades)";
+            eliminar_stock($unidades, $codProd);
             $resul = $bd->query($ins);
             if (!$resul) {
                 $bd->rollBack();
@@ -135,6 +136,25 @@ function eliminar_stock($cantidad, $codProd)
         }
 
         $bd->commit();
+    } catch (Exception $ex) {
+        echo "Error con la base de datos: " . $ex->getMessage();
+    }
+}
+
+function obtener_un_producto($cod)
+{
+    try {
+        $bd = new PDO(CADENA_CONEXION, USUARIO_CONEXION, CLAVE_CONEXION);
+        $bd->beginTransaction();
+
+        $sql = "SELECT Nombre FROM productos WHERE CodProd =$cod";
+
+        $resul = $bd->query($sql);
+        if (!$resul) {
+            return FALSE;
+        }
+
+        return $resul;
     } catch (Exception $ex) {
         echo "Error con la base de datos: " . $ex->getMessage();
     }
