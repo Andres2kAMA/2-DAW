@@ -89,6 +89,16 @@ function anyadirEventosBotones() {
     },
     false
   );
+
+  document.getElementById("iniciarSesion").addEventListener(
+    "click",
+    function () {
+      plantillaHtml.eliminarDatosMain();
+      plantillaHtml.insertarDivSesion();
+      eventoSesion();
+    },
+    false
+  );
 }
 
 function eventoRegistrarse() {
@@ -96,7 +106,11 @@ function eventoRegistrarse() {
     "click",
     function () {
       let datos = getDatosRegistrarse();
-      funcionesFirebase.validarUsuario(datos[0], datos[1]);
+      if (datos[2] == true) {
+        funcionesFirebase.validarUsuario(datos[0], datos[1], true);
+      } else {
+        funcionesFirebase.validarUsuario(datos[0], datos[1], false);
+      }
     },
     false
   );
@@ -104,7 +118,7 @@ function eventoRegistrarse() {
 
 function getDatosRegistrarse() {
   let form = document.getElementById("formularioRegistrarse");
-  let datos = [form[0].value, form[1].value];
+  let datos = [form[0].value, form[1].value, form[2].checked];
   return datos;
 }
 /**

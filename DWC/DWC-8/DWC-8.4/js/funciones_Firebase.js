@@ -48,6 +48,12 @@ function obtenerColecciónListaFireBase() {
   return listaCollection;
 }
 
+function obtenerColeccionUsuarios() {
+  const db = getFirestore(app);
+  let usuariosCollection = collection(db, "usuarios");
+  return usuariosCollection;
+}
+
 /**
  * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
  */
@@ -279,17 +285,28 @@ async function eventoAnyadirProductos() {
   });
 }
 
-async function validarUsuario(correo, contraseña) {
+async function validarUsuario(correo, contraseña, rol) {
   createUserWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
-      console.log("yes");
-      console.log(userCredential);
+      anyadirUsuarioBBDD(correo, contraseña, rol);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..
     });
+}
+
+async function anyadirUsuarioBBDD(correo, contraseña, rol) {
+  let usuariosCollection = obtenerColeccionUsuarios();
+
+  const nuevoUsuario = {
+    correo: correo,
+    contrasenya: contraseña,
+    rol: rol,
+  };
+
+  await addDoc(usuariosCollection, nuevoUsuario);
 }
 
 export {

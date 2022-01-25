@@ -88,9 +88,12 @@ let divFormRegistrarse = `<div id="divFormRegistrarse">
                              <input class="datosRegistrarse" type="text" value="" /><br /><br />
                              <label>Contraseña</label>
                              <input class="datosRegistrarse" type="password" value="" /><br /><br />
-                             <input id="botonRegistrarse" type="button" value="Editar" />
+                             <label for="admin" >Editor</label>
+                             <input class="datosRegistrarse" name="admin" type="checkbox" /><br /><br />
+                             <input id="botonRegistrarse" type="button" value="Registrarse" />
                            </form>
                         </div> `;
+
 let divFormIniciarSesion = `<div id="divFormSesion">
                               <h1>Inicia sesión</h1>
                               <form id="formularioSesion">
@@ -202,9 +205,11 @@ function insertarFormularioEditarLista() {
 function insertarTablaListas() {
   body.insertAdjacentHTML("beforeend", tablaLista);
 }
+
 function insertarDivSesion() {
   body.insertAdjacentHTML("beforeend", divFormIniciarSesion);
 }
+
 function insertarDivRegistrarse() {
   body.insertAdjacentHTML("beforeend", divFormRegistrarse);
 }
@@ -259,4 +264,5 @@ export {
   eliminarDatosMain,
   insertarDivActualizarProductosLista,
   insertarDivRegistrarse,
+  insertarDivSesion,
 };
