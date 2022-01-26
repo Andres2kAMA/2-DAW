@@ -35,9 +35,9 @@
     d-- > 
     e-- > Check 0,5
     f-- > Check 1
-    g-- > 
+    g-- > Check 1,5 revisar pedidos
     h-- > 
-    i-- > 
+    i-- > ---------
     j-- > Check 0,5
     !-->
 </body>

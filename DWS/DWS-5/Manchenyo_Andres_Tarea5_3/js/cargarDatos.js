@@ -242,7 +242,9 @@ function cargarCarrito() {
         procesar.onclick = function () {
           var confirmacion = confirm("¿Deseas confirmar el pedido?");
           if (confirmacion == true) {
-            return procesarPedido();
+            return procesarPedido(filas);
+          } else {
+            descargarFacturaTxtUsuario(filas);
           }
         };
         contenido.appendChild(procesar);
@@ -382,4 +384,20 @@ function cargarPedidos() {
   xhttp.open("GET", "pedidos_json.php", true);
   xhttp.send();
   return false;
+}
+
+function descargarFacturaTxtUsuario(productos) {
+  var xhttp = new XMLHttpRequest();
+  let productosFactura = [];
+  for (let i = 0; i < productos.length; i++) {
+    productosFactura.push(
+      `Se han enviado ${productos[i].unidades} del producto ${
+        productos[i].Nombre
+      }. Su descripción es ${
+        productos[i].Descripcion
+      }. ${document.createElement("br")} `
+    );
+  }
+  xhttp.open("GET", `crearFactura.php?productos=${productosFactura}`, true);
+  xhttp.send();
 }
