@@ -155,10 +155,10 @@ function anadirProductoHTML(cod, unidades) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       try {
+        let prodMod = false;
         var prod = JSON.parse(this.responseText);
         let parrafo = document.createElement("p");
         parrafo.innerHTML = `${prod[0].Nombre} => ${unidades} unidades.`;
-        parrafo.id = unidades;
         parrafo.className = "productosHtml";
 
         if (document.getElementById("vacio") != null) {
@@ -171,12 +171,24 @@ function anadirProductoHTML(cod, unidades) {
             document.getElementsByClassName("productosHtml");
 
           for (let i = 0; i < productosAñadidos.length; i++) {
-            if (productosAñadidos[i].innerHTML.includes(prod[0].Nombre)) {
-              console.log(patata);
-            } else {
-              document.getElementById("infoPedidos").appendChild(parrafo);
+            if (prodMod == false) {
+              let texto = productosAñadidos[i].innerHTML;
+              if (texto.includes(prod[0].Nombre)) {
+                let unidadesTexto = parseFloat(getNumerosString(texto));
+                let nuevasUnidades = unidadesTexto + parseFloat(unidades);
+                let nuevoTexto = texto.replace(
+                  unidadesTexto.toString(),
+                  nuevasUnidades.toString()
+                );
+                productosAñadidos[i].innerHTML = nuevoTexto;
+                prodMod = true;
+              }
             }
           }
+          if (prodMod == false) {
+            document.getElementById("infoPedidos").appendChild(parrafo);
+          }
+          prodMod == false;
         }
       } catch (e) {
         var mensaje = document.createElement("p");
@@ -189,6 +201,25 @@ function anadirProductoHTML(cod, unidades) {
   xhttp.open("GET", `obtenerUnProducto.php?codUnProd=${cod}`, true);
   xhttp.send();
   return false;
+}
+
+function getNumerosString(string) {
+  var tmp = string.split("");
+  var map = tmp.map(function (current) {
+    if (!isNaN(parseInt(current))) {
+      return current;
+    }
+  });
+
+  var numbers = map.filter(function (value) {
+    if (value != undefined) {
+      {
+        return parseFloat(value);
+      }
+    }
+  });
+
+  return numbers.join("");
 }
 
 function cargarCarrito() {
