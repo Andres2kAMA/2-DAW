@@ -347,7 +347,7 @@ function procesarPedido() {
       contenido.innerHTML = "";
       var titulo = document.getElementById("titulo");
       titulo.innerHTML = "Estado del pedido";
-      console.log(this.responseText);
+
       if (this.responseText == true) {
         contenido.innerHTML = "Pedido realizado";
       } else {
@@ -398,6 +398,13 @@ function descargarFacturaTxtUsuario(productos) {
       }. ${document.createElement("br")} `
     );
   }
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      xhttp.open("GET", `descargar.php`, true);
+      xhttp.send();
+    }
+  };
   xhttp.open("GET", `crearFactura.php?productos=${productosFactura}`, true);
   xhttp.send();
 }
