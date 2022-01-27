@@ -242,9 +242,7 @@ function cargarCarrito() {
         procesar.onclick = function () {
           var confirmacion = confirm("¿Deseas confirmar el pedido?");
           if (confirmacion == true) {
-            return procesarPedido(filas);
-          } else {
-            descargarFacturaTxtUsuario(filas);
+            return descargarFacturaTxtUsuario(filas);
           }
         };
         contenido.appendChild(procesar);
@@ -391,20 +389,33 @@ function descargarFacturaTxtUsuario(productos) {
   let productosFactura = [];
   for (let i = 0; i < productos.length; i++) {
     productosFactura.push(
-      `Se han enviado ${productos[i].unidades} del producto ${
-        productos[i].Nombre
-      }. Su descripción es ${
-        productos[i].Descripcion
-      }. ${document.createElement("br")} `
+      `Se han enviado ${productos[i].unidades} del producto ${productos[i].Nombre}. Su descripción es ${productos[i].Descripcion}.  `
     );
   }
 
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      xhttp.open("GET", `descargar.php`, true);
-      xhttp.send();
+      var contenido = document.getElementById("contenido");
+      contenido.innerHTML = "";
+      var titulo = document.getElementById("titulo");
+      titulo.innerHTML = "Estado del pedido";
+      contenido.innerHTML = "Pedido realizado";
+      eliminarDivCarrito();
     }
   };
   xhttp.open("GET", `crearFactura.php?productos=${productosFactura}`, true);
   xhttp.send();
+}
+
+function eliminarDivCarrito() {
+  let divProductos = document.getElementById("infoPedidos");
+  while (divProductos.hasChildNodes()) {
+    divProductos.removeChild(divProductos.childNodes[0]);
+  }
+
+  let p = document.createElement("p");
+  p.id = "vacio";
+  p.innerHTML = "No hay productos añadidos";
+
+  divProductos.appendChild(p);
 }

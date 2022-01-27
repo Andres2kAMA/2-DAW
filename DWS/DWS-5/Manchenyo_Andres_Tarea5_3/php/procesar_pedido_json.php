@@ -1,13 +1,14 @@
 <?php
-require_once "sesiones.php";
-require_once "bd.php";
-comprobar_sesion();
+require_once 'bd.php';
+/*comprueba que el usuario haya abierto sesión o devuelve*/
+require 'sesiones_json.php';
+if (!comprobar_sesion()) return;
 
-
-$resul = insertar_pedido($_SESSION["carrito"], $_SESSION["usuario"]);
-if ($resul === false) {
-    echo "No se ha podido realizar el pedido<br>";
+$resul = insertar_pedido($_SESSION['carrito'], $_SESSION['usuario']);
+if ($resul === FALSE) {
+    echo "FALSE";
 } else {
-    $_SESSION["carrito"] = [];
-    echo true;
+    echo "TRUE";
+    //vaciar carrito	
+    $_SESSION['carrito'] = [];
 }
