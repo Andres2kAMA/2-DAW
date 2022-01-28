@@ -16,9 +16,9 @@ const plantillaHeaderInicio = `<header class="page-header">
 const plantillaHeaderProducto = `<header class="page-header">
                                     <ul class="nav nav-pills pull-right">
                                     <li class="active"><a href="#" id="inicio">Inicio</a></li>
-                                    <li><a href="#">Mostrar</a></li>
-                                    <li><a href="#">Ordenar de manera ascendente</a></li>
-                                    <li><a href="#">Filtrar</a></li>
+                                    <li><a href="#" id="mostrarProductos">Mostrar</a></li>
+                                    <li><a href="#" id="ordenarProductos">Ordenar de manera ascendente</a></li>
+                                    <li><a href="#" id="filtrarProductos">Filtrar</a></li>
                                     </ul>
                                     <h3>Productos</h3>
                                 </header>`;
@@ -50,6 +50,10 @@ const plantillaPresentacion = `<div class="jumbotron">
                                 </p>
                             </div>`;
 
+const plantillaDivProductos = `<div id="divProductos"></div>`;
+
+const plantillaProducto = `<div></div>`;
+
 const plantillaFooter = `<footer id="footer">
                             <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
                         </footer>`;
@@ -74,6 +78,10 @@ function insertarPlantillaPresentacion() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaPresentacion);
 }
 
+function insertarPlantillaProductos() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaDivProductos);
+}
+
 function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
@@ -88,11 +96,41 @@ function eliminarPlantillasInsertadas() {
   }
 }
 
+function imprimirProducto(producto, id) {
+  let div = document.getElementById("divProductos");
+  let productoModificado = modificarPrimerProductoCarrusel(producto, id);
+  div.insertAdjacentHTML("afterbegin", productoModificado);
+}
+
+function modificarPrimerProductoCarrusel(producto, id) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    ` <div class="col-md-6 centrarTexto producto" >
+   <div class="card" >
+   <img src="${producto.imagen}" style="width: 15vw; min-width: 75px;" class="card-img-top" alt="...">
+   <div class="card-body">
+     <h5 class="card-title">${producto.nombre}</h5>
+     <p class="card-text">${producto.descripcion}.</p>
+   </div>
+   <ul class="list-group list-group-flush">
+     <li class="list-group-item">${producto.precio} €</li>
+   </ul>
+   <div class="card-body">
+     <a href="#" class="card-link">Card link</a>
+     <a href="#" class="card-link">Another link</a>
+   </div>
+ </div>
+    </div>`
+  );
+  return plantillaDevolver;
+}
 export {
   insertarPlantillaHeaderInicio,
   insertarPlantillaHeaderProducto,
   insertarPlantillaHeaderLista,
   insertarPlantillaPresentacion,
+  insertarPlantillaProductos,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
+  imprimirProducto,
 };

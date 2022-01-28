@@ -14,3 +14,14 @@ footer {
 .centrarTexto {
   text-align: center;
 }
+
+#divProductos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.producto {
+  padding: 3em;
+}

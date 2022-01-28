@@ -8,5 +8,6 @@ import * as funcionesHtml from "./funciones_Html.js";
 window.onload = function () {
   plantilla.insertarPlantillaHeaderInicio();
   plantilla.insertarPlantillaPresentacion();
+  plantilla.insertarPlantillaFooter();
   funcionesHtml.declararEventosInicio();
 };

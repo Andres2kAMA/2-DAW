@@ -1,6 +1,7 @@
 "use strict";
 
 import * as plantilla from "./plantilla_Html.js";
+import * as funcionesFirebase from "./funciones_Firebase.js";
 
 /**
  *
@@ -9,8 +10,9 @@ function declararEventosInicio() {
   document.getElementById("productos").addEventListener("click", function () {
     plantilla.eliminarPlantillasInsertadas();
     plantilla.insertarPlantillaHeaderProducto();
-    plantilla.insertarPlantillaPresentacion();
+    plantilla.insertarPlantillaProductos();
     plantilla.insertarPlantillaFooter();
+    funcionesFirebase.mostrarTodosProductos();
     declararEventosSeccionProducto();
   });
 
@@ -43,6 +45,24 @@ function declararEventoRedirigirInicio() {
 
 function declararEventosSeccionProducto() {
   declararEventoRedirigirInicio();
+  document.getElementById("mostrarProductos").addEventListener(
+    "click",
+    function () {
+      plantilla.insertarPlantillaHeaderProducto();
+      plantilla.insertarPlantillaCarruselProductos();
+      plantilla.insertarPlantillaFooter();
+      funcionesFirebase.mostrarTodosProductos();
+    },
+    false
+  );
+
+  document
+    .getElementById("ordenarProductos")
+    .addEventListener("click", function () {}, false);
+
+  document
+    .getElementById("filtrarProductos")
+    .addEventListener("click", function () {}, false);
 }
 
 function declararEventosSeccionLista() {
