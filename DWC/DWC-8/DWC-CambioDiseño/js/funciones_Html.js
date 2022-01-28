@@ -1,8 +1,11 @@
 "use strict";
 
-import * as plantilla from "./plantillaHtml.js";
+import * as plantilla from "./plantilla_Html.js";
 
-function insertarEventosPrincipales() {
+/**
+ *
+ */
+function declararEventosInicio() {
   document.getElementById("productos").addEventListener("click", function () {
     plantilla.eliminarPlantillasInsertadas();
     plantilla.insertarPlantillaHeaderProducto();
@@ -24,7 +27,7 @@ function insertarEventosPrincipales() {
   );
 }
 
-function declararEventoInicio() {
+function declararEventoRedirigirInicio() {
   document.getElementById("inicio").addEventListener(
     "click",
     function () {
@@ -39,10 +42,10 @@ function declararEventoInicio() {
 }
 
 function declararEventosSeccionProducto() {
-  declararEventoInicio();
+  declararEventoRedirigirInicio();
 }
 
 function declararEventosSeccionLista() {
-  declararEventoInicio();
+  declararEventoRedirigirInicio();
 }
-export { insertarEventosPrincipales };
+export { declararEventosInicio };

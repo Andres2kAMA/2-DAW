@@ -78,8 +78,9 @@ function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
 
-//Elimino las plantillas
-
+/**
+ * Eliminos las plantillas insertadas.
+ */
 function eliminarPlantillasInsertadas() {
   let hijos = elementoPadre.childNodes;
   for (let i = 0; i < elementoPadre.childNodes.length + 2; i++) {
