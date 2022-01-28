@@ -52,6 +52,7 @@ function declararEventosSeccionProducto() {
       plantilla.insertarPlantillaCarruselProductos();
       plantilla.insertarPlantillaFooter();
       funcionesFirebase.mostrarTodosProductos();
+      declararEventoRedirigirInicio();
     },
     false
   );
