@@ -13,6 +13,16 @@ const plantillaHeaderInicio = `<header class="page-header">
                             <h3>Carrefour</h3>
                         </header>`;
 
+const plantillaHeaderProducto = `<header class="page-header">
+                                    <ul class="nav nav-pills pull-right">
+                                    <li class="active"><a id="inicio">Inicio</a></li>
+                                    <li><a href="#">Mostrar</a></li>
+                                    <li><a href="#">Ordenar de manera ascendente</a></li>
+                                    <li><a href="#">Filtrar</a></li>
+                                    </ul>
+                                    <h3>Productos</h3>
+                                </header>`;
+
 const plantillaPresentacion = `<div class="jumbotron">
                                 <h1 class="centrarTexto">Carrefour</h1>
                                 <p>
@@ -30,30 +40,43 @@ const plantillaPresentacion = `<div class="jumbotron">
                                 </p>
                             </div>`;
 
+const plantillaFooter = `<footer id="footer">
+                            <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
+                        </footer>`;
+
 const elementoPadre = document.getElementById("padre");
-const footer = document.getElementById("footer");
 
 //Inserto las plantillas
 
 function insertarPlantillaHeaderInicio() {
-  elementoPadre.insertAdjacentHTML("afterbegin", plantillaHeaderInicio);
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaHeaderInicio);
+}
+
+function insertarPlantillaHeaderProducto() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaHeaderProducto);
 }
 
 function insertarPlantillaPresentacion() {
-  footer.insertAdjacentHTML("beforebegin", plantillaPresentacion);
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaPresentacion);
+}
+
+function insertarPlantillaFooter() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
 
 //Elimino las plantillas
 
 function eliminarPlantillasInsertadas() {
   let hijos = elementoPadre.childNodes;
-  for (let i = 0; i < body.childNodes.length; i++) {
-    body.removeChild(hijos[0]);
+  for (let i = 0; i < elementoPadre.childNodes.length + 2; i++) {
+    elementoPadre.removeChild(hijos[0]);
   }
 }
 
 export {
   insertarPlantillaHeaderInicio,
+  insertarPlantillaHeaderProducto,
   insertarPlantillaPresentacion,
+  insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
 };
