@@ -105,22 +105,22 @@ function imprimirProducto(producto, id) {
 function modificarPrimerProductoCarrusel(producto, id) {
   let plantillaDevolver = plantillaProducto.replace(
     `<div></div>`,
-    ` <div class="col-md-6 centrarTexto producto" >
-   <div class="card" >
-   <img src="${producto.imagen}" style="width: 15vw; min-width: 75px;" class="card-img-top" alt="...">
-   <div class="card-body">
-     <h5 class="card-title">${producto.nombre}</h5>
-     <p class="card-text">${producto.descripcion}.</p>
-   </div>
-   <ul class="list-group list-group-flush">
-     <li class="list-group-item">${producto.precio} €</li>
-   </ul>
-   <div class="card-body">
-     <a href="#" class="card-link">Card link</a>
-     <a href="#" class="card-link">Another link</a>
-   </div>
- </div>
-    </div>`
+    `<div class="col-md-6 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw; min-width: 75px;" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.descripcion}.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>`
   );
   return plantillaDevolver;
 }
