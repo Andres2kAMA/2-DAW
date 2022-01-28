@@ -373,7 +373,7 @@ function cargarPedidos() {
         contenido.appendChild(tabla);
       } catch (e) {
         var mensaje = document.createElement("p");
-        mensaje.innerHTML = "Todavía no tiene productos";
+        mensaje.innerHTML = "Todavía no tiene pedidos";
         contenido.appendChild(mensaje);
       }
     }
