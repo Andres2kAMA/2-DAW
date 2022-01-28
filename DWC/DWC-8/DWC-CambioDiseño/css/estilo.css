@@ -1,0 +1,16 @@
+/*  Márgenes totales  */
+header {
+  margin-bottom: 10em;
+}
+
+footer {
+  background: whitesmoke;
+  padding: 2rem 0;
+  text-align: center;
+  height: max-content;
+}
+
+/*  Clases genéricas    */
+.centrarTexto {
+  text-align: center;
+}
