@@ -96,13 +96,24 @@ function eliminarPlantillasInsertadas() {
   }
 }
 
+/**
+ *
+ * @param {Object} producto
+ * @param {String} id
+ */
 function imprimirProducto(producto, id) {
   let div = document.getElementById("divProductos");
-  let productoModificado = modificarPrimerProductoCarrusel(producto, id);
+  let productoModificado = modificarProducto(producto, id);
   div.insertAdjacentHTML("afterbegin", productoModificado);
 }
 
-function modificarPrimerProductoCarrusel(producto, id) {
+/**
+ *
+ * @param {Object} producto
+ * @param {String} id
+ * @returns Devuelvo la plantilla modificada.
+ */
+function modificarProducto(producto, id) {
   let plantillaDevolver = plantillaProducto.replace(
     `<div></div>`,
     `<div class="col-md-6 centrarTexto producto">
@@ -124,6 +135,7 @@ function modificarPrimerProductoCarrusel(producto, id) {
   );
   return plantillaDevolver;
 }
+
 export {
   insertarPlantillaHeaderInicio,
   insertarPlantillaHeaderProducto,

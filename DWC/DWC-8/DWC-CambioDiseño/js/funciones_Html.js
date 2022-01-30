@@ -4,7 +4,7 @@ import * as plantilla from "./plantilla_Html.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
 
 /**
- *
+ * Declaro todos los eventos del inicio del programa.
  */
 function declararEventosInicio() {
   document.getElementById("productos").addEventListener("click", function () {
@@ -29,6 +29,9 @@ function declararEventosInicio() {
   );
 }
 
+/**
+ * Declaro un evento para cargar el inicio del programa.
+ */
 function declararEventoRedirigirInicio() {
   document.getElementById("inicio").addEventListener(
     "click",
@@ -37,19 +40,22 @@ function declararEventoRedirigirInicio() {
       plantilla.insertarPlantillaHeaderInicio();
       plantilla.insertarPlantillaPresentacion();
       plantilla.insertarPlantillaFooter();
-      insertarEventosPrincipales();
+      declararEventosInicio();
     },
     false
   );
 }
 
+/**
+ * Declaro los eventos de la sección de productos de la página web.
+ */
 function declararEventosSeccionProducto() {
-  declararEventoRedirigirInicio();
   document.getElementById("mostrarProductos").addEventListener(
     "click",
     function () {
+      plantilla.eliminarPlantillasInsertadas();
       plantilla.insertarPlantillaHeaderProducto();
-      plantilla.insertarPlantillaCarruselProductos();
+      plantilla.insertarPlantillaProductos();
       plantilla.insertarPlantillaFooter();
       funcionesFirebase.mostrarTodosProductos();
       declararEventoRedirigirInicio();
@@ -66,7 +72,6 @@ function declararEventosSeccionProducto() {
     .addEventListener("click", function () {}, false);
 }
 
-function declararEventosSeccionLista() {
-  declararEventoRedirigirInicio();
-}
+function declararEventosSeccionLista() {}
+
 export { declararEventosInicio };

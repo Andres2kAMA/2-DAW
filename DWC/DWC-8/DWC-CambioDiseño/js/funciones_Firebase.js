@@ -22,12 +22,19 @@ import { app, autentificacion } from "./conexion_Firebase.js";
 import * as plantilla from "./plantilla_Html.js";
 import * as funcionesHtml from "./funciones_Html.js";
 
+/**
+ *
+ * @returns Devuelvo la colección de productos.
+ */
 function obtenerColecciónProductosFireBase() {
   const db = getFirestore(app);
   let productosCollection = collection(db, "productos");
   return productosCollection;
 }
 
+/**
+ * Obtengo todos los productos del FireStore y los imprimo por pantalla.
+ */
 async function mostrarTodosProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -38,14 +45,21 @@ async function mostrarTodosProductos() {
   });
 }
 
-async function mostrarProductosConConsulta(consulta) {
-  const productosFiltrados = await getDocs(consulta);
+/**
+ * Obtengo todos los productos del FireStore que cumplan el filtro y los imprimo por pantalla.
+ * @param {String} filtro
+ */
+async function mostrarProductosFiltrados(filtro) {
+  const productosFiltrados = await getDocs(filtro);
 
   productosFiltrados.docs.map((producto) => {
-    plantillas.imprimirProducto(producto.data());
+    plantilla.imprimirProducto(producto.data());
   });
 }
 
+/**
+ * Ordeno los productos por el precio de manera ascendente o descendente.
+ */
 async function ordenarProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -73,7 +87,7 @@ async function ordenarProductos() {
     liOrdenar.className = "ascendente";
   }
 
-  mostrarProductosConConsulta(consulta);
+  mostrarProductosFiltrados(consulta);
 }
 
 export { mostrarTodosProductos, ordenarProductos };
