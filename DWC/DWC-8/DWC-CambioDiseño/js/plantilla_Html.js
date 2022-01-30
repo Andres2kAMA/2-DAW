@@ -17,7 +17,7 @@ const plantillaHeaderProducto = `<header class="page-header">
                                     <ul class="nav nav-pills pull-right">
                                     <li class="active"><a href="#" id="inicio">Inicio</a></li>
                                     <li><a href="#" id="mostrarProductos">Mostrar</a></li>
-                                    <li><a href="#" id="ordenarProductos">Ordenar de manera ascendente</a></li>
+                                    <li><a href="#" id="ordenarProductos" class="ascendente">Ordenar de manera ascendente</a></li>
                                     <li><a href="#" id="filtrarProductos">Filtrar</a></li>
                                     </ul>
                                     <h3>Productos</h3>
@@ -96,6 +96,14 @@ function eliminarPlantillasInsertadas() {
   }
 }
 
+function eliminarProductosInsertados() {
+  let divProductos = document.getElementById("divProductos");
+  let productos = document.getElementsByClassName("producto");
+  for (let i = productos.length; i > 0; i--) {
+    divProductos.removeChild(productos[0]);
+  }
+}
+
 /**
  *
  * @param {Object} producto
@@ -144,5 +152,6 @@ export {
   insertarPlantillaProductos,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
+  eliminarProductosInsertados,
   imprimirProducto,
 };

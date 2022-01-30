@@ -53,19 +53,22 @@ function declararEventosSeccionProducto() {
   document.getElementById("mostrarProductos").addEventListener(
     "click",
     function () {
-      plantilla.eliminarPlantillasInsertadas();
-      plantilla.insertarPlantillaHeaderProducto();
+      plantilla.eliminarProductosInsertados();
       plantilla.insertarPlantillaProductos();
-      plantilla.insertarPlantillaFooter();
       funcionesFirebase.mostrarTodosProductos();
-      declararEventoRedirigirInicio();
     },
     false
   );
 
-  document
-    .getElementById("ordenarProductos")
-    .addEventListener("click", function () {}, false);
+  document.getElementById("ordenarProductos").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarProductosInsertados();
+      plantilla.insertarPlantillaProductos();
+      funcionesFirebase.ordenarProductos();
+    },
+    false
+  );
 
   document
     .getElementById("filtrarProductos")

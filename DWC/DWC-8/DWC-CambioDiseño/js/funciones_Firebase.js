@@ -64,7 +64,6 @@ async function ordenarProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
 
   var consulta = "";
-
   if (document.getElementsByClassName("ascendente").length != 0) {
     consulta = await query(
       productosCollection,
