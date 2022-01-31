@@ -15,7 +15,7 @@ footer {
   text-align: center;
 }
 
-#divProductos {
+.centrarProductos {
   display: flex;
   justify-content: center;
   align-items: center;

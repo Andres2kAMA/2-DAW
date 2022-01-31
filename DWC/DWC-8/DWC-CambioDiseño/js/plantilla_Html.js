@@ -26,9 +26,7 @@ const plantillaHeaderProducto = `<header class="page-header">
 const plantillaHeaderLista = `<header class="page-header">
                                     <ul class="nav nav-pills pull-right">
                                     <li class="active"><a href="#" id="inicio">Inicio</a></li>
-                                    <li><a href="#">Crear una lista</a></li>
-                                    <li><a href="#">Elegir lista</a></li>
-                                    <li><a href="#">Mostrar listas</a></li>
+                                    <li><a href="#" id="crearLista">Crear una lista</a></li>
                                     </ul>
                                     <h3>Listas de la compra</h3>
                                 </header>`;
@@ -50,7 +48,7 @@ const plantillaPresentacion = `<div class="jumbotron">
                                 </p>
                             </div>`;
 
-const plantillaDivProductos = `<div id="divProductos"></div>`;
+const plantillaDivProductos = `<div id="divProductos" class="centrarProductos"></div>`;
 
 const plantillaProducto = `<div></div>`;
 
@@ -86,6 +84,36 @@ const plantillaFormularioFiltrarProductos = `<div id="formilariosFiltrarProducto
                                               </form> <br/><br/>
                                             </div>`;
 
+const plantillaDivListas = `<div id="divListas" class="centrarProductos">
+                              <table class="table" id="tablaListas">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Nombre del propietario</th>
+                                    <th scope="col">Nombre de la lista</th>
+                                    <th scope="col">Fecha de creación</th>
+                                    <th scope="col">Editar datos</th>
+                                    <th scope="col">Añadir productos</th>
+                                    <th scope="col">Mostrar productos</th>
+                                    <th scope="col">Eliminar lista</th>
+                                  </tr>
+                                </thead>
+                              </table>
+                            </div>`;
+
+const plantillaFilaLista = `<tr></tr>`;
+
+const plantillaFormularioCrearLista = `<form id="formularioCrearLista">
+                                        <label>Nombre del propietario</label>
+                                        <input type="text" value="" /><br><br>
+
+                                        <label>Nombre de la lista</label>
+                                        <input type="text" value="" /><br><br>
+                                        
+                                        <label>Fecha</label>
+                                        <input type="date" value="" /><br><br>
+                                        
+                                        <input type="button" value="Crear" id="botonCrearLista" /><br><br>
+                                        </form>`;
 const plantillaFooter = `<footer id="footer">
                             <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
                         </footer>`;
@@ -121,6 +149,14 @@ function insertarPlantillaFormularioFiltrarProductos() {
   );
 }
 
+function insertarPlantillaDivListas() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaDivListas);
+}
+
+function insertarPlantillaFormularioCrearLista() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaFormularioCrearLista);
+}
+
 function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
@@ -146,6 +182,14 @@ function eliminarProductosInsertados() {
 function eliminarFormularioFiltrarProductos() {
   let form = document.getElementById("formilariosFiltrarProductos");
   elementoPadre.removeChild(form);
+}
+
+function eliminarListasInsertadas() {
+  elementoPadre.removeChild(document.getElementById("divListas"));
+}
+
+function eliminarFormularioCrearLista() {
+  elementoPadre.removeChild(document.getElementById("formularioCrearLista"));
 }
 
 function eliminarFooter() {
@@ -193,6 +237,29 @@ function modificarProducto(producto, id) {
   return plantillaDevolver;
 }
 
+function imprimirLista(lista, id) {
+  let tablaLista = document.getElementById("tablaListas");
+  let plantillaListaModificada = modificarLista(lista, id);
+  tablaLista.insertAdjacentHTML("beforeend", plantillaListaModificada);
+}
+
+function modificarLista(lista, id) {
+  console.log(lista);
+  let plantillaDevolver = plantillaFilaLista.replace(
+    `<tr></tr>`,
+    `<tr >
+      <td>${lista.nombrePropietario}</td>
+      <td>${lista.nombreLista}</td>
+      <td>${lista.fechaCreacion}</td>
+      <td><button>Editar</button></td>
+      <td><button>Añadir</button></td>
+      <td><button>Mostrar</button></td>
+      <td><button>Eliminar</button></td>
+    </tr>`
+  );
+  return plantillaDevolver;
+}
+
 export {
   insertarPlantillaHeaderInicio,
   insertarPlantillaHeaderProducto,
@@ -200,10 +267,15 @@ export {
   insertarPlantillaPresentacion,
   insertarPlantillaProductos,
   insertarPlantillaFormularioFiltrarProductos,
+  insertarPlantillaDivListas,
+  insertarPlantillaFormularioCrearLista,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
   eliminarProductosInsertados,
   eliminarFormularioFiltrarProductos,
+  eliminarListasInsertadas,
+  eliminarFormularioCrearLista,
   eliminarFooter,
   imprimirProducto,
+  imprimirLista,
 };

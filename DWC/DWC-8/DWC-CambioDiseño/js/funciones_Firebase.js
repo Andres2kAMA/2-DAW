@@ -20,11 +20,10 @@ import { app, autentificacion } from "./conexion_Firebase.js";
 
 //Importo funciones de otros ficheros js.
 import * as plantilla from "./plantilla_Html.js";
-import * as funcionesHtml from "./funciones_Html.js";
 
 const db = getFirestore(app);
 
-/**       Productos      */
+/**       Obtener colecciones Firebase      */
 /**
  *
  * @returns Devuelvo la colección de productos.
@@ -34,6 +33,12 @@ function obtenerColecciónProductosFireBase() {
   return productosCollection;
 }
 
+function obtenerColecciónListasFireBase() {
+  let listaCollection = collection(db, "listasCompra");
+  return listaCollection;
+}
+
+/**       Productos      */
 /**
  * Obtengo todos los productos del FireStore y los imprimo por pantalla.
  */
@@ -124,9 +129,26 @@ async function filtrarProductosPorNumero(valor, campo) {
 
 /**     Listas       */
 
+async function mostrarTodasLasListas() {
+  const listaCollection = obtenerColecciónListasFireBase();
+
+  const listas = await getDocs(listaCollection);
+
+  listas.docs.map((lista) => {
+    plantilla.imprimirLista(lista.data(), lista.id);
+  });
+}
+
+async function anyadirLista(lista) {
+  const listaCollection = obtenerColecciónListasFireBase();
+  await addDoc(listaCollection, lista);
+}
+
 export {
   mostrarTodosProductos,
   ordenarProductos,
   filtrarProductosPorNombre,
   filtrarProductosPorNumero,
+  mostrarTodasLasListas,
+  anyadirLista,
 };

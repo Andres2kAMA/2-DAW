@@ -22,7 +22,8 @@ function declararEventosInicio() {
     function () {
       plantilla.eliminarPlantillasInsertadas();
       plantilla.insertarPlantillaHeaderLista();
-      plantilla.insertarPlantillaPresentacion();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
       plantilla.insertarPlantillaFooter();
       declararEventosSeccionLista();
       declararEventoRedirigirInicio();
@@ -142,6 +143,55 @@ function devolverDatosFormularioFiltrarProducto(nombreFormulario) {
   return formulario[0].value;
 }
 
-function declararEventosSeccionLista() {}
+function declararEventosSeccionLista() {
+  document.getElementById("crearLista").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaFormularioCrearLista();
+      plantilla.insertarPlantillaFooter();
+      declararEventoCrearLista();
+    },
+    false
+  );
+}
 
+function declararEventoCrearLista() {
+  document.getElementById("botonCrearLista").addEventListener(
+    "click",
+    function () {
+      let datosFormCrearLista = obtenerDatosFormularioCrearLista();
+      let lista = crearObjetoLista(datosFormCrearLista);
+      funcionesFirebase.anyadirLista(lista);
+      plantilla.eliminarFormularioCrearLista();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
+      plantilla.insertarPlantillaFooter();
+    },
+    false
+  );
+}
+
+function obtenerDatosFormularioCrearLista() {
+  let form = document.getElementById("formularioCrearLista");
+  let datosForm = [];
+  for (let i = 0; i < form.length - 1; i++) {
+    datosForm.push(form[i].value);
+  }
+
+  return datosForm;
+}
+
+function crearObjetoLista(datos) {
+  let lista = {
+    nombrePropietario: datos[0],
+    nombreLista: datos[1],
+    fechaCreacion: datos[2],
+    productos: [],
+  };
+
+  return lista;
+}
 export { declararEventosInicio };
