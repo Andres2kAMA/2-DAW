@@ -91,7 +91,7 @@ function insertarPlantillaFooter() {
  */
 function eliminarPlantillasInsertadas() {
   let hijos = elementoPadre.childNodes;
-  for (let i = 0; i < elementoPadre.childNodes.length + 2; i++) {
+  for (let i = 0; i < elementoPadre.childNodes.length + 3; i++) {
     elementoPadre.removeChild(hijos[0]);
   }
 }

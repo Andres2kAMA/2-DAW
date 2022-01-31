@@ -14,6 +14,7 @@ function declararEventosInicio() {
     plantilla.insertarPlantillaFooter();
     funcionesFirebase.mostrarTodosProductos();
     declararEventosSeccionProducto();
+    declararEventoRedirigirInicio();
   });
 
   document.getElementById("listas").addEventListener(
@@ -24,6 +25,7 @@ function declararEventosInicio() {
       plantilla.insertarPlantillaPresentacion();
       plantilla.insertarPlantillaFooter();
       declararEventosSeccionLista();
+      declararEventoRedirigirInicio();
     },
     false
   );
