@@ -20,6 +20,7 @@ import { app, autentificacion } from "./conexion_Firebase.js";
 
 //Importo funciones de otros ficheros js.
 import * as plantilla from "./plantilla_Html.js";
+import * as funciones from "./funciones_Html.js";
 
 const db = getFirestore(app);
 
@@ -136,12 +137,21 @@ async function mostrarTodasLasListas() {
 
   listas.docs.map((lista) => {
     plantilla.imprimirLista(lista.data(), lista.id);
+    funciones.anyadirEventosLista(lista.id);
   });
 }
 
 async function anyadirLista(lista) {
   const listaCollection = obtenerColecciónListasFireBase();
   await addDoc(listaCollection, lista);
+}
+
+async function eliminarLista(id) {
+  const listaCollection = obtenerColecciónListasFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await deleteDoc(listaRef, id);
 }
 
 export {
@@ -151,4 +161,5 @@ export {
   filtrarProductosPorNumero,
   mostrarTodasLasListas,
   anyadirLista,
+  eliminarLista,
 };

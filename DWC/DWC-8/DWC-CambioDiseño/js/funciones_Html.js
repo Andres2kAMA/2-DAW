@@ -194,4 +194,20 @@ function crearObjetoLista(datos) {
 
   return lista;
 }
-export { declararEventosInicio };
+
+function anyadirEventosLista(id) {
+  document.getElementById(`eliminar${id}`).addEventListener(
+    "click",
+    function () {
+      funcionesFirebase.eliminarLista(id);
+      plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
+      plantilla.insertarPlantillaFooter();
+    },
+    false
+  );
+}
+
+export { declararEventosInicio, anyadirEventosLista };

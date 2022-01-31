@@ -251,10 +251,10 @@ function modificarLista(lista, id) {
       <td>${lista.nombrePropietario}</td>
       <td>${lista.nombreLista}</td>
       <td>${lista.fechaCreacion}</td>
-      <td><button>Editar</button></td>
-      <td><button>Añadir</button></td>
-      <td><button>Mostrar</button></td>
-      <td><button>Eliminar</button></td>
+      <td><button id="editar${id}">Editar</button></td>
+      <td><button id="anyadir${id}">Añadir</button></td>
+      <td><button id="mostrar${id}">Mostrar</button></td>
+      <td><button id="eliminar${id}">Eliminar</button></td>
     </tr>`
   );
   return plantillaDevolver;
