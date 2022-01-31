@@ -72,9 +72,74 @@ function declararEventosSeccionProducto() {
     false
   );
 
-  document
-    .getElementById("filtrarProductos")
-    .addEventListener("click", function () {}, false);
+  document.getElementById("filtrarProductos").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarProductosInsertados();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaFormularioFiltrarProductos();
+      plantilla.insertarPlantillaFooter();
+      declararEventosFiltradoProductos();
+    },
+    false
+  );
+}
+
+/**
+ * Declaro los eventos para filtrar cada producto.
+ */
+function declararEventosFiltradoProductos() {
+  document.getElementById("filtrarProductoNombre").addEventListener(
+    "click",
+    function () {
+      let datoFormulario =
+        devolverDatosFormularioFiltrarProducto("formNombreProducto");
+
+      plantilla.eliminarFormularioFiltrarProductos();
+
+      if (datoFormulario != "")
+        funcionesFirebase.filtrarProductosPorNombre(datoFormulario);
+    },
+    false
+  );
+
+  document.getElementById("filtrarProductoPrecio").addEventListener(
+    "click",
+    function () {
+      let datoFormulario =
+        devolverDatosFormularioFiltrarProducto("formPrecioProducto");
+
+      plantilla.eliminarFormularioFiltrarProductos();
+
+      if (datoFormulario >= 0)
+        funcionesFirebase.filtrarProductosPorNumero(datoFormulario, "precio");
+    },
+    false
+  );
+
+  document.getElementById("filtrarProductoPeso").addEventListener(
+    "click",
+    function () {
+      let datoFormulario =
+        devolverDatosFormularioFiltrarProducto("formPesoProducto");
+
+      plantilla.eliminarFormularioFiltrarProductos();
+
+      if (datoFormulario >= 0)
+        funcionesFirebase.filtrarProductosPorNumero(datoFormulario, "peso");
+    },
+    false
+  );
+}
+
+/**
+ *
+ * @param {String} nombreFormulario
+ * @returns Devuelvo el valor del formulario.
+ */
+function devolverDatosFormularioFiltrarProducto(nombreFormulario) {
+  let formulario = document.getElementById(nombreFormulario);
+  return formulario[0].value;
 }
 
 function declararEventosSeccionLista() {}

@@ -22,12 +22,14 @@ import { app, autentificacion } from "./conexion_Firebase.js";
 import * as plantilla from "./plantilla_Html.js";
 import * as funcionesHtml from "./funciones_Html.js";
 
+const db = getFirestore(app);
+
+/**       Productos      */
 /**
  *
  * @returns Devuelvo la colección de productos.
  */
 function obtenerColecciónProductosFireBase() {
-  const db = getFirestore(app);
   let productosCollection = collection(db, "productos");
   return productosCollection;
 }
@@ -89,4 +91,42 @@ async function ordenarProductos() {
   mostrarProductosFiltrados(consulta);
 }
 
-export { mostrarTodosProductos, ordenarProductos };
+/**
+ *
+ * @param {String} valor
+ */
+async function filtrarProductosPorNombre(valor) {
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const consulta = await query(
+    productosCollection,
+    where("nombre", "==", valor)
+  );
+
+  mostrarProductosFiltrados(consulta);
+}
+
+/**
+ *
+ * @param {String} valor
+ * @param {String} campo
+ */
+async function filtrarProductosPorNumero(valor, campo) {
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const consulta = await query(
+    productosCollection,
+    where(campo, "<", parseInt(valor, 10))
+  );
+
+  mostrarProductosFiltrados(consulta);
+}
+
+/**     Listas       */
+
+export {
+  mostrarTodosProductos,
+  ordenarProductos,
+  filtrarProductosPorNombre,
+  filtrarProductosPorNumero,
+};

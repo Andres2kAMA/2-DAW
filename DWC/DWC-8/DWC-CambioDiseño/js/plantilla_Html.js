@@ -54,6 +54,38 @@ const plantillaDivProductos = `<div id="divProductos"></div>`;
 
 const plantillaProducto = `<div></div>`;
 
+const plantillaFormularioFiltrarProductos = `<div id="formilariosFiltrarProductos">
+                                              <form id="formNombreProducto">
+                                              <label>Nombre: </label>
+                                                <input type="text" value="" />
+                                                <input
+                                                  id="filtrarProductoNombre"
+                                                  type="button"
+                                                  value="Filtrar"
+                                                />
+                                              </form><br/><br/> 
+
+                                              <form id="formPrecioProducto">
+                                              <label>Precio: </label>
+                                                <input type="number" value="" />
+                                                <input
+                                                  id="filtrarProductoPrecio"
+                                                  type="button"
+                                                  value="Filtrar"
+                                                />
+                                              </form> <br/><br/>
+
+                                              <form id="formPesoProducto">
+                                              <label>Peso: </label>
+                                                <input type="number" value="" />
+                                                <input
+                                                  id="filtrarProductoPeso"
+                                                  type="button"
+                                                  value="Filtrar"
+                                                />
+                                              </form> <br/><br/>
+                                            </div>`;
+
 const plantillaFooter = `<footer id="footer">
                             <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
                         </footer>`;
@@ -82,6 +114,13 @@ function insertarPlantillaProductos() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaDivProductos);
 }
 
+function insertarPlantillaFormularioFiltrarProductos() {
+  elementoPadre.insertAdjacentHTML(
+    "beforeend",
+    plantillaFormularioFiltrarProductos
+  );
+}
+
 function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
@@ -102,6 +141,16 @@ function eliminarProductosInsertados() {
   for (let i = productos.length; i > 0; i--) {
     divProductos.removeChild(productos[0]);
   }
+}
+
+function eliminarFormularioFiltrarProductos() {
+  let form = document.getElementById("formilariosFiltrarProductos");
+  elementoPadre.removeChild(form);
+}
+
+function eliminarFooter() {
+  let footer = document.getElementById("footer");
+  elementoPadre.removeChild(footer);
 }
 
 /**
@@ -150,8 +199,11 @@ export {
   insertarPlantillaHeaderLista,
   insertarPlantillaPresentacion,
   insertarPlantillaProductos,
+  insertarPlantillaFormularioFiltrarProductos,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
   eliminarProductosInsertados,
+  eliminarFormularioFiltrarProductos,
+  eliminarFooter,
   imprimirProducto,
 };
