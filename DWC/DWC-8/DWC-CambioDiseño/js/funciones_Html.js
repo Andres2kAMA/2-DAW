@@ -3,6 +3,7 @@
 import * as plantilla from "./plantilla_Html.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
 
+let productosLista = [];
 /**
  * Declaro todos los eventos del inicio del programa.
  */
@@ -218,6 +219,20 @@ function anyadirEventosLista(id) {
     false
   );
 
+  document.getElementById(`anyadir${id}`).addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaProductos();
+      funcionesFirebase.mostrarTodosProductosAnyadir();
+      plantilla.insertarBotonAnyadirProductosLista();
+      plantilla.insertarPlantillaFooter();
+      declararEventoAnyadirProductosFireBase(id);
+    },
+    false
+  );
+
   document.getElementById(`eliminar${id}`).addEventListener(
     "click",
     function () {
@@ -248,4 +263,45 @@ function declararEventoActualizarLista(id) {
   );
 }
 
-export { declararEventosInicio, anyadirEventosLista };
+function declararEventoAnyadirProducto(idHtml, id) {
+  document.getElementById(idHtml).addEventListener("click", function () {
+    productosLista.push(id);
+    let divProductos = document.getElementById("divProductos");
+    let mensaje = document.createElement("p");
+    mensaje.id = "mensaje";
+    mensaje.innerHTML = `El producto con id ${id} añadido corréctamente`;
+
+    if (document.getElementById("mensaje") != null) {
+      divProductos.removeChild(document.getElementById("mensaje"));
+    }
+    divProductos.prepend(mensaje);
+  });
+}
+
+function declararEventoAnyadirProductosFireBase(id) {
+  document.getElementById("anyadirProductosLista").addEventListener(
+    "click",
+    function () {
+      if (document.getElementById("mensaje") != null) {
+        divProductos.removeChild(document.getElementById("mensaje"));
+      }
+
+      funcionesFirebase.anyadirProductosLista(productosLista, id);
+      productosLista = [];
+
+      plantilla.eliminarProductosInsertados();
+      plantilla.eliminarBotonAnyadirProductos();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
+      plantilla.insertarPlantillaFooter();
+    },
+    false
+  );
+}
+
+export {
+  declararEventosInicio,
+  anyadirEventosLista,
+  declararEventoAnyadirProducto,
+};

@@ -2,6 +2,8 @@
 
 //Me defino unas plantillas div.
 
+import * as funcionesHtml from "./funciones_Html.js";
+
 const plantillaHeaderInicio = `<header class="page-header">
                             <ul class="nav nav-pills pull-right">
                             <li class="active"><a href="#">Iniciar sesión</a></li>
@@ -128,6 +130,8 @@ const plantillaFormularioActualizarLista = `<form id="formularioActualizarLista"
                                         <input type="button" value="Actualizar" id="botonActualizarLista" /><br><br>
                                         </form>`;
 
+const plantillaBotonAnyadirProductos = `<button id="anyadirProductosLista">Añadir todos los productos al carrito</button>`;
+
 const plantillaFooter = `<footer id="footer">
                             <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
                         </footer>`;
@@ -178,6 +182,10 @@ function insertarPlantillaFormularioActualizarLista() {
   );
 }
 
+function insertarBotonAnyadirProductosLista() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaBotonAnyadirProductos);
+}
+
 function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
@@ -219,6 +227,10 @@ function eliminarFormularioActualizarLista() {
   );
 }
 
+function eliminarBotonAnyadirProductos() {
+  elementoPadre.removeChild(document.getElementById("anyadirProductosLista"));
+}
+
 function eliminarFooter() {
   let footer = document.getElementById("footer");
   elementoPadre.removeChild(footer);
@@ -233,6 +245,13 @@ function imprimirProducto(producto, id) {
   let div = document.getElementById("divProductos");
   let productoModificado = modificarProducto(producto, id);
   div.insertAdjacentHTML("afterbegin", productoModificado);
+}
+
+function imprimirProductoAnyadir(producto, id) {
+  let div = document.getElementById("divProductos");
+  let productoModificado = modificarProductoAnyadir(producto, id);
+  div.insertAdjacentHTML("afterbegin", productoModificado);
+  funcionesHtml.declararEventoAnyadirProducto(`anyadirProducto${id}`, id);
 }
 
 /**
@@ -254,9 +273,27 @@ function modificarProducto(producto, id) {
           <ul class="list-group list-group-flush">
             <li class="list-group-item">${producto.precio} €</li>
           </ul>
+        </div>
+      </div>`
+  );
+  return plantillaDevolver;
+}
+
+function modificarProductoAnyadir(producto, id) {
+  let plantillaDevolver = plantillaProducto.replace(
+    `<div></div>`,
+    `<div class="col-md-6 centrarTexto producto">
+        <div class="card" >
+          <img src="${producto.imagen}" style="width: 15vw; min-width: 75px;" class="card-img-top" alt="...">
           <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">${producto.descripcion}.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${producto.precio} €</li>
+          </ul>
+          <div class="card-body">
+          <input type="button" id="anyadirProducto${id}"   value="Añadir producto a la lista" />
           </div>
         </div>
       </div>`
@@ -271,7 +308,6 @@ function imprimirLista(lista, id) {
 }
 
 function modificarLista(lista, id) {
-  console.log(lista);
   let plantillaDevolver = plantillaFilaLista.replace(
     `<tr></tr>`,
     `<tr >
@@ -297,6 +333,7 @@ export {
   insertarPlantillaDivListas,
   insertarPlantillaFormularioCrearLista,
   insertarPlantillaFormularioActualizarLista,
+  insertarBotonAnyadirProductosLista,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
   eliminarProductosInsertados,
@@ -304,7 +341,9 @@ export {
   eliminarListasInsertadas,
   eliminarFormularioCrearLista,
   eliminarFormularioActualizarLista,
+  eliminarBotonAnyadirProductos,
   eliminarFooter,
   imprimirProducto,
+  imprimirProductoAnyadir,
   imprimirLista,
 };

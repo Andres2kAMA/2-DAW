@@ -166,6 +166,26 @@ async function actualizarLista(datos, id) {
   });
 }
 
+async function mostrarTodosProductosAnyadir() {
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    plantilla.imprimirProductoAnyadir(producto.data(), producto.id);
+  });
+}
+
+async function anyadirProductosLista(productosAnyadir, id) {
+  const listaCollection = obtenerColeccionListasFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await updateDoc(listaRef, {
+    productos: productosAnyadir,
+  });
+}
+
 export {
   mostrarTodosProductos,
   ordenarProductos,
@@ -174,5 +194,7 @@ export {
   mostrarTodasLasListas,
   anyadirLista,
   actualizarLista,
+  anyadirProductosLista,
+  mostrarTodosProductosAnyadir,
   eliminarLista,
 };
