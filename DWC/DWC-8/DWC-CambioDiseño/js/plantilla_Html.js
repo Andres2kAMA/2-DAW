@@ -114,6 +114,20 @@ const plantillaFormularioCrearLista = `<form id="formularioCrearLista">
                                         
                                         <input type="button" value="Crear" id="botonCrearLista" /><br><br>
                                         </form>`;
+
+const plantillaFormularioActualizarLista = `<form id="formularioActualizarLista">
+                                        <label>Nombre del propietario</label>
+                                        <input type="text" value="" /><br><br>
+
+                                        <label>Nombre de la lista</label>
+                                        <input type="text" value="" /><br><br>
+                                        
+                                        <label>Fecha</label>
+                                        <input type="date" value="" /><br><br>
+                                        
+                                        <input type="button" value="Actualizar" id="botonActualizarLista" /><br><br>
+                                        </form>`;
+
 const plantillaFooter = `<footer id="footer">
                             <p>&copy; Página diseñada por Andrés Mancheño Alcaraz</p>
                         </footer>`;
@@ -157,6 +171,13 @@ function insertarPlantillaFormularioCrearLista() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFormularioCrearLista);
 }
 
+function insertarPlantillaFormularioActualizarLista() {
+  elementoPadre.insertAdjacentHTML(
+    "beforeend",
+    plantillaFormularioActualizarLista
+  );
+}
+
 function insertarPlantillaFooter() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaFooter);
 }
@@ -190,6 +211,12 @@ function eliminarListasInsertadas() {
 
 function eliminarFormularioCrearLista() {
   elementoPadre.removeChild(document.getElementById("formularioCrearLista"));
+}
+
+function eliminarFormularioActualizarLista() {
+  elementoPadre.removeChild(
+    document.getElementById("formularioActualizarLista")
+  );
 }
 
 function eliminarFooter() {
@@ -269,12 +296,14 @@ export {
   insertarPlantillaFormularioFiltrarProductos,
   insertarPlantillaDivListas,
   insertarPlantillaFormularioCrearLista,
+  insertarPlantillaFormularioActualizarLista,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,
   eliminarProductosInsertados,
   eliminarFormularioFiltrarProductos,
   eliminarListasInsertadas,
   eliminarFormularioCrearLista,
+  eliminarFormularioActualizarLista,
   eliminarFooter,
   imprimirProducto,
   imprimirLista,

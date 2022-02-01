@@ -184,6 +184,16 @@ function obtenerDatosFormularioCrearLista() {
   return datosForm;
 }
 
+function obtenerDatosFormularioActualizarLista() {
+  let form = document.getElementById("formularioActualizarLista");
+  let datosForm = [];
+  for (let i = 0; i < form.length - 1; i++) {
+    datosForm.push(form[i].value);
+  }
+
+  return datosForm;
+}
+
 function crearObjetoLista(datos) {
   let lista = {
     nombrePropietario: datos[0],
@@ -196,11 +206,39 @@ function crearObjetoLista(datos) {
 }
 
 function anyadirEventosLista(id) {
+  document.getElementById(`editar${id}`).addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaFormularioActualizarLista();
+      plantilla.insertarPlantillaFooter();
+      declararEventoActualizarLista(id);
+    },
+    false
+  );
+
   document.getElementById(`eliminar${id}`).addEventListener(
     "click",
     function () {
       funcionesFirebase.eliminarLista(id);
       plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
+      plantilla.insertarPlantillaFooter();
+    },
+    false
+  );
+}
+
+function declararEventoActualizarLista(id) {
+  document.getElementById("botonActualizarLista").addEventListener(
+    "click",
+    function () {
+      let datosFormCrearLista = obtenerDatosFormularioActualizarLista();
+      funcionesFirebase.actualizarLista(datosFormCrearLista, id);
+      plantilla.eliminarFormularioActualizarLista();
       plantilla.eliminarFooter();
       plantilla.insertarPlantillaDivListas();
       funcionesFirebase.mostrarTodasLasListas();

@@ -34,7 +34,7 @@ function obtenerColecciónProductosFireBase() {
   return productosCollection;
 }
 
-function obtenerColecciónListasFireBase() {
+function obtenerColeccionListasFireBase() {
   let listaCollection = collection(db, "listasCompra");
   return listaCollection;
 }
@@ -131,7 +131,7 @@ async function filtrarProductosPorNumero(valor, campo) {
 /**     Listas       */
 
 async function mostrarTodasLasListas() {
-  const listaCollection = obtenerColecciónListasFireBase();
+  const listaCollection = obtenerColeccionListasFireBase();
 
   const listas = await getDocs(listaCollection);
 
@@ -142,16 +142,28 @@ async function mostrarTodasLasListas() {
 }
 
 async function anyadirLista(lista) {
-  const listaCollection = obtenerColecciónListasFireBase();
+  const listaCollection = obtenerColeccionListasFireBase();
   await addDoc(listaCollection, lista);
 }
 
 async function eliminarLista(id) {
-  const listaCollection = obtenerColecciónListasFireBase();
+  const listaCollection = obtenerColeccionListasFireBase();
 
   const listaRef = await doc(listaCollection, id);
 
   await deleteDoc(listaRef, id);
+}
+
+async function actualizarLista(datos, id) {
+  const listaCollection = obtenerColeccionListasFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await updateDoc(listaRef, {
+    nombrePropietario: datos[0],
+    nombreLista: datos[1],
+    fechaCreacion: datos[2],
+  });
 }
 
 export {
@@ -161,5 +173,6 @@ export {
   filtrarProductosPorNumero,
   mostrarTodasLasListas,
   anyadirLista,
+  actualizarLista,
   eliminarLista,
 };
