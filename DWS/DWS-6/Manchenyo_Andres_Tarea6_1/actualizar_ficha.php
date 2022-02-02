@@ -37,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="partidos">Partidos</label>
         <input id="partidos" name="partidos" type="number"><br><br>
         <label for="puntos">Puntos</label>
-        <input id="puntos" name="puntos" type="number"><br><br>
+        <input id="puntos" name="puntos" type="number" step=0.01><br><br>
         <label for="rebotes">Rebotes</label>
-        <input id="rebotes" name="rebotes" type="number"><br><br>
+        <input id="rebotes" name="rebotes" type="number" step=0.01><br><br>
         <label for="asistencias">Asistencias</label>
-        <input id="asistencias" name="asistencias" type="number"><br><br>
+        <input id="asistencias" name="asistencias" type="number" step=0.01><br><br>
         <input id="id" name="id" value="<?php echo $id ?>" type="hidden"><br><br>
         <input type="submit">
     </form>

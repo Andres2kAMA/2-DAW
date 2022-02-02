@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="posicion">Posición</label>
         <input id="posicion" name="posicion" type="text" value=""><br><br>
         <label for="partidos">Partidos</label>
-        <input id="partidos" name="partidos" type="number" step=0.01 value="0"><br><br>
+        <input id="partidos" name="partidos" type="number" value="0"><br><br>
         <label for="puntos">Puntos</label>
         <input id="puntos" name="puntos" type="number" step=0.01 value="0"><br><br>
         <label for="rebotes">Rebotes</label>
