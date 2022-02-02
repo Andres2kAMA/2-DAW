@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     if ($datos === false) {
         echo "<p class='error'>Error al conectar con la base de datos</p>";
     } else {
-        echo "<table><tr><th>Jugador</th><th>Posición</th><th>Puntos</th></tr>";
+        echo "<table class='ficha'><tr><th>Jugador</th><th>Posición</th><th>Partidos</th><th>Puntos</th><th>Rebotes</th><th>Asistencias</th></tr>";
         foreach ($datos as $jugador) {
             echo "<tr><td>" . $jugador["nombre"] .
                 "</td> <td>" . $jugador["posicion"] .
@@ -15,8 +15,8 @@ if (isset($_GET['id'])) {
                 "</td><td>" . $jugador["puntos"] .
                 "</td><td>" . $jugador["rebotes"] .
                 "</td><td>" . $jugador["asistencias"] .
-                "</td><td><a href='borrar_ficha.php?id=" . $jugador["id"] . "'>Modificar datos</a>" .
-                "</td><td><a href='actualizar_ficha.php?id=" . $jugador["id"] . "'>Eliminar jugador</a>" .
+                "</td><td><a href='actualizar_ficha.php?id=" . $jugador["id"] . "'>Modificar datos</a>" .
+                "</td><td><a href='borrar_ficha.php?id=" . $jugador["id"] . "'>Eliminar jugador</a>" .
                 "</td> </tr>";
         }
         echo "</table>";

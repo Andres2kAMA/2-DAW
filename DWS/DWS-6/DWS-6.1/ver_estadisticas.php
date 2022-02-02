@@ -18,7 +18,7 @@
             <option value="asistencias">Asistencias</option>
         </select>
         <br><br>
-        <input type="submit"><br><br>
+        <input class="boton" type="submit"><br><br>
     </form>
 
     <?php

@@ -19,6 +19,7 @@ label {
 }
 input {
   font-weight: bold;
+  color: black;
 }
 .boton {
   padding: 5px;
@@ -27,4 +28,5 @@ input {
 }
 .boton:hover {
   background-color: turquoise;
+  cursor: pointer;
 }

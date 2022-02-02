@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Formulario Login</title>
+    <title>Jugadores ordenados por puntos</title>
 </head>
 
 <body>

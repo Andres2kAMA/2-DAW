@@ -30,8 +30,26 @@ td {
   border: 1px solid white;
   padding: 5px;
 }
-
+.boton {
+  padding: 5px;
+  border-radius: 1em;
+  color: black;
+}
+.boton:hover {
+  cursor: pointer;
+}
+input {
+  color: black;
+}
+select,
+option {
+  color: black;
+}
 .footer {
   margin-top: 5em;
   background-color: rgba(5, 7, 12, 0.5);
+}
+
+.ficha {
+  margin-top: 3em;
 }

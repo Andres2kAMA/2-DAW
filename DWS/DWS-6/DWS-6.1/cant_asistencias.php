@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Formulario Login</title>
+    <title>Jugadores ordenados por asistencias</title>
 </head>
 
 <body>
-    <h1>Jugadores ordenados por puntos</h1>
+    <h1>Jugadores ordenados por asistencias</h1>
 
 
     <?php
