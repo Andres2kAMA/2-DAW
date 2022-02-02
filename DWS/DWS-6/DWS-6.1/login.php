@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Formulario Login</title>
+    <link rel="stylesheet" type="text/css" href="./css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="./css/estiloLogin.css">
 </head>
 
 <body>
@@ -40,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input value="<?php if (isset($usuario)) echo $usuario; ?>" id="usuario" name="usuario" type="text"><br><br>
         <label for="clave">Clave</label>
         <input id="clave" name="clave" type="password"><br><br>
-        <input type="submit">
+        <input class="boton" type="submit">
     </form>
 </body>
 
