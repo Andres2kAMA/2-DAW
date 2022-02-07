@@ -233,6 +233,18 @@ function anyadirEventosLista(id) {
     false
   );
 
+  document.getElementById(`mostrar${id}`).addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarListasInsertadas();
+      plantilla.eliminarFooter();
+      plantilla.insertarPlantillaProductos();
+      funcionesFirebase.mostrarTodosProductosLista(id);
+      plantilla.insertarPlantillaFooter();
+    },
+    false
+  );
+
   document.getElementById(`eliminar${id}`).addEventListener(
     "click",
     function () {

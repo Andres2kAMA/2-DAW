@@ -5,6 +5,7 @@ import {
   getFirestore,
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   where,
@@ -37,6 +38,18 @@ function obtenerColecciónProductosFireBase() {
 function obtenerColeccionListasFireBase() {
   let listaCollection = collection(db, "listasCompra");
   return listaCollection;
+}
+
+async function obtenerProductoId(id){
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+   if(producto.id==id){
+     plantilla.imprimirProducto(producto.data())
+   }
+  });
 }
 
 /**       Productos      */
@@ -166,6 +179,22 @@ async function actualizarLista(datos, id) {
   });
 }
 
+async function mostrarTodosProductosLista(id){
+  const listaCollection=obtenerColeccionListasFireBase();
+
+  const listas=await getDocs(listaCollection);
+
+  listas.docs.map((lista) => {
+   if(lista.id==id){
+    lista.data().productos.map((producto)=>{
+      obtenerProductoId(producto);
+    });
+    
+    // plantilla.imprimirProductoLista(lista.data());
+   }
+  });
+}
+
 async function mostrarTodosProductosAnyadir() {
   const productosCollection = obtenerColecciónProductosFireBase();
 
@@ -194,7 +223,7 @@ export {
   mostrarTodasLasListas,
   anyadirLista,
   actualizarLista,
-  anyadirProductosLista,
+  anyadirProductosLista,mostrarTodosProductosLista,
   mostrarTodosProductosAnyadir,
   eliminarLista,
 };
