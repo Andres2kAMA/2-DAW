@@ -5,7 +5,6 @@ import {
   getFirestore,
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
   where,
@@ -16,105 +15,77 @@ import {
   arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
 //Importo la 'key' para acceder al Firebase.
 import { app, autentificacion } from "./conexion_Firebase.js";
 
 //Importo funciones de otros ficheros js.
-import * as plantilla from "./plantilla_Html.js";
-import * as funciones from "./funciones_Html.js";
+import * as plantillas from "./plantillasHtml.js";
+import * as funcionesHtml from "./funcionesHtml.js";
 
-const db = getFirestore(app);
-
-/**       Obtener colecciones Firebase      */
 /**
- *
- * @returns Devuelvo la colección de productos.
+ * @returns Devuelvo la colección de Productos.
  */
 function obtenerColecciónProductosFireBase() {
+  const db = getFirestore(app);
   let productosCollection = collection(db, "productos");
   return productosCollection;
 }
 
-function obtenerColeccionListasFireBase() {
-  let listaCollection = collection(db, "listasCompra");
+/**
+ *
+ * @returns Devuelvo la colección de Listas de la compra.
+ */
+function obtenerColecciónListaFireBase() {
+  const db = getFirestore(app);
+  let listaCollection = collection(db, "listaCompra");
   return listaCollection;
 }
 
-async function obtenerProductoId(id){
+function obtenerColeccionUsuarios() {
+  const db = getFirestore(app);
+  let usuariosCollection = collection(db, "usuarios");
+  return usuariosCollection;
+}
+
+/**
+ * Imprimo TODOS los productos de la colección sin ningún tipo de filtro.
+ */
+async function listarProductos() {
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
 
   productos.docs.map((producto) => {
-   if(producto.id==id){
-     plantilla.imprimirProducto(producto.data())
-   }
+    plantillas.imprimirProducto(producto.data(), producto.id);
   });
 }
 
-/**       Productos      */
-/**
- * Obtengo todos los productos del FireStore y los imprimo por pantalla.
- */
-async function mostrarTodosProductos() {
+async function listarProductosLista() {
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
 
   productos.docs.map((producto) => {
-    plantilla.imprimirProducto(producto.data(), producto.id);
+    plantillas.imprimirProductoLista(producto.data(), producto.id);
   });
 }
 
 /**
- * Obtengo todos los productos del FireStore que cumplan el filtro y los imprimo por pantalla.
- * @param {String} filtro
+ * @param {*} valor
  */
-async function mostrarProductosFiltrados(filtro) {
-  const productosFiltrados = await getDocs(filtro);
+async function filtrarPorNombre(valor) {
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
 
-  productosFiltrados.docs.map((producto) => {
-    plantilla.imprimirProducto(producto.data());
-  });
-}
-
-/**
- * Ordeno los productos por el precio de manera ascendente o descendente.
- */
-async function ordenarProductos() {
-  const productosCollection = obtenerColecciónProductosFireBase();
-
-  var consulta = "";
-  if (document.getElementsByClassName("ascendente").length != 0) {
-    consulta = await query(
-      productosCollection,
-      where("precio", ">", 0),
-      orderBy("precio", "asc")
-    );
-
-    let liOrdenar = document.getElementById("ordenarProductos");
-    liOrdenar.innerHTML = "Ordenar de manera descendente";
-    liOrdenar.className = "descendente";
-  } else {
-    consulta = await query(
-      productosCollection,
-      where("precio", ">", 0),
-      orderBy("precio", "desc")
-    );
-
-    let liOrdenar = document.getElementById("ordenarProductos");
-    liOrdenar.innerHTML = "Ordenar de manera ascendente";
-    liOrdenar.className = "ascendente";
-  }
-
-  mostrarProductosFiltrados(consulta);
-}
-
-/**
- *
- * @param {String} valor
- */
-async function filtrarProductosPorNombre(valor) {
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -122,15 +93,20 @@ async function filtrarProductosPorNombre(valor) {
     where("nombre", "==", valor)
   );
 
-  mostrarProductosFiltrados(consulta);
+  const productosFiltrados = await getDocs(consulta);
+
+  productosFiltrados.docs.map((producto) => {
+    plantillas.imprimirProducto(producto.data());
+  });
 }
 
 /**
- *
- * @param {String} valor
- * @param {String} campo
+ * @param {*} valor
+ * @param {string} campo
  */
-async function filtrarProductosPorNumero(valor, campo) {
+async function filtrarPorNumero(valor, campo) {
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const consulta = await query(
@@ -138,92 +114,212 @@ async function filtrarProductosPorNumero(valor, campo) {
     where(campo, "<", parseInt(valor, 10))
   );
 
-  mostrarProductosFiltrados(consulta);
+  const productosFiltrados = await getDocs(consulta);
+
+  productosFiltrados.docs.map((producto) => {
+    plantillas.imprimirProducto(producto.data());
+  });
 }
 
-/**     Listas       */
+/**
+ * Ordeno los productos.
+ */
+async function ordenarProductos() {
+  plantillas.eliminarDatosMain();
+  plantillas.insertarDivProductos();
 
-async function mostrarTodasLasListas() {
-  const listaCollection = obtenerColeccionListasFireBase();
+  const productosCollection = obtenerColecciónProductosFireBase();
+
+  var consulta;
+
+  if (document.getElementsByClassName("ascendente").length != 0) {
+    consulta = await query(
+      productosCollection,
+      where("precio", ">", 0),
+      orderBy("precio", "asc")
+    );
+
+    let botonOrdenar = document.getElementById("ordenar");
+    botonOrdenar.innerHTML = "Ordenar por precio descendente";
+    botonOrdenar.className = "descendente";
+  } else {
+    consulta = await query(
+      productosCollection,
+      where("precio", ">", 0),
+      orderBy("precio", "desc")
+    );
+
+    let boton = document.getElementById("ordenar");
+    boton.innerHTML = "Ordenar por precio ascendente";
+    boton.className = "ascendente";
+  }
+
+  const productosFiltrados = await getDocs(consulta);
+
+  productosFiltrados.docs.map((producto) => {
+    plantillas.imprimirProducto(producto.data());
+  });
+}
+
+/**
+ *
+ * @param {*} datosForm
+ * @param {*} productos
+ */
+async function crearLista(datosForm, productos) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  let productosLista = await obtenerProductos(productos);
+
+  const nuevaLista = {
+    nombreLista: datosForm[0],
+    nombrePropietario: datosForm[1],
+    fechaCreacion: datosForm[2],
+    productos: productosLista,
+  };
+  await addDoc(listaCollection, nuevaLista);
+}
+/**
+ *
+ * @param {Array} productosId
+ * @returns Devuelvo un array con los datos de los productos.
+ */
+async function obtenerProductos(productosId) {
+  const productosCollection = obtenerColecciónProductosFireBase();
+  let productosObtenidos = [];
+  const productos = await getDocs(productosCollection);
+
+  productos.docs.map((producto) => {
+    for (let i = 0; i < productosId.length; i++) {
+      if (producto.id == productosId[i]) {
+        productosObtenidos.push(producto.data());
+      }
+    }
+  });
+  return productosObtenidos;
+}
+
+/**
+ * Imprimo las listas.
+ */
+async function obtenerListas() {
+  const listaCollection = obtenerColecciónListaFireBase();
 
   const listas = await getDocs(listaCollection);
 
   listas.docs.map((lista) => {
-    plantilla.imprimirLista(lista.data(), lista.id);
-    funciones.anyadirEventosLista(lista.id);
+    plantillas.imprimirLista(lista.data(), lista.id);
   });
 }
 
-async function anyadirLista(lista) {
-  const listaCollection = obtenerColeccionListasFireBase();
-  await addDoc(listaCollection, lista);
+/**
+ *
+ * @param {Array} productos
+ * @param {String} id
+ */
+async function aumentarProductosLista(productos, id) {
+  const listaCollection = obtenerColecciónListaFireBase();
+  const lista = await doc(listaCollection, id);
+  let productosAnyadir = await obtenerProductos(productos);
+  productosAnyadir.map((producto) => {
+    actualizarLista(lista, producto);
+  });
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
 }
 
+async function actualizarLista(lista, producto) {
+  await updateDoc(lista, {
+    productos: arrayUnion(producto),
+  });
+}
+
+/**
+  console.log(productosAnyadir);
+ *
+ * @param {String} id
+ * @param {Array} datos
+ */
+async function editarLista(id, datos) {
+  const listaCollection = obtenerColecciónListaFireBase();
+
+  const listaRef = await doc(listaCollection, id);
+
+  await updateDoc(listaRef, {
+    nombreLista: datos[0],
+    nombrePropietario: datos[1],
+    fechaCreacion: datos[2],
+  });
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
+}
+
+/**
+ *
+ * @param {String} id
+ */
 async function eliminarLista(id) {
-  const listaCollection = obtenerColeccionListasFireBase();
+  const listaCollection = obtenerColecciónListaFireBase();
 
   const listaRef = await doc(listaCollection, id);
 
   await deleteDoc(listaRef, id);
+
+  plantillas.eliminarDatosMain();
+  plantillas.insertarTablaListas();
+  obtenerListas();
 }
 
-async function actualizarLista(datos, id) {
-  const listaCollection = obtenerColeccionListasFireBase();
-
-  const listaRef = await doc(listaCollection, id);
-
-  await updateDoc(listaRef, {
-    nombrePropietario: datos[0],
-    nombreLista: datos[1],
-    fechaCreacion: datos[2],
-  });
-}
-
-async function mostrarTodosProductosLista(id){
-  const listaCollection=obtenerColeccionListasFireBase();
-
-  const listas=await getDocs(listaCollection);
-
-  listas.docs.map((lista) => {
-   if(lista.id==id){
-    lista.data().productos.map((producto)=>{
-      obtenerProductoId(producto);
-    });
-    
-    // plantilla.imprimirProductoLista(lista.data());
-   }
-  });
-}
-
-async function mostrarTodosProductosAnyadir() {
+/**
+ * Inserto un evento que utilizaré para añadir los productos.
+ */
+async function eventoAnyadirProductos() {
   const productosCollection = obtenerColecciónProductosFireBase();
-
   const productos = await getDocs(productosCollection);
 
   productos.docs.map((producto) => {
-    plantilla.imprimirProductoAnyadir(producto.data(), producto.id);
+    funcionesHtml.anyadirEventoProducto(producto.id);
   });
 }
 
-async function anyadirProductosLista(productosAnyadir, id) {
-  const listaCollection = obtenerColeccionListasFireBase();
+async function validarUsuario(correo, contraseña, rol) {
+  createUserWithEmailAndPassword(autentificacion, correo, contraseña)
+    .then((userCredential) => {
+      anyadirUsuarioBBDD(correo, contraseña, rol);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
 
-  const listaRef = await doc(listaCollection, id);
+async function anyadirUsuarioBBDD(correo, contraseña, rol) {
+  let usuariosCollection = obtenerColeccionUsuarios();
 
-  await updateDoc(listaRef, {
-    productos: productosAnyadir,
-  });
+  const nuevoUsuario = {
+    correo: correo,
+    contrasenya: contraseña,
+    rol: rol,
+  };
+
+  await addDoc(usuariosCollection, nuevoUsuario);
 }
 
 export {
-  mostrarTodosProductos,
+  listarProductos,
+  listarProductosLista,
   ordenarProductos,
-  filtrarProductosPorNombre,
-  filtrarProductosPorNumero,
-  mostrarTodasLasListas,
-  anyadirLista,
-  actualizarLista,
-  anyadirProductosLista,mostrarTodosProductosLista,
-  mostrarTodosProductosAnyadir,
+  filtrarPorNombre,
+  filtrarPorNumero,
+  crearLista,
+  obtenerListas,
+  eventoAnyadirProductos,
+  editarLista,
   eliminarLista,
+  aumentarProductosLista,
+  validarUsuario,
 };
