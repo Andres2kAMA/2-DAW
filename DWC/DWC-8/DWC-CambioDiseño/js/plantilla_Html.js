@@ -9,7 +9,7 @@ const plantillaHeaderInicio = `<header class="page-header">
                             <li class="active"><a href="#">Iniciar sesión</a></li>
                             <li><a href="#" id="productos">Productos</a></li>
                             <li><a href="#" id="listas">Listas de la compra</a></li>
-                            <li><a href="#">Registrarse</a></li>
+                            <li><a href="#" id="registrarse">Registrarse</a></li>
                             <li><a href="#">Cerrar sesión</a></li>
                             </ul>
                             <h3>Carrefour</h3>

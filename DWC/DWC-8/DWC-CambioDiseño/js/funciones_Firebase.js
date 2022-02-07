@@ -215,6 +215,34 @@ async function anyadirProductosLista(productosAnyadir, id) {
   });
 }
 
+/** USUARIOS */
+
+
+async function validarUsuario(correo, contraseña, rol) {
+  createUserWithEmailAndPassword(autentificacion, correo, contraseña)
+    .then((userCredential) => {
+      anyadirUsuarioBBDD(correo, contraseña, rol);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
+
+async function anyadirUsuarioBBDD(correo, contraseña, rol) {
+  let usuariosCollection = obtenerColeccionUsuarios();
+
+  const nuevoUsuario = {
+    correo: correo,
+    contrasenya: contraseña,
+    rol: rol,
+  };
+
+  await addDoc(usuariosCollection, nuevoUsuario);
+}
+
+
 export {
   mostrarTodosProductos,
   ordenarProductos,
@@ -225,5 +253,5 @@ export {
   actualizarLista,
   anyadirProductosLista,mostrarTodosProductosLista,
   mostrarTodosProductosAnyadir,
-  eliminarLista,
+  eliminarLista,validarUsuario,
 };
