@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Carre4</title>
+  </head>
+  <body>
+    <!--    Header  -->
+    <header class="header">
+      <div class="container logo-nav-container">
+        <a href="" class="logo">Carre4</a>
+        <nav class="navigation">
+          <ul class="menu-horizontal">
+            <li>
+              Productos
+              <ul>
+                <li id="listar">Mostrar todos los productos</li>
+                <li id="ordenar" class="ascendente">
+                  Ordenar por precio ascendente
+                </li>
+                <li>
+                  Filtrar
+                  <ul>
+                    <li>
+                      Por nombre
+                      <form id="formProductoNombre">
+                        <input type="text" value="" />
+                        <input
+                          id="filtrarNombreProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                    <li>
+                      Por peso
+                      <form id="formProductoPeso">
+                        <input type="number" value="" />
+                        <input
+                          id="filtrarPesoProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                    <li>
+                      Por precio
+                      <form id="formProductoPrecio">
+                        <input type="number" value="" />
+                        <input
+                          id="filtrarPrecioProducto"
+                          type="button"
+                          value="Filtrar"
+                        />
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Lista de la compra
+              <ul>
+                <li id="crearLista">Crear lista</li>
+                <li id="listarListas">Mostrar todas las listas</li>
+              </ul>
+            </li>
+            <li id="registrarse">Registrarse</li>
+            <li id="iniciarSesion">Iniciar sesión</li>
+            <li id="nombreUsuario" style="visibility: hidden"></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--    Main    -->
+    <main class="main">
+      <div class="container" id="contenidoPrincipal"></div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>Página diseñada por Andrés Mancheño Alcaraz</p>
+      </div>
+    </footer>
+    <script type="module" src="js/listaCompra.js"></script>
+  </body>
+</html>
