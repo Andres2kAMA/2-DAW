@@ -4,6 +4,11 @@ import * as plantilla from "./plantilla_Html.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
 
 let productosLista = [];
+const usuarioRegistrado = {
+  correo: "",
+  contrasenya: "",
+  rol: false,
+};
 /**
  * Declaro todos los eventos del inicio del programa.
  */
@@ -31,8 +36,57 @@ function declararEventosInicio() {
     },
     false
   );
+
+  document.getElementById("registro").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPlantillasInsertadas();
+      plantilla.insertarPlantillaHeaderInicio();
+      plantilla.insertarPlantillaFormularioRegistro();
+      plantilla.insertarPlantillaFooter();
+      declararEventosRegistro();
+    },
+    false
+  );
+
+  document.getElementById("inicioSesion").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPlantillasInsertadas();
+      plantilla.insertarPlantillaHeaderInicio();
+      plantilla.insertarPlantillaFormularioInicioSesion();
+      plantilla.insertarPlantillaFooter();
+      declararEventosSesion();
+    },
+    false
+  );
 }
 
+function declararEventosInicioSesion() {
+  document.getElementById("productos").addEventListener("click", function () {
+    plantilla.eliminarPlantillasInsertadas();
+    plantilla.insertarPlantillaHeaderProducto();
+    plantilla.insertarPlantillaProductos();
+    plantilla.insertarPlantillaFooter();
+    funcionesFirebase.mostrarTodosProductos();
+    declararEventosSeccionProducto();
+    declararEventoRedirigirInicio();
+  });
+
+  document.getElementById("listas").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPlantillasInsertadas();
+      plantilla.insertarPlantillaHeaderLista();
+      plantilla.insertarPlantillaDivListas();
+      funcionesFirebase.mostrarTodasLasListas();
+      plantilla.insertarPlantillaFooter();
+      declararEventosSeccionLista();
+      declararEventoRedirigirInicio();
+    },
+    false
+  );
+}
 /**
  * Declaro un evento para cargar el inicio del programa.
  */
@@ -195,6 +249,26 @@ function obtenerDatosFormularioActualizarLista() {
   return datosForm;
 }
 
+function obtenerDatosFormularioRegistro() {
+  let form = document.getElementById("formularioRegistrarse");
+  let datosForm = [];
+  for (let i = 0; i < form.length - 1; i++) {
+    datosForm.push(form[i].value);
+  }
+
+  return datosForm;
+}
+
+function obtenerDatosFormularioSesion() {
+  let form = document.getElementById("formularioInicioSesion");
+  let datosForm = [];
+  for (let i = 0; i < form.length - 1; i++) {
+    datosForm.push(form[i].value);
+  }
+
+  return datosForm;
+}
+
 function crearObjetoLista(datos) {
   let lista = {
     nombrePropietario: datos[0],
@@ -312,8 +386,48 @@ function declararEventoAnyadirProductosFireBase(id) {
   );
 }
 
+function declararEventosRegistro() {
+  document.getElementById("botonRegistro").addEventListener(
+    "click",
+    function () {
+      let datosFormRegistro = obtenerDatosFormularioRegistro();
+      funcionesFirebase.validarUsuario(
+        datosFormRegistro[0],
+        datosFormRegistro[1],
+        datosFormRegistro[2]
+      );
+      plantilla.eliminarPlantillasInsertadas();
+      plantilla.insertarPlantillaHeaderInicio();
+      plantilla.insertarPlantillaPresentacion();
+      plantilla.insertarPlantillaFooter();
+      declararEventosInicio();
+    },
+    false
+  );
+}
+
+function declararEventosSesion() {
+  document.getElementById("botonSesion").addEventListener(
+    "click",
+    function () {
+      let datosForm = obtenerDatosFormularioSesion();
+      funcionesFirebase.validarUsuarioRegistrado(datosForm[0], datosForm[1]);
+    },
+    false
+  );
+}
+
+function modificarInterfazUsuario(usuario) {
+  plantilla.eliminarPlantillasInsertadas();
+  plantilla.insertarPlantillaHeaderInicioUsuario(usuario);
+  plantilla.insertarPlantillaPresentacion();
+  plantilla.insertarPlantillaFooter();
+  declararEventosInicioSesion();
+}
+
 export {
   declararEventosInicio,
   anyadirEventosLista,
   declararEventoAnyadirProducto,
+  modificarInterfazUsuario,
 };

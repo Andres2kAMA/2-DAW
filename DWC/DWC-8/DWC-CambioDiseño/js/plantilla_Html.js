@@ -3,17 +3,25 @@
 //Me defino unas plantillas div.
 
 import * as funcionesHtml from "./funciones_Html.js";
-
+let usuario = "";
 const plantillaHeaderInicio = `<header class="page-header">
                             <ul class="nav nav-pills pull-right">
-                            <li class="active"><a href="#">Iniciar sesión</a></li>
+                            <li class="active"><a href="#" id="inicioSesion">Iniciar sesión</a></li>
                             <li><a href="#" id="productos">Productos</a></li>
                             <li><a href="#" id="listas">Listas de la compra</a></li>
-                            <li><a href="#" id="registrarse">Registrarse</a></li>
-                            <li><a href="#">Cerrar sesión</a></li>
+                            <li><a href="#" id="registro">Registrarse</a></li>
                             </ul>
                             <h3>Carrefour</h3>
                         </header>`;
+
+const plantillaHeaderInicioSesion = `<header class="page-header">
+                        <ul class="nav nav-pills pull-right">
+                        <li><a href="#" id="productos">Productos</a></li>
+                        <li><a href="#" id="listas">Listas de la compra</a></li>
+                        <li class="active"><a  href="#">Cerrar sesión</a></li>
+                        </ul>
+                        <h3>Carrefour</h3>
+                    </header>`;
 
 const plantillaHeaderProducto = `<header class="page-header">
                                     <ul class="nav nav-pills pull-right">
@@ -130,6 +138,24 @@ const plantillaFormularioActualizarLista = `<form id="formularioActualizarLista"
                                         <input type="button" value="Actualizar" id="botonActualizarLista" /><br><br>
                                         </form>`;
 
+const plantillaFormRegistro = `<form id="formularioRegistrarse">
+                                  <label>Correo</label>
+                                    <input class="datosRegistrarse" type="text" value="" /><br /><br />
+                                  <label>Contraseña</label>
+                                    <input class="datosRegistrarse" type="password" value="" /><br /><br />
+                                  <label for="admin" >Editor</label>
+                                    <input class="datosRegistrarse" name="admin" type="checkbox" /><br /><br />
+                                  <input id="botonRegistro" type="button" value="Registrarse" />
+                                </form>`;
+
+const plantillaFormSesion = `<form id="formularioInicioSesion">
+                                <label>Correo</label>
+                                  <input class="datosRegistrarse" type="text" value="" /><br /><br />
+                                <label>Contraseña</label>
+                                  <input class="datosRegistrarse" type="password" value="" /><br /><br />
+                              <input id="botonSesion" type="button" value="Registrarse" />
+                              </form>`;
+
 const plantillaBotonAnyadirProductos = `<button id="anyadirProductosLista">Añadir todos los productos al carrito</button>`;
 
 const plantillaFooter = `<footer id="footer">
@@ -143,7 +169,9 @@ const elementoPadre = document.getElementById("padre");
 function insertarPlantillaHeaderInicio() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaHeaderInicio);
 }
-
+function insertarPlantillaHeaderInicioUsuario(usuario) {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaHeaderInicioSesion);
+}
 function insertarPlantillaHeaderProducto() {
   elementoPadre.insertAdjacentHTML("beforeend", plantillaHeaderProducto);
 }
@@ -180,6 +208,14 @@ function insertarPlantillaFormularioActualizarLista() {
     "beforeend",
     plantillaFormularioActualizarLista
   );
+}
+
+function insertarPlantillaFormularioRegistro() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaFormRegistro);
+}
+
+function insertarPlantillaFormularioInicioSesion() {
+  elementoPadre.insertAdjacentHTML("beforeend", plantillaFormSesion);
 }
 
 function insertarBotonAnyadirProductosLista() {
@@ -325,6 +361,7 @@ function modificarLista(lista, id) {
 
 export {
   insertarPlantillaHeaderInicio,
+  insertarPlantillaHeaderInicioUsuario,
   insertarPlantillaHeaderProducto,
   insertarPlantillaHeaderLista,
   insertarPlantillaPresentacion,
@@ -333,6 +370,8 @@ export {
   insertarPlantillaDivListas,
   insertarPlantillaFormularioCrearLista,
   insertarPlantillaFormularioActualizarLista,
+  insertarPlantillaFormularioRegistro,
+  insertarPlantillaFormularioInicioSesion,
   insertarBotonAnyadirProductosLista,
   insertarPlantillaFooter,
   eliminarPlantillasInsertadas,

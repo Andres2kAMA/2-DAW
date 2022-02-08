@@ -16,6 +16,13 @@ import {
   arrayUnion,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
 //Importo la 'key' para acceder al Firebase.
 import { app, autentificacion } from "./conexion_Firebase.js";
 
@@ -40,15 +47,21 @@ function obtenerColeccionListasFireBase() {
   return listaCollection;
 }
 
-async function obtenerProductoId(id){
+function obtenerColeccionUsuarios() {
+  const db = getFirestore(app);
+  let usuariosCollection = collection(db, "usuarios");
+  return usuariosCollection;
+}
+
+async function obtenerProductoId(id) {
   const productosCollection = obtenerColecciónProductosFireBase();
 
   const productos = await getDocs(productosCollection);
 
   productos.docs.map((producto) => {
-   if(producto.id==id){
-     plantilla.imprimirProducto(producto.data())
-   }
+    if (producto.id == id) {
+      plantilla.imprimirProducto(producto.data());
+    }
   });
 }
 
@@ -179,19 +192,19 @@ async function actualizarLista(datos, id) {
   });
 }
 
-async function mostrarTodosProductosLista(id){
-  const listaCollection=obtenerColeccionListasFireBase();
+async function mostrarTodosProductosLista(id) {
+  const listaCollection = obtenerColeccionListasFireBase();
 
-  const listas=await getDocs(listaCollection);
+  const listas = await getDocs(listaCollection);
 
   listas.docs.map((lista) => {
-   if(lista.id==id){
-    lista.data().productos.map((producto)=>{
-      obtenerProductoId(producto);
-    });
-    
-    // plantilla.imprimirProductoLista(lista.data());
-   }
+    if (lista.id == id) {
+      lista.data().productos.map((producto) => {
+        obtenerProductoId(producto);
+      });
+
+      // plantilla.imprimirProductoLista(lista.data());
+    }
   });
 }
 
@@ -217,7 +230,6 @@ async function anyadirProductosLista(productosAnyadir, id) {
 
 /** USUARIOS */
 
-
 async function validarUsuario(correo, contraseña, rol) {
   createUserWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
@@ -242,6 +254,20 @@ async function anyadirUsuarioBBDD(correo, contraseña, rol) {
   await addDoc(usuariosCollection, nuevoUsuario);
 }
 
+async function validarUsuarioRegistrado(correo, contraseña) {
+  let usuariosCollection = obtenerColeccionUsuarios();
+
+  const usuarios = await getDocs(usuariosCollection);
+
+  usuarios.docs.map((usuario) => {
+    if (
+      usuario.data().contrasenya == contraseña &&
+      usuario.data().correo == correo
+    ) {
+      funciones.modificarInterfazUsuario(usuario.data());
+    }
+  });
+}
 
 export {
   mostrarTodosProductos,
@@ -251,7 +277,10 @@ export {
   mostrarTodasLasListas,
   anyadirLista,
   actualizarLista,
-  anyadirProductosLista,mostrarTodosProductosLista,
+  anyadirProductosLista,
+  mostrarTodosProductosLista,
   mostrarTodosProductosAnyadir,
-  eliminarLista,validarUsuario,
+  eliminarLista,
+  validarUsuario,
+  validarUsuarioRegistrado,
 };

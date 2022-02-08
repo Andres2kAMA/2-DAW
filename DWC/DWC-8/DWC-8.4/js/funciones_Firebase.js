@@ -309,6 +309,21 @@ async function anyadirUsuarioBBDD(correo, contraseña, rol) {
   await addDoc(usuariosCollection, nuevoUsuario);
 }
 
+async function validarUsuarioRegistrado(correo, contraseña) {
+  let usuariosCollection = obtenerColeccionUsuarios();
+
+  const usuarios = await getDocs(usuariosCollection);
+
+  usuarios.docs.map((usuario) => {
+    if (
+      usuario.data().contrasenya == contraseña &&
+      usuario.data().correo == correo
+    ) {
+      return true;
+    }
+  });
+}
+
 export {
   listarProductos,
   listarProductosLista,
@@ -322,4 +337,5 @@ export {
   eliminarLista,
   aumentarProductosLista,
   validarUsuario,
+  validarUsuarioRegistrado,
 };
