@@ -139,11 +139,13 @@ const plantillaFormularioActualizarLista = `<form id="formularioActualizarLista"
                                         </form>`;
 
 const plantillaFormRegistro = `<form id="formularioRegistrarse">
+                                  <label>Nombre</label>
+                                    <input class="datosRegistrarse" type="text" value="" /><br /><br />
                                   <label>Correo</label>
                                     <input class="datosRegistrarse" type="text" value="" /><br /><br />
                                   <label>Contraseña</label>
                                     <input class="datosRegistrarse" type="password" value="" /><br /><br />
-                                  <label for="admin" >Editor</label>
+                                  <label for="admin" id="editor">Editor</label>
                                     <input class="datosRegistrarse" name="admin" type="checkbox" /><br /><br />
                                   <input id="botonRegistro" type="button" value="Registrarse" />
                                 </form>`;
@@ -153,7 +155,7 @@ const plantillaFormSesion = `<form id="formularioInicioSesion">
                                   <input class="datosRegistrarse" type="text" value="" /><br /><br />
                                 <label>Contraseña</label>
                                   <input class="datosRegistrarse" type="password" value="" /><br /><br />
-                              <input id="botonSesion" type="button" value="Registrarse" />
+                              <input id="botonSesion" type="button" value="Inicar sesión" />
                               </form>`;
 
 const plantillaBotonAnyadirProductos = `<button id="anyadirProductosLista">Añadir todos los productos al carrito</button>`;

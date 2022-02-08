@@ -156,14 +156,16 @@ async function filtrarProductosPorNumero(valor, campo) {
 
 /**     Listas       */
 
-async function mostrarTodasLasListas() {
+async function mostrarTodasLasListas(nombre) {
   const listaCollection = obtenerColeccionListasFireBase();
 
   const listas = await getDocs(listaCollection);
-
+  console.log(nombre);
   listas.docs.map((lista) => {
-    plantilla.imprimirLista(lista.data(), lista.id);
-    funciones.anyadirEventosLista(lista.id);
+    if (lista.data().nombrePropietario == nombre) {
+      plantilla.imprimirLista(lista.data(), lista.id);
+      funciones.anyadirEventosLista(lista.id);
+    }
   });
 }
 
@@ -230,10 +232,10 @@ async function anyadirProductosLista(productosAnyadir, id) {
 
 /** USUARIOS */
 
-async function validarUsuario(correo, contraseña, rol) {
+async function validarUsuario(nombre, correo, contraseña, rol) {
   createUserWithEmailAndPassword(autentificacion, correo, contraseña)
     .then((userCredential) => {
-      anyadirUsuarioBBDD(correo, contraseña, rol);
+      anyadirUsuarioBBDD(nombre, correo, contraseña, rol);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -242,16 +244,23 @@ async function validarUsuario(correo, contraseña, rol) {
     });
 }
 
-async function anyadirUsuarioBBDD(correo, contraseña, rol) {
+async function anyadirUsuarioBBDD(nombre, correo, contraseña, rol) {
   let usuariosCollection = obtenerColeccionUsuarios();
 
   const nuevoUsuario = {
+    nombre: nombre,
     correo: correo,
     contrasenya: contraseña,
     rol: rol,
   };
 
   await addDoc(usuariosCollection, nuevoUsuario);
+
+  plantilla.eliminarPlantillasInsertadas();
+  plantilla.insertarPlantillaHeaderInicio();
+  plantilla.insertarPlantillaPresentacion();
+  plantilla.insertarPlantillaFooter();
+  funciones.declararEventosInicio();
 }
 
 async function validarUsuarioRegistrado(correo, contraseña) {

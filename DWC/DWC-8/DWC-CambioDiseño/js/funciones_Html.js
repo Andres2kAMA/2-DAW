@@ -4,11 +4,8 @@ import * as plantilla from "./plantilla_Html.js";
 import * as funcionesFirebase from "./funciones_Firebase.js";
 
 let productosLista = [];
-const usuarioRegistrado = {
-  correo: "",
-  contrasenya: "",
-  rol: false,
-};
+
+let usuarioLogueado;
 /**
  * Declaro todos los eventos del inicio del programa.
  */
@@ -23,19 +20,27 @@ function declararEventosInicio() {
     declararEventoRedirigirInicio();
   });
 
-  document.getElementById("listas").addEventListener(
-    "click",
-    function () {
-      plantilla.eliminarPlantillasInsertadas();
-      plantilla.insertarPlantillaHeaderLista();
-      plantilla.insertarPlantillaDivListas();
-      funcionesFirebase.mostrarTodasLasListas();
-      plantilla.insertarPlantillaFooter();
-      declararEventosSeccionLista();
-      declararEventoRedirigirInicio();
-    },
-    false
-  );
+  if (usuarioLogueado != null) {
+    document.getElementById("listas").addEventListener(
+      "click",
+      function () {
+        plantilla.eliminarPlantillasInsertadas();
+        plantilla.insertarPlantillaHeaderLista();
+        plantilla.insertarPlantillaDivListas();
+        funcionesFirebase.mostrarTodasLasListas();
+        plantilla.insertarPlantillaFooter();
+        declararEventosSeccionLista();
+        if (usuarioLogueado != null) {
+          declararEventoRedirigirInicioSesion();
+        } else {
+          declararEventoRedirigirInicio();
+        }
+      },
+      false
+    );
+  } else {
+    console.log("logueate puto");
+  }
 
   document.getElementById("registro").addEventListener(
     "click",
@@ -70,7 +75,11 @@ function declararEventosInicioSesion() {
     plantilla.insertarPlantillaFooter();
     funcionesFirebase.mostrarTodosProductos();
     declararEventosSeccionProducto();
-    declararEventoRedirigirInicio();
+    if (usuarioLogueado != null) {
+      declararEventoRedirigirInicioSesion();
+    } else {
+      declararEventoRedirigirInicio();
+    }
   });
 
   document.getElementById("listas").addEventListener(
@@ -79,10 +88,14 @@ function declararEventosInicioSesion() {
       plantilla.eliminarPlantillasInsertadas();
       plantilla.insertarPlantillaHeaderLista();
       plantilla.insertarPlantillaDivListas();
-      funcionesFirebase.mostrarTodasLasListas();
+      funcionesFirebase.mostrarTodasLasListas(usuarioLogueado.nombre);
       plantilla.insertarPlantillaFooter();
       declararEventosSeccionLista();
-      declararEventoRedirigirInicio();
+      if (usuarioLogueado != null) {
+        declararEventoRedirigirInicioSesion();
+      } else {
+        declararEventoRedirigirInicio();
+      }
     },
     false
   );
@@ -104,6 +117,22 @@ function declararEventoRedirigirInicio() {
   );
 }
 
+/**
+ * Declaro un evento para cargar el inicio del programa.
+ */
+function declararEventoRedirigirInicioSesion() {
+  document.getElementById("inicio").addEventListener(
+    "click",
+    function () {
+      plantilla.eliminarPlantillasInsertadas();
+      plantilla.insertarPlantillaHeaderInicioUsuario();
+      plantilla.insertarPlantillaPresentacion();
+      plantilla.insertarPlantillaFooter();
+      declararEventosInicioSesion();
+    },
+    false
+  );
+}
 /**
  * Declaro los eventos de la sección de productos de la página web.
  */
@@ -222,7 +251,7 @@ function declararEventoCrearLista() {
       plantilla.eliminarFormularioCrearLista();
       plantilla.eliminarFooter();
       plantilla.insertarPlantillaDivListas();
-      funcionesFirebase.mostrarTodasLasListas();
+      funcionesFirebase.mostrarTodasLasListas(usuarioLogueado.nombre);
       plantilla.insertarPlantillaFooter();
     },
     false
@@ -253,7 +282,15 @@ function obtenerDatosFormularioRegistro() {
   let form = document.getElementById("formularioRegistrarse");
   let datosForm = [];
   for (let i = 0; i < form.length - 1; i++) {
-    datosForm.push(form[i].value);
+    if (i != form.length - 2) {
+      datosForm.push(form[i].value);
+    } else {
+      if (form[i].checked == true) {
+        datosForm.push(true);
+      } else {
+        datosForm.push(false);
+      }
+    }
   }
 
   return datosForm;
@@ -281,17 +318,19 @@ function crearObjetoLista(datos) {
 }
 
 function anyadirEventosLista(id) {
-  document.getElementById(`editar${id}`).addEventListener(
-    "click",
-    function () {
-      plantilla.eliminarListasInsertadas();
-      plantilla.eliminarFooter();
-      plantilla.insertarPlantillaFormularioActualizarLista();
-      plantilla.insertarPlantillaFooter();
-      declararEventoActualizarLista(id);
-    },
-    false
-  );
+  if (usuarioLogueado.rol == true) {
+    document.getElementById(`editar${id}`).addEventListener(
+      "click",
+      function () {
+        plantilla.eliminarListasInsertadas();
+        plantilla.eliminarFooter();
+        plantilla.insertarPlantillaFormularioActualizarLista();
+        plantilla.insertarPlantillaFooter();
+        declararEventoActualizarLista(id);
+      },
+      false
+    );
+  }
 
   document.getElementById(`anyadir${id}`).addEventListener(
     "click",
@@ -313,24 +352,28 @@ function anyadirEventosLista(id) {
       plantilla.eliminarListasInsertadas();
       plantilla.eliminarFooter();
       plantilla.insertarPlantillaProductos();
+
       funcionesFirebase.mostrarTodosProductosLista(id);
+
       plantilla.insertarPlantillaFooter();
     },
     false
   );
 
-  document.getElementById(`eliminar${id}`).addEventListener(
-    "click",
-    function () {
-      funcionesFirebase.eliminarLista(id);
-      plantilla.eliminarListasInsertadas();
-      plantilla.eliminarFooter();
-      plantilla.insertarPlantillaDivListas();
-      funcionesFirebase.mostrarTodasLasListas();
-      plantilla.insertarPlantillaFooter();
-    },
-    false
-  );
+  if (usuarioLogueado.rol == true) {
+    document.getElementById(`eliminar${id}`).addEventListener(
+      "click",
+      function () {
+        funcionesFirebase.eliminarLista(id);
+        plantilla.eliminarListasInsertadas();
+        plantilla.eliminarFooter();
+        plantilla.insertarPlantillaDivListas();
+        funcionesFirebase.mostrarTodasLasListas();
+        plantilla.insertarPlantillaFooter();
+      },
+      false
+    );
+  }
 }
 
 function declararEventoActualizarLista(id) {
@@ -394,13 +437,9 @@ function declararEventosRegistro() {
       funcionesFirebase.validarUsuario(
         datosFormRegistro[0],
         datosFormRegistro[1],
-        datosFormRegistro[2]
+        datosFormRegistro[2],
+        datosFormRegistro[3]
       );
-      plantilla.eliminarPlantillasInsertadas();
-      plantilla.insertarPlantillaHeaderInicio();
-      plantilla.insertarPlantillaPresentacion();
-      plantilla.insertarPlantillaFooter();
-      declararEventosInicio();
     },
     false
   );
@@ -418,6 +457,7 @@ function declararEventosSesion() {
 }
 
 function modificarInterfazUsuario(usuario) {
+  usuarioLogueado = usuario;
   plantilla.eliminarPlantillasInsertadas();
   plantilla.insertarPlantillaHeaderInicioUsuario(usuario);
   plantilla.insertarPlantillaPresentacion();
