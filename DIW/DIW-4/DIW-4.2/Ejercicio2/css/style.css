@@ -1,0 +1,58 @@
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid;
+  padding: 25px;
+}
+
+th {
+  background-color: #c7c776;
+}
+
+#a::after {
+  content: "A";
+}
+
+#b::after {
+  content: "B";
+}
+
+#c::after {
+  content: "C";
+}
+
+#d::after {
+  content: "D";
+}
+
+#uno::after {
+  content: "1";
+}
+
+#dos::after {
+  content: "2";
+}
+
+#tres::after {
+  content: "3";
+}
+
+#cuatro::after {
+  content: "4";
+}
+
+#cinco::after {
+  content: "5";
+}
+
+#seis::after {
+  content: "6";
+}
+
+tr:hover {
+  background-color: #e4e48f;
+}

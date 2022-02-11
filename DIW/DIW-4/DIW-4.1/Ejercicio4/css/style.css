@@ -23,6 +23,7 @@ body {
 
 .box {
   border: 1px solid black;
+  min-height: 100px;
 }
 
 .a {
