@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div id="gridGaps" class="range">
+        <p>
+          <label>grid-rows-gap: <span id="valorGridFila">1</span>px;</label>
+          <input
+            type="range"
+            id="gridFila"
+            name="gridRowGap"
+            min="0"
+            max="20"
+            value="1"
+          />
+        </p>
+        <p></p>
+        <p>
+          <label
+            >grid-column-gap: <span id="valorGridColumna">1</span>px;</label
+          >
+          <input
+            type="range"
+            id="gridColumna"
+            name="gridColumnGap"
+            min="0"
+            max="20"
+            value="1"
+          />
+        </p>
+
+        <p></p>
+        <p style="display: inline; white-space: nowrap">
+          grid-gap: <span id="spangridRowGap">1</span>px
+          <span id="spangridColumnGap">1</span>px;
+        </p>
+        <p></p>
+
+        <select name="radio" id="radio">
+          <option value="row">grid-auto-flow:row</option>
+          <option value="column">grid-auto-flow:column</option>
+        </select>
+      </div>
+
+      <div id="cuadricula">
+        <div class="item a" style="--color: #3e989b"><p>1</p></div>
+        <div class="item b" style="--color: #6db465"><p>2</p></div>
+        <div class="item c" style="--color: #f2c14e"><p>3</p></div>
+        <div class="item d" style="--color: #f78154"><p>4</p></div>
+        <div class="item e" style="--color: #c87694"><p>5</p></div>
+        <div class="item f" style="--color: #3e989b"><p>6</p></div>
+        <div class="item g" style="--color: #6db465"><p>7</p></div>
+        <div class="item h" style="--color: #f2c14e"><p>8</p></div>
+        <div class="item i" style="--color: #f78154"><p>9</p></div>
+        <div class="item j" style="--color: #c87694"><p>10</p></div>
+        <div class="item k" style="--color: #3e989b"><p>11</p></div>
+        <div class="item l" style="--color: #6db465"><p>12</p></div>
+        <div class="item m" style="--color: #f2c14e"><p>13</p></div>
+        <div class="item n" style="--color: #f78154"><p>14</p></div>
+        <div class="item o" style="--color: #c87694"><p>15</p></div>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

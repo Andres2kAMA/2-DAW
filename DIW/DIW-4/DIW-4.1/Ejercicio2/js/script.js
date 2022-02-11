@@ -15,22 +15,6 @@ window.onload = () => {
   document.getElementById("gridColumna").addEventListener(
     "input",
     function () {
-      document.getElementById("cuadricula").style.gridAutoFlow = "row";
-    },
-    false
-  );
-
-  document.getElementById("radioRow").addEventListener(
-    "click",
-    function () {
-      document.getElementById("cuadricula").style.gridAutoFlow = "column";
-    },
-    false
-  );
-
-  document.getElementById("radioColumn").addEventListener(
-    "click",
-    function () {
       let gridRow = document.getElementById("gridFila").value;
       let gridColumna = document.getElementById("gridColumna").value;
       actualizarGridGapHtml(gridRow, gridColumna);
@@ -51,4 +35,13 @@ window.onload = () => {
       "cuadricula"
     ).style.gridGap = `${gridRow}px ${gridColumna}px`;
   }
+
+  document.getElementById("radio").addEventListener(
+    "input",
+    function () {
+      let valor = document.getElementById("radio").value;
+      document.getElementById("cuadricula").style.gridAutoFlow = `${valor}`;
+    },
+    false
+  );
 };
