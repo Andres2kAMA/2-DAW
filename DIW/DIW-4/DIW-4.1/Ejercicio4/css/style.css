@@ -9,10 +9,10 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-row-gap: 1em;
   grid-template-areas:
-    "a  a  .   .   e   e"
-    "a  a  b   b   e   e"
-    "c  c  d   d   e   e"
-    ".  .  d   d   e   e";
+    "a a . . e e"
+    "a a b b e e"
+    "c c d d e e"
+    ". . d d e e";
 
   background: no-repeat
     url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/12005/grid.png);

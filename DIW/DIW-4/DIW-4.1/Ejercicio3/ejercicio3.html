@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Grid justify-items &amp; align-items inside grid areas</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+  </head>
+  <body>
+    <div id="form">
+      <label>justify-items: </label>
+      <select name="justify" id="justify">
+        <option value="start">start</option>
+        <option value="end">end</option>
+        <option value="center">center</option>
+        <option value="strech">strech</option>
+      </select>
+      <br /><br />
+      <label>align-items: </label>
+      <select name="align" id="align">
+        <option value="start">start</option>
+        <option value="end">end</option>
+        <option value="center">center</option>
+        <option value="stretch">stretch</option>
+      </select>
+    </div>
+
+    <div id="cuadricula">
+      <div class="item" id="a"><p>a</p></div>
+      <!--header-->
+      <div class="item" id="b"><p>b</p></div>
+      <!--left-->
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

@@ -17,11 +17,12 @@ body {
   grid-template-rows: 100px 100px 100px;
   grid-template-areas:
     "a a . . ."
-    "a a . . b"
-    ". . . . b";
+    "a a . b b"
+    ". . . b b";
   margin: 0 auto;
   border: 1px dashed #777;
   width: 500px;
+
   background: 0 0/100px 100px
       linear-gradient(transparent 0%, transparent 99%, #777 100%),
     0 0/100px 100px
@@ -32,16 +33,18 @@ body {
       url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/222579/test.svg");
 }
 
-.a {
+#a {
   grid-area: a;
-  justify-self: center;
-  align-items: stretch;
+  padding: 50px;
 }
-.b {
+
+#b {
   grid-area: b;
+  padding: 50px;
 }
 
 .item {
   background-color: #5ea3b5;
-  border-radius: 2em;
+  border-radius: 1em;
+  text-align: center;
 }
